@@ -1,0 +1,199 @@
+package UI;
+
+import java.util.*;
+import java.util.logging.Handler;
+
+/**
+ *
+ * @author Grupo 24
+ *
+ * Contém adaptações da primeira ficha prática fornecida pelo Docente José Creissac Campos
+ */
+
+public class Menu {
+
+    //Interfaces auxiliares
+
+    /**
+     * Interface funcional para Handler.
+     */
+    public interface Handler {
+        void execute();
+    }
+
+    /**
+     * Interface funcional para as Pré-Condições.
+     */
+    public interface PreCondition {
+        boolean validate();
+    }
+
+    /*Variavel de classe para suportar a leitura*/
+    private static Scanner is = new Scanner(System.in);
+
+    //Variávies de Instância
+
+    private List<String> opcoes;            //Lista de opções
+    private List<PreCondition> disponivel;  //Lista de pré-condições
+    private List<Handler> handlers;         //Lista de handlers
+
+    //Construtor
+
+    /**
+     * Construtor vazio para objetos da classe Menu.
+     * <p>
+     * Cria um menu vazio, ao qual se podem adicionar opções
+     */
+    public Menu() {
+        this.opcoes = new ArrayList<>();
+        this.disponivel = new ArrayList<>();
+        this.handlers = new ArrayList<>();
+    }
+
+    /**
+     * Constructor para objetos da classe Menu
+     * <p>
+     * Cria um menu de opções sem event handlers.
+     *
+     * @param opcoes Uma lista de Strings com as opções do menu.
+     */
+    public Menu(List<String> opcoes) {
+        this.opcoes = new ArrayList<>(opcoes);
+        this.disponivel = new ArrayList<>();
+        this.handlers = new ArrayList<>();
+        this.opcoes.forEach(s -> {
+            this.disponivel.add(() -> true);
+            this.handlers.add(() -> System.out.println("\nErro: Funcionalidade ainda não implementada!"));
+        });
+    }
+
+    /**
+     * Construtor para objetos da classe Menu(com titulo e com array de opções).
+     * <p>
+     * Cria um menu de opções sem event handlers.
+     */
+    public Menu(String[] opcoes) {
+        this(Arrays.asList(opcoes));
+    }
+
+    //Métodos de instância
+    /**
+     * Adicionar opções a um Menu.
+     * @param name A opção a apresentar.
+     * @param p A pré-condição da opção.
+     * @param h O event handler para a opção.
+     */
+    public void option(String name,PreCondition p, Handler h){
+        this.opcoes.add(name);
+        this.disponivel.add(p);
+        this.handlers.add(h);
+    }
+
+    /**
+     * Correr multiplas vezes o menu (terminar quando escolhe 0
+     */
+    public void run(){
+        int op;
+        do{
+            show();
+            op = readOption();
+            if(op>0 && !this.disponivel.get(op-1).validate()){
+                System.out.println("Opção Indisponível!Try again");
+            }else if(op>0){
+                this.handlers.get(op-1).execute();
+            }
+        }while (op!=0);
+    }
+
+    /**
+     * Método para registar uma pré-condição numa opção do menu
+     *
+     * @param i índice da opção(começa em 1)
+     * @param b pré-condição a registar
+     */
+    public void setPreCondition(int i,PreCondition b){
+        this.disponivel.set(i-1,b);
+    }
+
+    /**
+     * Método para registar uma handler numa opção do menu.
+     *
+     * @param i indice da opção(começa em 1)
+     * @param h handlers a registar
+     */
+    public void setHandlers(int i,Handler h){
+        this.handlers.set(i-1,h);
+    }
+
+    //Métodos Auxiliares
+
+    /**Apresentar Menu*/
+    private void show(){
+        System.out.println("\033[1;36m"+ "\\n**************** UMRepair ****************"+"\033[0m");
+        for(int i=0; i<this.opcoes.size();i++){
+            System.out.println("\033[1;33m" + (i+1) + "\033[0m");
+            System.out.println("\033[1;33m"+" - "+"\033[0m");
+            System.out.println(this.disponivel.get(i).validate()?this.opcoes.get(i):"\u001B[31mTemporariamente Indisponivel\u001b[0m");
+            }
+        System.out.println("\033[1;33m"+"\n0 - LogOut"+"\033[0m");
+        System.out.println("\033[1;36m"+"**********************************************"+"\033[0m");
+    }
+
+    private int readOption(){
+        int op;
+
+        System.out.println("\nOpção:");
+        try{
+            String line = is.nextLine();
+            op = Integer.parseInt(line);
+        }
+        catch (NumberFormatException e){
+            op = -1;
+        }
+        if(op<0 || op>this.opcoes.size()){
+            System.out.println("\u001B[31m Opção Inválida!!\u001B[0m");
+            op = -1;
+        }
+        return op;
+    }
+
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
+    public static void Logo(){
+        //estou a pensar nisto
+    };
+
+    public Scanner scan;
+
+    public boolean verificaLogin() {
+        String user = null;
+        String password = null;
+        boolean sucesso = false;
+        int tentativas = 0;
+
+        Logo();
+
+        while (!sucesso && tentativas < 3) {
+            try {
+                System.out.println("\nInsire o seu nome:");
+                user = scan.nextLine();
+                System.out.println();
+                System.out.println("Insira a sua password:");
+                password = scan.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println(e.toString());
+            }
+
+            //sucesso = this.model.login(user, password);
+        }
+
+        if (!sucesso && ++tentativas < 3) {
+            Logo();
+            System.out.println("Dados Inválidos,tente novamente.\n" + "Tentativas restantes: " + (3 - tentativas));
+        }
+        return sucesso;
+    }
+}
+
