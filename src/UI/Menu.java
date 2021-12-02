@@ -1,7 +1,10 @@
 package UI;
 
+import Business.IStoreLN;
+
 import java.util.*;
-import java.util.logging.Handler;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 
 /**
  *
@@ -9,6 +12,28 @@ import java.util.logging.Handler;
  *
  * Contém adaptações da primeira ficha prática fornecida pelo Docente José Creissac Campos
  */
+
+/*
+class MapaThread implements Runnable{
+    IStoreLN model;
+    private AtomicBoolean running;
+
+    public MapaThread(IStoreLN model){
+        this.model = model;
+        this.running = new AtomicBoolean(true);
+    }
+
+    public void interrupt(){
+        running.set(false);
+    }
+}
+
+*/
+
+
+
+
+
 
 public class Menu {
 
@@ -157,9 +182,9 @@ public class Menu {
         return op;
     }
 
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_RESET = "\u001B[0m";
+    //public static final String ANSI_RED = "\u001B[31m";
+    //public static final String ANSI_GREEN = "\u001B[32m";
+    //public static final String ANSI_RESET = "\u001B[0m";
 
     public static void Logo(){
         //estou a pensar nisto
@@ -186,7 +211,7 @@ public class Menu {
                 System.out.println(e.toString());
             }
 
-            //sucesso = this.model.login(user, password);
+           // sucesso = this.model.login(user, password); Ainda estou a estudar isto.
         }
 
         if (!sucesso && ++tentativas < 3) {
