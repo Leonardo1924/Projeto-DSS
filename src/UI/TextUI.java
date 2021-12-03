@@ -15,28 +15,28 @@ public class TextUI {
      */
     private void menuPrincipal() {
         Menu menu = new Menu(new String[]{
-                "1.Criar ficha Cliente",
-                "2.Realizar Pedido de Orçamento",
-                "3.Consultar estado do Equipamento",
-                "4.Registar plano de trabalhos",
-                "5.Notificar o cliente",
-                "6.Consultar relatório de estatísticas"});
+                "Criar ficha Cliente",
+                "Realizar Pedido de Orçamento",
+                "Consultar estado do Equipamento",
+                "Registar plano de trabalhos",
+                "Notificar o cliente",
+                "Consultar relatório de estatísticas"});
 
 
         //Registar pré-condições das transições
 
 
         //Registar os handlers
-
+        menu.setHandlers(1,()->gestaoDeClientes());
 
         menu.run();
     }
 
     private void gestaoDeClientes(){
         Menu menu = new Menu(new String[]{
-                "1.Registrar novo cliente",
-                "2.Remover um cliente",
-                "3.Verificar a lista de cliente"});
+                "Registrar novo cliente",
+                "Remover um cliente",
+                "Verificar a lista de cliente"});
 
         //Registar pré-condições das transições
 

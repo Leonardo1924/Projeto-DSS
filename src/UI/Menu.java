@@ -154,10 +154,10 @@ public class Menu {
 
     /**Apresentar Menu*/
     private void show(){
-        System.out.println("\033[1;36m"+ "\\n**************** UMRepair ****************"+"\033[0m");
+        System.out.println("\033[1;36m"+ "**************** UMRepair ****************"+"\033[0m");
         for(int i=0; i<this.opcoes.size();i++){
-            System.out.println("\033[1;33m" + (i+1) + "\033[0m");
-            System.out.println("\033[1;33m"+" - "+"\033[0m");
+            System.out.print("\033[1;33m" + (i+1) + "\033[0m");
+            System.out.print("\033[1;33m"+" - "+"\033[0m");
             System.out.println(this.disponivel.get(i).validate()?this.opcoes.get(i):"\u001B[31mTemporariamente Indisponivel\u001b[0m");
             }
         System.out.println("\033[1;33m"+"\n0 - LogOut"+"\033[0m");
@@ -167,7 +167,7 @@ public class Menu {
     private int readOption(){
         int op;
 
-        System.out.println("\nOpção:");
+        System.out.print("\nOpção:");
         try{
             String line = is.nextLine();
             op = Integer.parseInt(line);
