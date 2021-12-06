@@ -1,10 +1,9 @@
-package Business.Store.Gestor;
+package Business.Store.Funcionario;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
+public class Gestor extends Funcionario{
+    /*
+    JÁ NÃO É NECESSÁRIO !!!!!!!!!!!!!!
 
-public class Gestor {
     String username;
     String password;
 
@@ -26,4 +25,5 @@ public class Gestor {
     public boolean rightpassWord(String password){
         return this.password.equals(Gestor.gerar(password));
     }
+    */
 }

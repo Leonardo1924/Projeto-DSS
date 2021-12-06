@@ -1,8 +1,8 @@
-package Business.Store.Rececionista;
+package Business.Store.Funcionario;
 
 import Business.Store.IRececionista;
 
-public class RececionistaFacade implements IRececionista {
+public class RececionistaFacade extends Funcionario implements IRececionista {
     Rececionista saved = new Rececionista("Rui","TalkLover");
     Rececionista userAtual;
 

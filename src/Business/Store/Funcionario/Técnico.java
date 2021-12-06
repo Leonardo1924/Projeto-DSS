@@ -1,19 +1,16 @@
-package Business.Store.Rececionista;
+package Business.Store.Funcionario;
 
-import Business.Store.Gestor.Gestor;
+// import Business.Store.Gestor.Gestor;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-
-public class Rececionista {
+public class Tecnico extends Funcionario{
+    /*
     String username;
     String password;
 
-    public Rececionista(String username, String password){
-            this.username = username;;
-            this.password = password;
-        }
+    public Técnico(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
 
     public static String gerar(final String password){
         try{
@@ -26,6 +23,7 @@ public class Rececionista {
     }
 
     public boolean rightpassWord(String password){
-        return this.password.equals(Business.Store.Gestor.Gestor.gerar(password));
+        return this.password.equals(Gestor.gerar(password));
     }
+    */
 }

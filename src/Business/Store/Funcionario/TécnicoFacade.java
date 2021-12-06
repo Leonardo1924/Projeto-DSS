@@ -1,11 +1,10 @@
-package Business.Store.Gestor;
+package Business.Store.Funcionario;
 
-import Business.Store.IGestor;
+import Business.Store.ITécnico;
 
-public class GestorFacade implements IGestor {
-    Gestor saved = new Gestor("João", "MathLover");
-    Gestor userAtual;
-
+public class TécnicoFacade extends Funcionario implements ITécnico {
+    Técnico saved = new Técnico("Tiago", "RepairLover");
+    Técnico userAtual;
 
     public boolean login(String user, String password) {
         boolean res = false;
@@ -20,3 +19,4 @@ public class GestorFacade implements IGestor {
         return res;
     }
 }
+
