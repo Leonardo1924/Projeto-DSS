@@ -1,3 +1,5 @@
+package Business.Store;
+
 public class Equipamento {
     private String Id;
 
