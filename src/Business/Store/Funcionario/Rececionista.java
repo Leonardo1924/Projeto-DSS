@@ -12,13 +12,13 @@ public class Rececionista extends Funcionario{
         super(username,password);
     }
 
-    public Rececionista(Rececionista rececionista){
+ /*   public Rececionista(Rececionista rececionista){
         super(rececionista);
-    }
+    }*/
 
-    public Rececionista clone(){
+    /*public Rececionista clone(){
         return new Rececionista(this);
-    }
+    }*/
 
     // Método que regista a entrega do equipamento pelo cliente e o pedido de orçamento
     // public boolean equipmentReceived(int NIF){

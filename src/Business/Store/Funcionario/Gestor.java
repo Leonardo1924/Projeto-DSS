@@ -9,14 +9,14 @@ public class Gestor extends Funcionario{
     public Gestor(String username, String password){
         super(username,password);
     }
-
+/*
     public Gestor(Gestor gestor){
         super(gestor);
-    }
+    }*/
 
-    public Gestor clone(){
+   /* public Gestor clone(){
         return new Gestor(this);
-    }
+    }*/
 
 
     /*

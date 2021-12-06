@@ -10,6 +10,9 @@ public class Funcionario{
     private String username;
     private String password;
 
+    public Funcionario(){
+
+    }
     public Funcionario(String username, String password){
             this.username = username;;
             this.password = password;

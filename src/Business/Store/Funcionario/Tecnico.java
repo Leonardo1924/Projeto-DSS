@@ -12,13 +12,13 @@ public class Tecnico extends Funcionario{
         super(username,password);
     }
 
-    public Tecnico(Tecnico tecnico){
+  /*  public Tecnico(Tecnico tecnico){
         super(tecnico);
-    }
-
+    }*/
+/*
     public Tecnico clone(){
         return new Tecnico(this);
-    }
+    }*/
 
     /*
     private String username;

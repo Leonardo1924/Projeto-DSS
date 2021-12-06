@@ -6,6 +6,10 @@ public class RececionistaFacade extends Funcionario implements IRececionista {
     Rececionista saved = new Rececionista("Rui","TalkLover");
     Rececionista userAtual;
 
+    public RececionistaFacade(String username, String password) {
+        super(username, password);
+    }
+
     public boolean login(String user, String password) {
         boolean res = false;
     /*
