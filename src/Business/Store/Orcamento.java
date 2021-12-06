@@ -1,71 +1,96 @@
 package Business.Store;
 
+import java.time.LocalDateTime;
+import java.time.format.DatetimeFormatter;
+
 
 public class Orcamento {
-    private String id;
+    private Equipamento equipamento;              //equipamento
     private LocalDateTime data;
-    private int custo;
-    private Tecnico IdTecnico;
+    private float custo;
+    private int prazo;  
+    private Funcionario funcionario;
+    private String notas;
 
     public Orcamento(){
-        this.id = "";
+        this.equipamento = new Equipamento();
         this.data = LocalDatetime.now();
-        this.custo = 0;
-        this.IdTecnico = new Tecnico();
+        this.custo = 0.0;
+        this.prazo = 0;
+        this.funcionario = new Funcionario();
+        this.notas = "";
     }
 
-    public Orcamento(String id, LocalDateTime data, int custo, Tecnico IdTecnico){
-        this.id = id;
+    public Orcamento(Equipamento equipamento, LocalDateTime data, float custo, int prazo, Funcionario funcionario, String notas){
+        this.equipamento = equipamento;
         this.data = LocalDatetime.now();
-        this.custo = 0;
-        this.IdTecnico = IdTecnico;
+        this.custo = custo;
+        this.prazo = prazo;
+        this.funcionario = funcionario;
+        this.notas = notas;
     }
 
-    public Orcamento(Orcamento orc){
-        this.id = orc.getId();
-        this.data = orc.getData();
-        this.custo = orc.getCusto();
-        this.IdTecnico = orc.getIdtecnico();
+    public Orcamento(Orcamento orcamento){
+        this.Equipamento = orcamento.getEquipamento();
+        this.data = orcamento.getData();
+        this.custo = orcamento.getCusto();
+        this.prazo = orcamento.getPrazo();
+        this.funcionario = orcamento.getFuncionario();
+        this.notas = orcamento.getNotas();
     }
 
     public LocalDateTime getData(){
         return this.data;
     }
 
-    public String getId(){
-        return this.id;
+    public Equipamento getEquipamento(){
+        return this.equipamento;
     }
 
-    public int getCusto(){
+    public float getCusto(){
         return this.custo;
     }
 
-    public String getIdTecnico(){
-        return this.IdTecnico;
+    public int getPrazo(){
+        return this.prazo;
+    }
+
+    public Funcionario getFuncionario(){
+        return this.funcionario;
+    }
+
+    public String getNotas(){
+        return this.notas;
     }
 
     public void setData(LocalDateTime data){
         this.data = data;
     }
 
-    public void setId(String id){
-        this.id = id;
+    public void setEquipamento(Equipamento equipamento){
+        this.equipamento = equipamento;
     }
 
-    public void setCusto(int custo){
+    public void setCusto(float custo){
         this.custo = custo;
     }
 
-    public void setIdTecnico(String IdTecnico){
-        this.IdTecnico = IdTecnico;
+    public void setFuncionario(Funcionario funcionario){
+        this.funcionario = funcionario;
+    }
+
+    public void setNotas(String notas){
+        this.notas = notas;
     }
 
     public String toString(){
+        DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         return "Orcamento{" + 
-                "ID=" + Id + 
-                "Custo=" + custo +
-                "Prazo:" + prazo +
-                "Id Funcionario:" + idFuncionario + 
+                "Equipamento: " + equipamento.tostring() +
+                "Data: " + data.format(dataFormatada) + 
+                "Custo: " + custo +
+                "Prazo: " + prazo +
+                "Funcionario:" + funcionario.toString() + 
                 "Notas:" + notas + 
                 '}';
     }
@@ -78,9 +103,11 @@ public class Orcamento {
         if (obj == this) return true;
         if (objb == null || obj.getClass().equals(this.getClass())) return false;
         Orcamento orcamento = (Orcamento) obj;
-        return this.id.equals(orcamento.getId()) && 
+        return this.equipamento.equals(orcamento.getEquipamento()) && 
                 this.data == orcamento.getData() &&
                 this.custo == orcamento.getCusto() &&
-                this.IdTecnico.equals(orcamento.getIdtecnico());
+                this.prazo == orcamento.getPrazo() &&
+                this.funcionario.equals(orcamento.getFuncionario()) &&
+                this.notas.equals(orcamento.getNotas());
     }
 }
