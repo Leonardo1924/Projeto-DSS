@@ -60,6 +60,16 @@ public class Orcamento {
         this.IdTecnico = IdTecnico;
     }
 
+    public String toString(){
+        return "Orcamento{" + 
+                "ID=" + Id + 
+                "Custo=" + custo +
+                "Prazo:" + prazo +
+                "Id Funcionario:" + idFuncionario + 
+                "Notas:" + notas + 
+                '}';
+    }
+
     public Orcamento clone(){
         return new Orcamento(this);
     }
