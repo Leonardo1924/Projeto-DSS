@@ -14,7 +14,7 @@ public class Gestor extends Funcionario{
         super(gestor);
     }
 
-    public Tecnico clone(){
+    public Gestor clone(){
         return new Gestor(this);
     }
 

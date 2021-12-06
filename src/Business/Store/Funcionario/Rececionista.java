@@ -16,7 +16,7 @@ public class Rececionista extends Funcionario{
         super(rececionista);
     }
 
-    public Tecnico clone(){
+    public Rececionista clone(){
         return new Rececionista(this);
     }
 
