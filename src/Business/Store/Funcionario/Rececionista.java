@@ -4,6 +4,22 @@ package Business.Store.Funcionario;
 
 public class Rececionista extends Funcionario{
 
+    public Rececionista(){
+        super();
+    }
+
+    public Rececionista(String username, String password){
+        super(username,password);
+    }
+
+    public Rececionista(Tecnico tecnico){
+        super(tecnico);
+    }
+
+    public Tecnico clone(){
+        return new Rececionista(this);
+    }
+
     // Método que regista a entrega do equipamento pelo cliente e o pedido de orçamento
     // public boolean equipmentReceived(int NIF){
     // return true;
