@@ -5,6 +5,5 @@ public interface IStoreLN {
 
     boolean login(String user,String password);
 
-
     void shutdown();
 }
