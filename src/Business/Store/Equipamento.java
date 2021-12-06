@@ -24,7 +24,7 @@ public class Equipamento {
     }
 
     public Equipamento clone(){
-        return new Equipmento(this);
+        return new Equipamento(this);
     }
 
     public String toString(){
@@ -35,8 +35,8 @@ public class Equipamento {
 
     public boolean equals(Object obj){
         if (obj == this) return true;
-        if (objb == null || obj.getClass().equals(this.getClass())) return false;
+        if (obj == null || obj.getClass().equals(this.getClass())) return false;
         Equipamento equipamento = (Equipamento) obj;
-        return this.id.equals(equipamento.getId());
+        return this.Id.equals(equipamento.getId());
     }
 }

@@ -1,7 +1,9 @@
 package Business.Store;
 
+import Business.Store.Funcionario.Funcionario;
+
 import java.time.LocalDateTime;
-import java.time.format.DatetimeFormatter;
+import java.time.format.DateTimeFormatter;
 
 
 public class Orcamento {
@@ -14,8 +16,8 @@ public class Orcamento {
 
     public Orcamento(){
         this.equipamento = new Equipamento();
-        this.data = LocalDatetime.now();
-        this.custo = 0.0;
+        this.data = LocalDateTime.now();
+        this.custo = 0;
         this.prazo = 0;
         this.funcionario = new Funcionario();
         this.notas = "";
@@ -23,7 +25,7 @@ public class Orcamento {
 
     public Orcamento(Equipamento equipamento, LocalDateTime data, float custo, int prazo, Funcionario funcionario, String notas){
         this.equipamento = equipamento;
-        this.data = LocalDatetime.now();
+        this.data = LocalDateTime.now();
         this.custo = custo;
         this.prazo = prazo;
         this.funcionario = funcionario;
@@ -31,7 +33,7 @@ public class Orcamento {
     }
 
     public Orcamento(Orcamento orcamento){
-        this.Equipamento = orcamento.getEquipamento();
+        this.equipamento = orcamento.getEquipamento();
         this.data = orcamento.getData();
         this.custo = orcamento.getCusto();
         this.prazo = orcamento.getPrazo();
@@ -86,8 +88,8 @@ public class Orcamento {
     public String toString(){
         DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         return "Orcamento{" + 
-                "Equipamento: " + equipamento.tostring() +
-                "Data: " + data.format(dataFormatada) + 
+                "Equipamento: " + equipamento.toString() +
+                "Data: " + data.format(dataformatada) +
                 "Custo: " + custo +
                 "Prazo: " + prazo +
                 "Funcionario:" + funcionario.toString() + 
@@ -101,7 +103,7 @@ public class Orcamento {
 
     public boolean equals(Object obj){
         if (obj == this) return true;
-        if (objb == null || obj.getClass().equals(this.getClass())) return false;
+        if (obj == null || obj.getClass().equals(this.getClass())) return false;
         Orcamento orcamento = (Orcamento) obj;
         return this.equipamento.equals(orcamento.getEquipamento()) && 
                 this.data == orcamento.getData() &&
