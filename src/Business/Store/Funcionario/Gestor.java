@@ -10,8 +10,8 @@ public class Gestor extends Funcionario{
         super(username,password);
     }
 
-    public Gestor(Tecnico tecnico){
-        super(Gestor);
+    public Gestor(Gestor gestor){
+        super(gestor);
     }
 
     public Tecnico clone(){
