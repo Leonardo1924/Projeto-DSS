@@ -1,22 +1,25 @@
 package Business.Store.Funcionario;
 
-// import Business.Store.Gestor.Gestor;
+import Business.Cliente.Cliente;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 public class Funcionario{
+
     private String username;
     private String password;
 
     public Funcionario(){
-
+        this.username = "";
+        this.password = "";
     }
+
     public Funcionario(String username, String password){
-            this.username = username;;
-            this.password = password;
-        }
+        this.username = username;;
+        this.password = password;
+    }
 
     public String getUsername(){
         return this.username;
