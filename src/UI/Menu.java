@@ -175,12 +175,20 @@ public class Menu {
             System.out.println("\n\n O Sistema será encerrado agora");
     }
 
-    //public static final String ANSI_RED = "\u001B[31m";
-    //public static final String ANSI_GREEN = "\u001B[32m";
-    //public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RESET = "\u001B[0m";
 
     public static void Logo(){
-        //estou a pensar nisto
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        System.out.println(ANSI_RED + "                    |       | |\\       /| "+ ANSI_GREEN + "_ _ _ _    _ _ _ _ _    _ _ _ _      /\\         _    _ _ _ _\n" +
+                ANSI_RED + "                    |       | | \\     / |" + ANSI_GREEN + "|       |   |           |       |    /  \\       | |  |       |\n" +
+                ANSI_RED + "                    |       | |  \\   /  |" + ANSI_GREEN + "|       |   |           |       |   / /\\ \\      | |  |       |\n" +
+                ANSI_RED + "                    |       | |   \\ /   |" + ANSI_GREEN + "|_ _ _ _|   |_ _ _ _ _  |_ _ _ _|  /      \\     | |  |_ _ _ _|\n" +
+                ANSI_RED + "                    |       | |         |" + ANSI_GREEN + "|  \\        |           |         /  ____  \\    | |  |  \\    \n" +
+                ANSI_RED + "                    | _ _ _ | |         |" + ANSI_GREEN + "|   \\       |_ _ _ _ _  |        /_/     \\_ \\   |_|  |   \\   \n"
+                + ANSI_RESET);
     };
 
     public boolean verificaLogin() {
@@ -212,4 +220,3 @@ public class Menu {
         return sucesso;
     }
 }
-
