@@ -98,6 +98,16 @@ public class Orcamento {
         this.plano = plano;
     }
 
+    public void calculaPrazo(){
+        this.prazo = this.plano.tempoTotalPlano();
+    }
+
+    public void calcularCusto(){  
+        String somaTempo = this.plano.tempoTotalPlano().toString();
+        float somaCusto = this.plano.custoTotalPlano();
+        this.custo = Float.parseFloat(somaTempo) + somaCusto;
+    }
+
     public String toString(){
         DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         return "Orcamento{" + 
