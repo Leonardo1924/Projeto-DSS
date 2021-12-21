@@ -16,13 +16,13 @@ import java.util.Random;
  * @author grupo 3
  * @version (número de versão ou data)
  */
-public class Data {
+public class SGRE {
     private Map<String,String> loginData; // username, password
 
     /**
      * Construtor por omissão
      */
-    public Data(){
+    public SGRE(){
         this.loginData = new HashMap<>();
     }
 
@@ -30,7 +30,7 @@ public class Data {
      * Construtor de um objeto data com parametros
      * @param loginData todos os usernames e passwords do sistema
      */
-    public Data (Map<String,String> loginData){
+    public SGRE (Map<String,String> loginData){
         this.loginData = loginData.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue()));
     }
 

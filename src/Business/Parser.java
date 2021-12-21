@@ -9,11 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Data.Data;
+import Data.SGRE;
 
-public class SGRE {
+public class Parser {
 
-    public static Data parse() throws IOException {
+    public static SGRE parse() throws IOException {
         List<String> lines = readFile("./input/authentication.csv");
         Map<String,String> loginData = new HashMap<>(); // username, password
         String[] oneLine;
@@ -22,7 +22,7 @@ public class SGRE {
             oneLine = l.split(";", 2);
             loginData.put(oneLine[0],oneLine[1]);
         }
-        Data data = new Data(loginData);
+        SGRE data = new SGRE(loginData);
         return data;
     }
 
