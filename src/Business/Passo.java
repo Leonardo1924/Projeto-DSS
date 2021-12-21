@@ -1,18 +1,20 @@
 package Business;
 
-import java.time.LocalTime;
+import java.time.Duration;
 import java.time.format.DateTimeFormatter;
 
 public class Passo {
     private float custoPasso;
-    private LocalTime tempoPasso;
+    private Duration tempoPasso;
+
+    //private long minutes = 2880; 2 dias 
 
     public Passo() {
         this.custoPasso = 0;
-        this.tempoPasso = LocalTime.now();
+        this.tempoPasso = Duration.ofMinutes(0);
     }
     
-    public Passo(float custoPasso, LocalTime tempoPasso){
+    public Passo(float custoPasso, Duration tempoPasso){
         this.custoPasso = custoPasso;
         this.tempoPasso = tempoPasso;
     }
@@ -22,7 +24,7 @@ public class Passo {
         this.tempoPasso = passo.getTempoPasso();
     }
 
-    public LocalTime getTempoPasso(){
+    public Duration getTempoPasso(){
         return this.tempoPasso;
     }
 
@@ -30,7 +32,7 @@ public class Passo {
         return this.custoPasso;
     }
 
-    public void setTempoPasso(LocalTime tempoPasso){
+    public void setTempoPasso(Duration tempoPasso){
         this.tempoPasso = this.tempoPasso;
     }
 

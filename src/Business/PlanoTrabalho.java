@@ -1,3 +1,10 @@
+package Business;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.time.Duration;
+
 public class PlanoTrabalho {
     private List<Passo> passos;
 
@@ -6,7 +13,10 @@ public class PlanoTrabalho {
     }
 
     public PlanoTrabalho(List<Passo> passos){
-        this.passos.putAll(passos);
+        this.passos = new ArrayList<>();
+        for(Passo p : passos) {
+            this.passos.add(p);
+        }
     }
 
     public PlanoTrabalho(PlanoTrabalho plano){
@@ -14,14 +24,30 @@ public class PlanoTrabalho {
     }
 
     public List<Passo> getPassos(){
-        return this.passos;
+        return this.passos.stream().map(Passo::clone).collect(Collectors.toList());;
     }
 
-    public void setPassos(List<Passo> passo){
+    public void setPassos(List<Passo> passos){
         this.passos = new ArrayList<>();
-        for(Passo p : passo) {
+        for(Passo p : passos) {
             this.passos.add(p);
         }
+    }
+
+    public float custoTotalPlano(){
+        float res = 0;
+        for(Passo p: this.passos){
+            res += p.getCustoPasso();
+        }
+        return res;
+    }
+
+    public Duration tempoTotalPlano(){
+        Duration res = Duration.ofMinutes(0);
+        for(Passo p: this.passos){
+            res.plus(Duration.ofMinutes(p.getTempoPasso()));
+        }
+        return res;
     }
 
     public PlanoTrabalho clone(){
