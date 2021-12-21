@@ -1,9 +1,10 @@
 package Business.Store;
 
-import Business.Store.Funcionario.Funcionario;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import Business.PlanoTrabalho;
+import Business.Store.Funcionario.Funcionario;
 
 
 public class Orcamento {
@@ -13,6 +14,7 @@ public class Orcamento {
     private int prazo;  
     private Funcionario funcionario;
     private String notas;
+    private PlanoTrabalho plano;
 
     public Orcamento(){
         this.equipamento = new Equipamento();
@@ -21,15 +23,17 @@ public class Orcamento {
         this.prazo = 0;
         this.funcionario = new Funcionario();
         this.notas = "";
+        this.plano = new PlanoTrabalho();
     }
 
-    public Orcamento(Equipamento equipamento, LocalDateTime data, float custo, int prazo, Funcionario funcionario, String notas){
+    public Orcamento(Equipamento equipamento, LocalDateTime data, float custo, int prazo, Funcionario funcionario, String notas, PlanoTrabalho plano){
         this.equipamento = equipamento;
         this.data = LocalDateTime.now();
         this.custo = custo;
         this.prazo = prazo;
         this.funcionario = funcionario;
         this.notas = notas;
+        this.plano = plano;
     }
 
     public Orcamento(Orcamento orcamento){
@@ -39,6 +43,7 @@ public class Orcamento {
         this.prazo = orcamento.getPrazo();
         this.funcionario = orcamento.getFuncionario();
         this.notas = orcamento.getNotas();
+        this.plano = orcamento.getPlano();
     }
 
     public LocalDateTime getData(){
@@ -65,6 +70,10 @@ public class Orcamento {
         return this.notas;
     }
 
+    public PlanoTrabalho getPlano(){
+        return this.plano;
+    }
+
     public void setData(LocalDateTime data){
         this.data = data;
     }
@@ -85,6 +94,10 @@ public class Orcamento {
         this.notas = notas;
     }
 
+    public void setPlano(PlanoTrabalho plano){
+        this.plano = plano;
+    }
+
     public String toString(){
         DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         return "Orcamento{" + 
@@ -94,6 +107,7 @@ public class Orcamento {
                 "Prazo: " + prazo +
                 "Funcionario:" + funcionario.toString() + 
                 "Notas:" + notas + 
+                "Plano: " + plano.toString() +
                 '}';
     }
 
@@ -110,6 +124,7 @@ public class Orcamento {
                 this.custo == orcamento.getCusto() &&
                 this.prazo == orcamento.getPrazo() &&
                 this.funcionario.equals(orcamento.getFuncionario()) &&
-                this.notas.equals(orcamento.getNotas());
+                this.notas.equals(orcamento.getNotas()) &&
+                this.plano.equals(orcamento.getPlano());
     }
 }
