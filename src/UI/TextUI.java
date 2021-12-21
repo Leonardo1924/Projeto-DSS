@@ -45,9 +45,7 @@ public class TextUI {
 
         //Registar os handlers
 
-
         menu.run();
-
     }
 
     private void gestaoDeOrçamento(){

@@ -203,14 +203,13 @@ public class Menu {
             try {
                 System.out.println("\nInsire o seu nome:");
                 user = scan.nextLine();
-                System.out.println();
                 System.out.println("Insira a sua password:");
                 password = scan.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println(e.toString());
             }
 
-            sucesso = this.model.login(user, password);
+            sucesso = this.model.login(user,password);
 
             if (!sucesso && ++tentativas < 3) {
                 Logo();
