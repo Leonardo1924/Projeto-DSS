@@ -7,6 +7,7 @@ public class TextUI {
     public void run(){
         System.out.println("\033[1;35mBem vindo ao Sistema da Loja!\033[0m");
         this.menuPrincipal();
+        System.out.println("\n\n O Sistema será encerrado agora");
         System.out.println("\033[1;36m"+"Sessão Terminada!"+"\033[0m");
     }
 

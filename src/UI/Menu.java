@@ -99,8 +99,8 @@ public class Menu {
      */
     public void run(){
         int op;
-        boolean login = verificaLogin();
         Logo();
+        boolean login = verificaLogin();//true;
         if(login) {
             do {
                 show();
@@ -172,7 +172,6 @@ public class Menu {
         Logo();
         if(!login)
             System.out.println("\n\n Número de tentativas excedido");
-            System.out.println("\n\n O Sistema será encerrado agora");
     }
 
     public static final String ANSI_RED = "\u001B[31m";
@@ -197,7 +196,8 @@ public class Menu {
         boolean sucesso = false;
         int tentativas = 0;
 
-        Logo();
+        if(tentativas == 3)
+            System.out.println("\n\n O Sistema será encerrado agora");
 
         while (!sucesso && tentativas < 3) {
             try {
@@ -212,9 +212,9 @@ public class Menu {
             sucesso = this.model.login(user,password);
 
             if (!sucesso && ++tentativas < 3) {
-                Logo();
                 System.out.println("Dados Inválidos,tente novamente.\n" + "Tentativas restantes: " + (3 - tentativas));
             }
+
         }
         return sucesso;
     }
