@@ -105,7 +105,7 @@ public class Orcamento {
     public void calcularCusto(){  
         String somaTempo = this.plano.tempoTotalPlano().toString();
         float somaCusto = this.plano.custoTotalPlano();
-        this.custo = Float.parseFloat(somaTempo) + somaCusto;
+        this.custo = Float.parseFloat(somaTempo)*0.25 + somaCusto;
     }
 */
     public String toString(){
