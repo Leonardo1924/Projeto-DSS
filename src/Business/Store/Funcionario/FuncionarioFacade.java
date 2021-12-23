@@ -2,16 +2,11 @@ package Business.Store.Funcionario;
 
 import Business.Cliente.Cliente;
 import Business.Store.IFuncionario;
-import Business.Parser;
-import Data.SGRE;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class FuncionarioFacade implements IFuncionario {
     Funcionario userAtual;
@@ -22,19 +17,9 @@ public class FuncionarioFacade implements IFuncionario {
     public FuncionarioFacade() {
     }
     */
-/*
-    public boolean login(String username,String password) {
-        boolean res = false;
-        if (credentials.containsKey(username)) {
-            Funcionario func = credentials.get(username);
-            if (password == func.getPassword()) {
-                this.userAtual = func;
-                res = true;
-            }
-        }
-        return res;
-    }
-*/
+
+    // public boolean login(String username,String password) {}
+
     /*
      * Método que contacta um cliente via email ou via telefone.
      * Devolve a data e hora do contacto. Se for o output for null, então o cliente não foi contactado.

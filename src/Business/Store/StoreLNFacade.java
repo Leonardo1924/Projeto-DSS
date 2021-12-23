@@ -1,9 +1,15 @@
 package Business.Store;
 
-import Business.IStoreLN;
+import Business.*;
+import Business.Store.Funcionario.*;
+import Business.Parser;
+import Data.SGRE;
+
+import java.io.IOException;
+import java.util.Map;
 
 public class StoreLNFacade implements IStoreLN {
-    Boolean funcional;
+    private Boolean funcional;
 
     public StoreLNFacade(){
         funcional = true;
@@ -13,15 +19,18 @@ public class StoreLNFacade implements IStoreLN {
 
     }
 
-    public boolean login(String username,String password) {
+    public boolean login(String username,String password) throws IOException {
+        SGRE data = Parser.parse();
+        Map<String,Funcionario> credentials = data.getLoginData();
+        Boolean res = false;
         if (credentials.containsKey(username)) {
             Funcionario func = credentials.get(username);
-            if (password == func.getPassword()) {
-                this.userAtual = func;
-                return true;
+            if (password.equals(func.getPassword())) {
+                //this.userAtual = func;
+                res = true;
             }
         }
-        else return false;
+        return res;
     }
 
     public void shutdown() {

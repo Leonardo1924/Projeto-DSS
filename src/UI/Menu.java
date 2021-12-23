@@ -3,6 +3,7 @@ package UI;
 import Business.IStoreLN;
 import Business.Store.StoreLNFacade;
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -97,7 +98,7 @@ public class Menu {
     /**
      * Correr multiplas vezes o menu (terminar quando escolhe 0
      */
-    public void run(){
+    public void run() throws IOException {
         int op;
         Logo();
         boolean login = verificaLogin();//true;
@@ -190,7 +191,7 @@ public class Menu {
                 + ANSI_RESET);
     };
 
-    public boolean verificaLogin() {
+    public boolean verificaLogin() throws IOException {
         String user = null;
         String password = null;
         boolean sucesso = false;
