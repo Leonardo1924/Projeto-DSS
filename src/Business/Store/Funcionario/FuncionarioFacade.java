@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FuncionarioFacade implements IFuncionario {
-    SGRE data = Parser.parse();
-    Map<String,Funcionario> credentials = data.getLoginData();
     Funcionario userAtual;
 
     public FuncionarioFacade() throws IOException {
@@ -24,25 +22,19 @@ public class FuncionarioFacade implements IFuncionario {
     public FuncionarioFacade() {
     }
     */
-
+/*
     public boolean login(String username,String password) {
-        System.out.println("Fuck");
         boolean res = false;
-        boolean credential = false;
-        credential = credentials.containsKey(username);
-        System.out.println("credential: " + credential);
         if (credentials.containsKey(username)) {
             Funcionario func = credentials.get(username);
-            System.out.println("password: " + func.getPassword());
             if (password == func.getPassword()) {
                 this.userAtual = func;
                 res = true;
             }
         }
-        System.out.println("res: " + res);
         return res;
     }
-
+*/
     /*
      * Método que contacta um cliente via email ou via telefone.
      * Devolve a data e hora do contacto. Se for o output for null, então o cliente não foi contactado.

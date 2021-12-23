@@ -15,7 +15,8 @@ import Data.SGRE;
 public class Parser {
 
     public static SGRE parse() throws IOException {
-        List<String> lines = readFile("authentication.txt");
+
+        List<String> lines = readFile("input/authetication.txt");
         Map<String,Funcionario> loginData = new HashMap<>(); // username, password
         String[] oneLine;
 

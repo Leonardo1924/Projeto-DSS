@@ -13,8 +13,15 @@ public class StoreLNFacade implements IStoreLN {
 
     }
 
-    public boolean login(String user, String password) {
-        return false;
+    public boolean login(String username,String password) {
+        if (credentials.containsKey(username)) {
+            Funcionario func = credentials.get(username);
+            if (password == func.getPassword()) {
+                this.userAtual = func;
+                return true;
+            }
+        }
+        else return false;
     }
 
     public void shutdown() {
