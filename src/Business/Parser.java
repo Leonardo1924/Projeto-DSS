@@ -9,18 +9,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Business.Store.Funcionario.Funcionario;
 import Data.SGRE;
 
 public class Parser {
 
     public static SGRE parse() throws IOException {
-        List<String> lines = readFile("./input/authentication.csv");
-        Map<String,String> loginData = new HashMap<>(); // username, password
+        List<String> lines = readFile("authentication.txt");
+        Map<String,Funcionario> loginData = new HashMap<>(); // username, password
         String[] oneLine;
 
         for (String l : lines) {
-            oneLine = l.split(";", 2);
-            loginData.put(oneLine[0],oneLine[1]);
+            oneLine = l.split(";", 3);
+            Funcionario func = new Funcionario(oneLine[0],oneLine[1],oneLine[2]);
+            loginData.put(oneLine[0],func);
         }
         SGRE data = new SGRE(loginData);
         return data;

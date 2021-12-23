@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.time.Duration;
 
 public class PlanoTrabalho {
+    /*
     private List<Passo> passos;
 
     public PlanoTrabalho(){
@@ -52,5 +53,7 @@ public class PlanoTrabalho {
 
     public PlanoTrabalho clone(){
         return new PlanoTrabalho(this);
-    } 
+    }
+
+     */
 }

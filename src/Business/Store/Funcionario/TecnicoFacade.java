@@ -3,7 +3,7 @@ package Business.Store.Funcionario;
 import Business.Store.ITécnico;
 
 public class TecnicoFacade extends Funcionario implements ITécnico {
-    Tecnico saved = new Tecnico("Tiago", "RepairLover");
+    // Tecnico saved = new Tecnico("Tiago", "RepairLover");
     Tecnico userAtual;
 
     public TecnicoFacade(String username, String password) {

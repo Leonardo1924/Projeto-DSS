@@ -23,6 +23,7 @@ public class Equipamento {
         this.Id = Id;
     }
 
+    @Override
     public Equipamento clone(){
         return new Equipamento(this);
     }
