@@ -2,6 +2,7 @@ package UI;
 
 import Business.IStoreLN;
 import Business.Store.StoreLNFacade;
+import Business.Parser;
 
 import java.io.IOException;
 import java.util.*;
@@ -46,8 +47,8 @@ public class Menu {
      * <p>
      * Cria um menu vazio, ao qual se podem adicionar opções
      */
-    public Menu() {
-        this.model = new StoreLNFacade();
+    public Menu() throws IOException{
+        this.model = Parser.parse();
         this.scan = new Scanner(System.in);
         this.opcoes = new ArrayList<>();
         this.disponivel = new ArrayList<>();
@@ -61,8 +62,8 @@ public class Menu {
      *
      * @param opcoes Uma lista de Strings com as opções do menu.
      */
-    public Menu(List<String> opcoes) {
-        this.model = new StoreLNFacade();
+    public Menu(List<String> opcoes) throws IOException{
+        this.model = Parser.parse();
         this.scan = new Scanner(System.in);
         this.opcoes = new ArrayList<>(opcoes);
         this.disponivel = new ArrayList<>();
@@ -78,7 +79,7 @@ public class Menu {
      * <p>
      * Cria um menu de opções sem event handlers.
      */
-    public Menu(String[] opcoes) {
+    public Menu(String[] opcoes) throws IOException{
         this(Arrays.asList(opcoes));
     }
 

@@ -27,6 +27,12 @@ public class Funcionario{
         this.password = password;
     }
 
+    public Funcionario(Funcionario umFunc){
+        this.username = umFunc.getUsername();
+        this.password = umFunc.getPassword();
+        this.tipo = umFunc.getTipo();
+    }
+
     public String getUsername(){
         return this.username;
     }
@@ -38,8 +44,7 @@ public class Funcionario{
     public String getTipo(){
         return this.tipo;
     }
-
-/*
+  /*
     @Override
     public Funcionario clone(){
         return new Funcionario(this);

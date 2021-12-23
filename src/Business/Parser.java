@@ -10,22 +10,25 @@ import java.util.List;
 import java.util.Map;
 
 import Business.Store.Funcionario.Funcionario;
-import Data.SGRE;
+import Business.Store.StoreLNFacade;
 
 public class Parser {
 
-    public static SGRE parse() throws IOException {
+    public static StoreLNFacade parse() throws IOException {
 
         List<String> lines = readFile("input/authetication.txt");
-        Map<String,Funcionario> loginData = new HashMap<>(); // username, password
-        String[] oneLine;
+        //List<String> lines1 = readFile("input/equipments.txt");
+        Map<String,Funcionario> loginData = new HashMap<>(); // username, funcionario
+        //Map<String,Equipamento> equipamentos = new HashMap<>(); // username, equipamento
+        String[] tokens; // para as credenciais
+        //String[] tokens1; // para os equipamentos
 
         for (String l : lines) {
-            oneLine = l.split(";", 3);
-            Funcionario func = new Funcionario(oneLine[0],oneLine[1],oneLine[2]);
-            loginData.put(oneLine[0],func);
+            tokens = l.split(";", 3);
+            Funcionario func = new Funcionario(tokens[0],tokens[1],tokens[2]);
+            loginData.put(tokens[0],func);
         }
-        SGRE data = new SGRE(loginData);
+        StoreLNFacade data = new StoreLNFacade(true,loginData/*,equipamentos*/);
         return data;
     }
 
