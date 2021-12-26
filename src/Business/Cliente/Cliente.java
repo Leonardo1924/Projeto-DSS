@@ -5,18 +5,15 @@ import Business.Store.Equipamento;
 import java.io.Serializable;
 
 public class Cliente implements Serializable {
-    private int id;
+    private String idCliente;
     private String name;
     private int nif;
     private int telemovel;
     private String mail;
     private Equipamento equipamento;
 
-    /**
-     * Construtor Vázio
-     */
     public Cliente(){
-        this.id = 0;
+        this.idCliente = "n/a";
         this.name = "n/a";
         this.nif = 0;
         this.telemovel = 0;
@@ -24,8 +21,8 @@ public class Cliente implements Serializable {
         this.equipamento = new Equipamento();
     }
 
-    public Cliente(int id,String name, int nif, int telemovel, String mail, Equipamento equipamento){
-        this.id = id;
+    public Cliente(String id,String name, int nif, int telemovel, String mail, Equipamento equipamento){
+        this.idCliente = id;
         this.name = name;
         this.nif = nif;
         this.telemovel = telemovel;
@@ -34,7 +31,7 @@ public class Cliente implements Serializable {
     }
 
     public Cliente(Cliente c){
-        this.id = c.getId();
+        this.idCliente = c.getIdCliente();
         this.name = c.getName();
         this.nif = c.getNif();
         this.telemovel = c.getTelemovel();
@@ -42,12 +39,12 @@ public class Cliente implements Serializable {
         this.equipamento = c.getEquipamento();
     }
 
-    public int getId() {
-        return this.id;
+    public String getIdCliente() {
+        return this.idCliente;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getName() {
@@ -96,7 +93,7 @@ public class Cliente implements Serializable {
 
     public String toString(){
         return "Cliente{" +
-                "Id: " + id +
+                "Id: " + idCliente +
                 "Name: " + name +
                 "NIF: " + nif +
                 "Telemóvel: " + telemovel +
@@ -109,7 +106,7 @@ public class Cliente implements Serializable {
         if (obj == this) return true;
         if (obj == null || obj.getClass().equals(this.getClass())) return false;
         Cliente client = (Cliente) obj;
-        return this.id == client.getId() &&
+        return this.idCliente == client.getIdCliente() &&
                 this.name.equals(client.getName()) &&
                 this.nif == client.getNif() &&
                 this.telemovel == client.getTelemovel() &&

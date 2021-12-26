@@ -211,10 +211,10 @@ public class Menu {
                 System.out.println(e.toString());
             }
             sucesso = this.model.login(user,password);
+
             if (!sucesso && ++tentativas < 3) {
                 System.out.println("Dados Inválidos,tente novamente.\n" + "Tentativas restantes: " + (3 - tentativas));
             }
-
         }
         return sucesso;
     }

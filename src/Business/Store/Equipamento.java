@@ -1,26 +1,26 @@
 package Business.Store;
 
 public class Equipamento {
-    private String Id;
+    private String id;
 
     public Equipamento(){
-        this.Id = "";
+        this.id = "";
     }
 
     public Equipamento(String Id){
-        this.Id = Id;
+        this.id = Id;
     }
 
     public Equipamento(Equipamento equipamento){
-        this.Id = equipamento.getId();
+        this.id = equipamento.getId();
     }
 
     public String getId(){
-        return this.Id;
+        return this.id;
     }
 
-    public void setId(String Id){
-        this.Id = Id;
+    public void setId(String id){
+        this.id = id;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Equipamento {
 
     public String toString(){
         return "Equipamento{" + 
-                "Id: " + Id +
+                "Id: " + id +
                 '}';
     }
 
@@ -38,6 +38,6 @@ public class Equipamento {
         if (obj == this) return true;
         if (obj == null || obj.getClass().equals(this.getClass())) return false;
         Equipamento equipamento = (Equipamento) obj;
-        return this.Id.equals(equipamento.getId());
+        return this.id.equals(equipamento.getId());
     }
 }
