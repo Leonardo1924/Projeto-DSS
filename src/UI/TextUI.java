@@ -50,7 +50,7 @@ public class TextUI {
             }});
         menu.setHandlers(2,()-> {
             try {
-                gestaoDeOrçamento();
+                gestaoDeOrcamento();
             } catch (IOException e) {
                 e.printStackTrace();
             }});
@@ -124,7 +124,7 @@ public class TextUI {
         menu.run();
     }
 
-    private void gestaoDeOrçamento() throws IOException {
+    private void gestaoDeOrcamento() throws IOException {
         Menu menu = new Menu(new String[]{
                 "Pedido de Orçamento",
                 "Editar Orçamento",

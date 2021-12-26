@@ -68,8 +68,7 @@ public class StoreLNFacade implements IStoreLN {
     }
 
     public void consultaClientes(){
-        Map<String,Cliente> clientes = this.model.getClientes();
-        for(Cliente c : clientes.values()){
+        for(Cliente c : this.clientes.values()){
             System.out.println(c.toString());
         }
     }
