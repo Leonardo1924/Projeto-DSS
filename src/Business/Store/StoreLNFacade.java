@@ -15,11 +15,11 @@ public class StoreLNFacade implements IStoreLN {
     private Map<Integer,Equipamento> equipamentos;   // nif do clinente, equipamento
     private Map<String,Cliente> clientes;           // id do cliente, cliente
 
-    public StoreLNFacade(boolean funcional, Map<String,Funcionario> credentials/*,Map<Integer,Equipamento> equipamentos, Map<String,Cliente> clientes*/){
+    public StoreLNFacade(boolean funcional, Map<String,Funcionario> credentials,Map<String,Cliente> clientes/*,Map<Integer,Equipamento> equipamentos*/){
         this.funcional = funcional;
-        this.credentials = credentials.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue()));
+        this.credentials = credentials.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
+        this.clientes = clientes.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
         // this.equipamentos = equipamentos.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue()));
-        // this.clientes = clientes.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue()));
     }
 
     public void start() {
@@ -36,13 +36,12 @@ public class StoreLNFacade implements IStoreLN {
         return res;
     }
 
-    public void removeCliente(int id){
+    public void removeCliente(String id){
         this.clientes.remove(id);
     }
 
     public void registaCliente(String idCliente, String nome, int nif, int telemovel, String mail, String idEquip){
-        Equipamento equip = new Equipamento(idEquip);
-        Cliente cliente = new Cliente(idCliente,nome,nif,telemovel,mail,equip.clone());
+        Cliente cliente = new Cliente(idCliente,nome,nif,telemovel,mail,idEquip);
         this.clientes.put(idCliente,cliente.clone());
     }
 

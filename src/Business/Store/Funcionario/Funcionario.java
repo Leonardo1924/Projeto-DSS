@@ -44,12 +44,11 @@ public class Funcionario{
     public String getTipo(){
         return this.tipo;
     }
-  /*
-    @Override
+
     public Funcionario clone(){
         return new Funcionario(this);
     }
-
+/*
     public static String gerar(final String password){
 
         try{

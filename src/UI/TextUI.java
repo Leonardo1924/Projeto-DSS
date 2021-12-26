@@ -100,7 +100,7 @@ public class TextUI {
         });
         menu.setHandlers(2,()-> {
             System.out.println("Indique o ID do cliente a remover:");
-            int id = Integer.parseInt(scan.nextLine());
+            String id = scan.nextLine();
             this.model.removeCliente(id);
             System.out.println("O cliente foi removido com sucesso!");
         });
@@ -155,12 +155,9 @@ public class TextUI {
         });
         menu.setHandlers(2,()-> {
             try {
-                System.out.println("Indique o ID do cliente a remover:");
-                int id = Integer.parseInt(scan.nextLine());
-                this.model.removeCliente(id);
-                System.out.println("O cliente foi removido com sucesso!");
+                gestaoDeEquipamentos();
             } catch (IOException e) {
-                System.out.println("Não foi possível remover o cliente!");
+                e.printStackTrace();
             }});
         menu.setHandlers(3,()-> {
             try {

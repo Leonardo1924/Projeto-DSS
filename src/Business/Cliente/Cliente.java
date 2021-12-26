@@ -10,7 +10,7 @@ public class Cliente implements Serializable {
     private int nif;
     private int telemovel;
     private String mail;
-    private Equipamento equipamento;
+    private String idEquip;
 
     public Cliente(){
         this.idCliente = "n/a";
@@ -18,16 +18,16 @@ public class Cliente implements Serializable {
         this.nif = 0;
         this.telemovel = 0;
         this.mail = "n/a";
-        this.equipamento = new Equipamento();
+        this.idEquip = "n/a";
     }
 
-    public Cliente(String id,String name, int nif, int telemovel, String mail, Equipamento equipamento){
+    public Cliente(String id,String name, int nif, int telemovel, String mail, String idEquip){
         this.idCliente = id;
         this.name = name;
         this.nif = nif;
         this.telemovel = telemovel;
         this.mail = mail;
-        this.equipamento = new Equipamento(equipamento);
+        this.idEquip = idEquip;
     }
 
     public Cliente(Cliente c){
@@ -36,7 +36,7 @@ public class Cliente implements Serializable {
         this.nif = c.getNif();
         this.telemovel = c.getTelemovel();
         this.mail = c.getMail();
-        this.equipamento = c.getEquipamento();
+        this.idEquip = c.getEquipamento();
     }
 
     public String getIdCliente() {
@@ -79,12 +79,12 @@ public class Cliente implements Serializable {
         this.mail = mail;
     }
 
-    public Equipamento getEquipamento(){
-        return this.equipamento.clone();
+    public String getEquipamento(){
+        return this.idEquip;
     }
 
-    public void setEquipamento(Equipamento equipamento){
-        this.equipamento = new Equipamento(equipamento);
+    public void setEquipamento(String idEquip){
+        this.idEquip = idEquip;
     }
 
     public Cliente clone(){
@@ -98,7 +98,7 @@ public class Cliente implements Serializable {
                 "NIF: " + nif +
                 "Telemóvel: " + telemovel +
                 "Mail: " + mail +
-                "Equipamento: " + equipamento.toString() +
+                "Equipamento: " + idEquip +
                 '}';
     }
 
@@ -111,6 +111,6 @@ public class Cliente implements Serializable {
                 this.nif == client.getNif() &&
                 this.telemovel == client.getTelemovel() &&
                 this.mail.equals(client.getMail()) &&
-                this.equipamento.equals(client.getEquipamento());
+                this.idEquip.equals(client.getEquipamento());
     }
 }
