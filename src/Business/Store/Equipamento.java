@@ -29,9 +29,7 @@ public class Equipamento {
     }
 
     public String toString(){
-        return "Equipamento{" + 
-                "Id: " + id +
-                '}';
+        return "\033[1;35mID: \033[0m" + id;
     }
 
     public boolean equals(Object obj){

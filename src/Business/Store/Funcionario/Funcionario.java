@@ -48,22 +48,4 @@ public class Funcionario{
     public Funcionario clone(){
         return new Funcionario(this);
     }
-/*
-    public static String gerar(final String password){
-
-        try{
-            byte[] hash = MessageDigest.getInstance("SHA-256").digest((password).getBytes());
-            return Base64.getEncoder().encodeToString(hash);
-        }catch (NoSuchAlgorithmException e){
-            e.printStackTrace();
-            return null;
-        }
-
-    }
-
-    public boolean rightPassWord(String password){
-        // return this.password.equals(Business.Store.Gestor.Gestor.gerar(password));
-        return this.password.equals(gerar(password));
-    }
- */
 }

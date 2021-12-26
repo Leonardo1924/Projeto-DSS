@@ -1,6 +1,5 @@
 package Business.Store.Funcionario;
 
-import Business.Cliente.Cliente;
 import Business.Store.IFuncionario;
 
 import java.io.IOException;
@@ -9,16 +8,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class FuncionarioFacade implements IFuncionario {
-    Funcionario userAtual;
 
-    public FuncionarioFacade() throws IOException {
-    }
-    /*
     public FuncionarioFacade() {
     }
-    */
-
-    // public boolean login(String username,String password) {}
 
     /*
      * Método que contacta um cliente via email ou via telefone.
@@ -26,15 +18,15 @@ public class FuncionarioFacade implements IFuncionario {
      *    notContacted - lista de clientes que ainda não foram contactados
      *    contacted - lista de clientes que já foram contactados
      */
-    public String contactClient(Cliente client, List<Cliente> notContacted, List<Cliente> contacted){
+    public String contactaCliente(String idCliente, List<String> contactados, List<String> naoContactados){
         String timeToString = null;
-        if(notContacted.contains(client)){
+        if(naoContactados.contains(idCliente)){
             LocalDateTime time = LocalDateTime.now();
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
             timeToString = time.format(timeFormat);
 
-            notContacted.remove(client);
-            contacted.add(client);
+            naoContactados.remove(idCliente);
+            contactados.add(idCliente);
         }
         return timeToString;
     }

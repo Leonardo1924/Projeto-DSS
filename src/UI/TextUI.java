@@ -1,7 +1,10 @@
 package UI;
 
 import Business.IStoreLN;
+import Business.Store.IFuncionario;
+import Business.Store.Funcionario.FuncionarioFacade;
 import Business.Parser;
+import Business.Cliente.Cliente;
 
 import java.io.IOException;
 import java.util.*;
@@ -10,10 +13,12 @@ public class TextUI {
 
     private IStoreLN model;
     private Scanner scan;
+    private IFuncionario funcionario;
 
     public TextUI() throws IOException {
         this.model = Parser.parse();
         this.scan = new Scanner(System.in);
+        this.funcionario = new FuncionarioFacade();
     }
 
     public void run() throws IOException {
@@ -76,7 +81,7 @@ public class TextUI {
                 "Registar novo cliente",
                 "Remover um cliente",
                 "Notificar o cliente",
-                "Verificar a lista de cliente"
+                "Consultar a lista de clientes"
         });
 
         //Registar pré-condições das transições
@@ -105,17 +110,16 @@ public class TextUI {
             System.out.println("O cliente foi removido com sucesso!");
         });
         menu.setHandlers(3,()-> {
-            try {
-                gestaoDeEquipamentos();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }});
+            System.out.println("Indique o ID do cliente a contactar:");
+            String id = scan.nextLine();
+            List<String> contactados = this.model.getContactados();
+            List<String> naoContactados = this.model.getNaoContactados();
+            String time = this.funcionario.contactaCliente(id,contactados,naoContactados);
+            System.out.println("O cliente foi contactado em " + time + "!");
+        });
         menu.setHandlers(4,()-> {
-            try {
-                gestaoDoPlano();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }});
+            this.model.consultaClientes();
+        });
 
         menu.run();
     }
@@ -204,7 +208,6 @@ public class TextUI {
         //Registar pré-condições das transições
 
         //Registar os handlers
-
         menu.run();
     }
 }
