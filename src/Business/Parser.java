@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import Business.Store.Cliente.Cliente;
 import Business.Store.Cliente.ClientesFacade;
@@ -15,6 +17,8 @@ import Business.Store.Equipamento.EquipamentosFacade;
 import Business.Store.Funcionario.Funcionario;
 import Business.Store.Funcionario.FuncionariosFacade;
 import Business.Store.Equipamento.Equipamento;
+import Business.Store.Orcamento.Orcamento;
+import Business.Store.Orcamento.OrcamentosFacade;
 
 public class Parser {
 
@@ -61,6 +65,21 @@ public class Parser {
         }
         EquipamentosFacade dataEquip = new EquipamentosFacade(equipamentos);
         return dataEquip;
+    }
+
+    public static OrcamentosFacade parseOrcamento() throws IOException {
+        List<String> lines = readFile("input/dadosOrcamento.txt");
+        Map<String, Orcamento> orcamentos = new HashMap<>();       // id do equipamento, orçamento
+        String[] tokens;
+        DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+        for (String l : lines) {
+            tokens = l.split(";", 7);
+            Orcamento orc = new Orcamento(tokens[0],LocalDateTime.parse(tokens[1],dataformatada),Float.parseFloat(tokens[2]),Integer.parseInt(tokens[3]),tokens[4],tokens[5],tokens[6]);
+            orcamentos.put(tokens[0],orc.clone());
+        }
+        OrcamentosFacade dataOrc = new OrcamentosFacade(orcamentos);
+        return dataOrc;
     }
 
     public static List<String> readFile(String file) {
