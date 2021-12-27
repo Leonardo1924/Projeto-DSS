@@ -46,7 +46,7 @@ public class TextUI {
         menu.setHandlers(1, this::gestaoDeClientes);
         menu.setHandlers(2, this::gestaoDeOrcamento);
         menu.setHandlers(3, this::gestaoDeEquipamentos);
-        menu.setHandlers(4, this::gestaoDoServiço);
+        menu.setHandlers(4, this::gestaoDeServico);
         menu.setHandlers(5, this::gestaoDeEstatisticas);
         menu.run();
     }
@@ -154,7 +154,7 @@ public class TextUI {
         menu.run();
     }
 
-    private void gestaoDoServiço() throws IOException {
+    private void gestaoDeServico() throws IOException {
         Menu menu = new Menu(new String[]{
                 "Serviço Expresso",
                 "Serviço Programado"});
