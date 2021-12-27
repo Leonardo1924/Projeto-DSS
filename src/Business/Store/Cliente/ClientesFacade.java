@@ -14,7 +14,7 @@ public class ClientesFacade implements IGestClientes{
 
     public ClientesFacade(Map<String,Cliente> clientes, List<String> contactados, List<String> naoContactados){
         this.clientes = clientes.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
-        this.contactados = null;
+        this.contactados = new ArrayList<>(contactados);
         this.naoContactados = new ArrayList<>(naoContactados);
     }
 
