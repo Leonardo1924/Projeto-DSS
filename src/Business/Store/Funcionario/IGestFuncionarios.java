@@ -11,5 +11,5 @@ public interface IGestFuncionarios {
 
     String contactaCliente(String idCliente, List<String> naoContactados, List<String> contactados);
 
-    boolean isRececionista(String username);
+    String getTipoFuncionario(String username);
 }

@@ -54,11 +54,7 @@ public class FuncionariosFacade implements IGestFuncionarios {
         return timeToString;
     }
 
-    public boolean isRececionista(String username){
-        String tipo = this.credentials.get(username).getTipo();
-        if (tipo.equals("Rececionista")) {
-            return true;
-        }
-        return false;
+    public String getTipoFuncionario(String username){
+        return this.credentials.get(username).getTipo();
     }
 }
