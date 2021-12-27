@@ -103,7 +103,7 @@ public class Menu {
         int op;
         do {
                 show();
-                System.out.println("\033[1;33m" + "\n0 - Logout" + "\033[0m");
+                System.out.println("\033[1;33m" + "\n0 - Logout || Back" + "\033[0m");
                 op = readOption();
                 if (op > 0 && !this.disponivel.get(op - 1).validate()) {
                     System.out.println("Opção Indisponível!Try again");
@@ -164,11 +164,6 @@ public class Menu {
         return op;
     }
 
-    public void ExitScreen(boolean login){
-        Logo();
-        if(!login)
-            System.out.println("\n\n Número de tentativas excedido");
-    }
 
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -185,31 +180,4 @@ public class Menu {
                 ANSI_RED + "                    | _ _ _ | |         |" + ANSI_GREEN + "|   \\       |_ _ _ _ _  |        /_/     \\_ \\   |_|  |   \\   \n"
                 + ANSI_RESET);
     };
-
-    public boolean verificaLogin() throws IOException {
-        String user = null;
-        String password = null;
-        boolean sucesso = false;
-        int tentativas = 0;
-
-        if(tentativas == 3)
-            System.out.println("\n\n O Sistema será encerrado agora");
-
-        while (!sucesso && tentativas < 3) {
-            try {
-                System.out.println("\nInsire o seu nome:");
-                user = scan.nextLine();
-                System.out.println("Insira a sua password:");
-                password = scan.nextLine();
-            } catch (InputMismatchException e) {
-                System.out.println(e.toString());
-            }
-            sucesso = this.model.login(user,password);
-
-            if (!sucesso && ++tentativas < 3) {
-                System.out.println("Dados Inválidos,tente novamente.\n" + "Tentativas restantes: " + (3 - tentativas));
-            }
-        }
-        return sucesso;
-    }
 }

@@ -20,10 +20,15 @@ public class TextUI {
     }
 
     public void run() throws IOException {
-        System.out.println("\033[1;35mBem vindo ao Sistema da Loja!\033[0m");
-        this.menuPrincipal();
-        System.out.println("\n\n O sistema será encerrado agora");
-        System.out.println("\033[1;36m"+"Sessão Terminada!"+"\033[0m");
+        Menu.Logo();
+        boolean login = verificaLogin();
+        if(login) {
+            System.out.println("\033[1;35mBem vindo ao Sistema da Loja!\033[0m");
+            this.menuPrincipal();
+        }
+        else{
+          this.ExitScreen(login);
+        }
     }
 
     /**
@@ -58,7 +63,7 @@ public class TextUI {
         //Registar pré-condições das transições
         //Registar os handlers
 
-        menu.setHandlers(1,()-> {
+        menu.setHandlers(1, () -> {
             System.out.println("Indique o ID do cliente:");
             String id = scan.nextLine();
             System.out.println("Indique o nome do cliente:");
@@ -74,21 +79,21 @@ public class TextUI {
             this.model.getClientesFacade().registaCliente(id, nome, nif, telemovel, mail, equip);
             System.out.println("O cliente foi registado com sucesso!");
         });
-        menu.setHandlers(2,()-> {
+        menu.setHandlers(2, () -> {
             System.out.println("Indique o ID do cliente a remover:");
             String id = scan.nextLine();
             this.model.getClientesFacade().removeCliente(id);
             System.out.println("O cliente foi removido com sucesso!");
         });
-        menu.setHandlers(3,()-> {
+        menu.setHandlers(3, () -> {
             System.out.println("Indique o ID do cliente a contactar:");
             String id = scan.nextLine();
             List<String> contactados = this.model.getClientesFacade().getContactados();
             List<String> naoContactados = this.model.getClientesFacade().getNaoContactados();
-            String time = this.model.getFuncionariosFacade().contactaCliente(id,contactados,naoContactados);
+            String time = this.model.getFuncionariosFacade().contactaCliente(id, contactados, naoContactados);
             System.out.println("O cliente foi contactado em " + time + "!");
         });
-        menu.setHandlers(4,()-> {
+        menu.setHandlers(4, () -> {
             this.model.getClientesFacade().consultaClientes();
         });
 
@@ -119,27 +124,27 @@ public class TextUI {
         //Registar pré-condições das transições
         //Registar os handlers
 
-        menu.setHandlers(1,()-> {
+        menu.setHandlers(1, () -> {
             System.out.println("Indique o NIF do cliente:");
             int nif = Integer.parseInt(scan.nextLine());
             System.out.println("Indique o ID do equipamento:");
             String equip = scan.nextLine();
-            this.model.getEquipamentosFacade().registaEquip(nif,equip,"em processo");
+            this.model.getEquipamentosFacade().registaEquip(nif, equip, "em processo");
             System.out.println("O equipamento foi registado com sucesso!");
         });
-        menu.setHandlers(2,()-> {
+        menu.setHandlers(2, () -> {
             System.out.println("Indique o NIF do cliente:");
             int nif = Integer.parseInt(scan.nextLine());
             String estado = this.model.getEquipamentosFacade().consultaEstado(nif);
             System.out.println("O equipamento está " + estado + "!");
         });
-        menu.setHandlers(3,()-> {
+        menu.setHandlers(3, () -> {
             System.out.println("Indique o NIF do cliente:");
             int nif = Integer.parseInt(scan.nextLine());
             this.model.getEquipamentosFacade().levantaEquipamento(nif);
             System.out.println("O equipamento foi levantado com sucesso!");
         });
-        menu.setHandlers(4,()-> {
+        menu.setHandlers(4, () -> {
             System.out.println("Indique o NIF do cliente:");
             int nif = Integer.parseInt(scan.nextLine());
             this.model.getEquipamentosFacade().apagaEquipamento(nif);
@@ -173,5 +178,40 @@ public class TextUI {
 
         //Registar os handlers
         menu.run();
+    }
+
+    public boolean verificaLogin() throws IOException {
+        String user = null;
+        String password = null;
+        boolean sucesso = false;
+        int tentativas = 0;
+
+        if (tentativas == 3)
+            System.out.println("\n\n O Sistema será encerrado agora");
+
+        while (!sucesso && tentativas < 3) {
+            try {
+                System.out.println("\nInsire o seu nome:");
+                user = scan.nextLine();
+                System.out.println("Insira a sua password:");
+                password = scan.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println(e.toString());
+            }
+            sucesso = this.model.login(user, password);
+
+            if (!sucesso && ++tentativas < 3) {
+                System.out.println("Dados Inválidos,tente novamente.\n" + "Tentativas restantes: " + (3 - tentativas));
+            }
+        }
+        return sucesso;
+    }
+
+    public void ExitScreen(boolean login){
+        Menu.Logo();
+        if(!login)
+            System.out.println("\nNúmero de tentativas excedido");
+            System.out.println("\nO sistema será encerrado agora");
+            System.out.println("\033[1;36m" + "Sessão Terminada!" + "\033[0m");
     }
 }
