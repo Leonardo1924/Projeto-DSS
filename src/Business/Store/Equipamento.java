@@ -2,7 +2,7 @@ package Business.Store;
 
 public class Equipamento {
     private String id;
-    private String estado; // em processamento ; reparado
+    private String estado; // em processamento ; reparado ; entregue
 
     public Equipamento(){
         this.id = "";

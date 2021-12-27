@@ -165,7 +165,7 @@ public class TextUI {
         menu.setHandlers(3,()-> {
             System.out.println("Indique o NIF do cliente:");
             int nif = Integer.parseInt(scan.nextLine());
-            this.model.getEquipamentos().get(nif).setEstado("reparado");
+            this.model.getEquipamentos().get(nif).setEstado("entregue");
             System.out.println("O equipamento foi levantado com sucesso!");
         });
         menu.setHandlers(4,()-> {
