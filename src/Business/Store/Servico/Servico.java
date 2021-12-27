@@ -1,4 +1,4 @@
-package Business.Store;
+package Business.Store.Servico;
 
 public class Servico {
     private String id;

@@ -1,9 +1,8 @@
-package Business;
+package Business.Store;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import Business.Store.Passo;
 
-public class SubPasso extends Passo{
+public class SubPasso extends Passo {
 /*
     public SubPasso() {
         super();

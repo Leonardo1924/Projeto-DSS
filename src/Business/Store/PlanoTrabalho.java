@@ -1,4 +1,4 @@
-package Business;
+package Business.Store;
 
 import java.util.List;
 import java.util.ArrayList;

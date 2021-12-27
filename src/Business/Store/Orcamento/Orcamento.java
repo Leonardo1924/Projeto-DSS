@@ -1,9 +1,9 @@
-package Business.Store;
+package Business.Store.Orcamento;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import Business.PlanoTrabalho;
+import Business.Store.PlanoTrabalho;
 import Business.Store.Equipamento.Equipamento;
 import Business.Store.Funcionario.Funcionario;
 

@@ -1,7 +1,6 @@
-package Business;
+package Business.Store;
 
 import java.time.Duration;
-import java.time.format.DateTimeFormatter;
 
 public class Passo {
     private float custoPasso;
