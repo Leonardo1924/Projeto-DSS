@@ -32,6 +32,7 @@ public class FuncionariosFacade implements IGestFuncionarios {
     public boolean login(String username,String password) throws IOException {
         Boolean res = false;
         if (this.credentials.containsKey(username)) {
+            this.userAtual = username;
             Funcionario func = this.credentials.get(username);
             if (password.equals(func.getPassword())) {
                 res = true;
