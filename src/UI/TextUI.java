@@ -184,7 +184,9 @@ public class TextUI {
                 "Apagar Plano"});
 
         //Registar pré-condições das transições
-
+        //menu.setPreCondition(2,()->têm que existir um plano para editar);
+        //menu.setPreCondition(3,()->têm que existir um plano para consultar);
+        //menu.setPreCondition(4,()->têm que existir um plano para apagar);
         //Registar os handlers
 
         menu.run();
@@ -192,6 +194,7 @@ public class TextUI {
 
     private void gestaoDeEstatisticas() throws IOException {
         Menu menu = new Menu(new String[]{
+                "Novo Relatório",
                 "Ler Relatório",
                 "Editar Relatório",
                 "Apagar Relatório"});
