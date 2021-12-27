@@ -5,6 +5,7 @@ import Business.IStoreLN;
 import Business.Parser;
 import Business.Store.Funcionario.IGestFuncionarios;
 import Business.Store.Equipamento.IGestEquipamentos;
+import Business.Store.Orcamento.IGestOrcamento;
 
 import java.io.IOException;
 
@@ -13,12 +14,14 @@ public class StoreLNFacade implements IStoreLN {
     private IGestClientes clientesFacade;
     private IGestEquipamentos equipamentosFacade;
     private IGestFuncionarios funcionariosFacade;
+    private IGestOrcamento orcamentosFacade;
 
     public StoreLNFacade() throws IOException{
         this.funcional = funcional;
         this.clientesFacade = Parser.parseCliente();
         this.equipamentosFacade = Parser.parseEquip();
         this.funcionariosFacade = Parser.parseLogin();
+        this.orcamentosFacade = Parser.parseOrcamento();
     }
 
     public void start() {
@@ -34,6 +37,10 @@ public class StoreLNFacade implements IStoreLN {
 
     public IGestFuncionarios getFuncionariosFacade(){
         return this.funcionariosFacade;
+    }
+
+    public IGestOrcamento getOrcamentosFacade(){
+        return this.orcamentosFacade;
     }
 
     public boolean login(String username,String password) throws IOException {

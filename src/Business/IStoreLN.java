@@ -3,6 +3,7 @@ package Business;
 import Business.Store.Cliente.IGestClientes;
 import Business.Store.Funcionario.IGestFuncionarios;
 import Business.Store.Equipamento.IGestEquipamentos;
+import Business.Store.Orcamento.IGestOrcamento;
 
 import java.io.IOException;
 
@@ -13,6 +14,8 @@ public interface IStoreLN {
     IGestEquipamentos getEquipamentosFacade();
 
     IGestFuncionarios getFuncionariosFacade();
+
+    IGestOrcamento getOrcamentosFacade();
 
     void start();
 
