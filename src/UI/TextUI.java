@@ -61,6 +61,7 @@ public class TextUI {
         });
 
         //Registar pré-condições das transições
+        menu.setPreCondition(2,()->!this.model.getClientesFacade().getClientes().isEmpty());
         //Registar os handlers
 
         menu.setHandlers(1, () -> {
