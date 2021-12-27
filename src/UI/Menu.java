@@ -23,7 +23,7 @@ public class Menu {
      * Interface funcional para Handler.
      */
     public interface Handler {
-        void execute();
+        void execute() throws IOException;
     }
 
     /**
@@ -101,10 +101,7 @@ public class Menu {
      */
     public void run() throws IOException {
         int op;
-        Logo();
-        boolean login = verificaLogin();//true;
-        if(login) {
-            do {
+        do {
                 show();
                 System.out.println("\033[1;33m" + "\n0 - Logout" + "\033[0m");
                 op = readOption();
@@ -113,11 +110,9 @@ public class Menu {
                 } else if (op > 0) {
                     this.handlers.get(op - 1).execute();
                 }
-            } while (op != 0);
-        }
-        this.model.shutdown();
-        ExitScreen(login);
+        } while (op != 0);
     }
+
 
     /**
      * Método para registar uma pré-condição numa opção do menu
@@ -143,27 +138,26 @@ public class Menu {
 
     /**Apresentar Menu*/
     private void show(){
-        System.out.println("\033[1;36m"+ "**************** UMRepair ****************"+"\033[0m");
-        for(int i=0; i<this.opcoes.size();i++){
-            System.out.print("\033[1;33m" + (i+1) + "\033[0m");
-            System.out.print("\033[1;33m"+" - "+"\033[0m");
-            System.out.println(this.disponivel.get(i).validate()?this.opcoes.get(i):"\u001B[31mTemporariamente Indisponivel\u001b[0m");
+            System.out.println("\033[1;36m" + "**************** UMRepair ****************" + "\033[0m");
+            for (int i = 0; i < this.opcoes.size(); i++) {
+                System.out.print("\033[1;33m" + (i + 1) + "\033[0m");
+                System.out.print("\033[1;33m" + " - " + "\033[0m");
+                System.out.println(this.disponivel.get(i).validate() ? this.opcoes.get(i) : "\u001B[31mTemporariamente Indisponivel\u001b[0m");
             }
-        System.out.println("\033[1;36m"+"**********************************************"+"\033[0m");
-    }
+            System.out.println("\033[1;36m" + "**********************************************" + "\033[0m");
+        }
 
-    private int readOption(){
+    private int readOption() throws IOException {
         int op;
 
         System.out.print("\nOpção:");
-        try{
+        try {
             String line = scan.nextLine();
             op = Integer.parseInt(line);
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             op = -1;
         }
-        if(op<0 || op>this.opcoes.size()){
+        if (op < 0 || op > this.opcoes.size()) {
             System.out.println("\u001B[31m Opção Inválida!!\u001B[0m");
             op = -1;
         }
