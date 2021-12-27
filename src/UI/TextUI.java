@@ -22,12 +22,11 @@ public class TextUI {
     public void run() throws IOException {
         Menu.Logo();
         boolean login = verificaLogin();
-        if(login) {
+        if (login) {
             System.out.println("\033[1;35mBem vindo ao Sistema da Loja!\033[0m");
             this.menuPrincipal();
-        }
-        else{
-          this.ExitScreen(login);
+        } else {
+            this.ExitScreen(login);
         }
     }
 
@@ -39,7 +38,7 @@ public class TextUI {
                 "Cliente",
                 "Orçamento",
                 "Equipamento",
-                "Plano de trabalhos",
+                "Serviço",
                 "Relatório de estatísticas"});
 
         //Registar pré-condições das transições
@@ -47,7 +46,7 @@ public class TextUI {
         menu.setHandlers(1, this::gestaoDeClientes);
         menu.setHandlers(2, this::gestaoDeOrcamento);
         menu.setHandlers(3, this::gestaoDeEquipamentos);
-        menu.setHandlers(4, this::gestaoDoPlano);
+        menu.setHandlers(4, this::gestaoDoServiço);
         menu.setHandlers(5, this::gestaoDeEstatisticas);
         menu.run();
     }
@@ -61,7 +60,7 @@ public class TextUI {
         });
 
         //Registar pré-condições das transições
-        menu.setPreCondition(2,()->!this.model.getClientesFacade().getClientes().isEmpty());
+        menu.setPreCondition(2, () -> !this.model.getClientesFacade().getClientes().isEmpty());
         //Registar os handlers
 
         menu.setHandlers(1, () -> {
@@ -152,6 +151,16 @@ public class TextUI {
             System.out.println("O equipamento foi apagado com sucesso!");
         });
 
+        menu.run();
+    }
+
+    private void gestaoDoServiço() throws IOException {
+        Menu menu = new Menu(new String[]{
+                "Serviço Expresso",
+                "Serviço Programado"});
+
+        //menu.setHandlers(1,this::something);
+        menu.setHandlers(2, this::gestaoDoPlano);
         menu.run();
     }
 
