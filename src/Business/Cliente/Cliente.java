@@ -1,7 +1,5 @@
 package Business.Cliente;
 
-import Business.Store.Equipamento;
-
 import java.io.Serializable;
 
 public class Cliente implements Serializable {

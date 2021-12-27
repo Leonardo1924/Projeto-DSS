@@ -1,10 +1,10 @@
 package UI;
 
 import Business.IStoreLN;
-import Business.Store.IFuncionario;
-import Business.Store.Funcionario.FuncionarioFacade;
+import Business.Store.Funcionario.IGestFuncionarios;
+import Business.Store.Funcionario.FuncionariosFacade;
 import Business.Parser;
-import Business.Cliente.Cliente;
+import Business.Store.StoreLNFacade;
 
 import java.io.IOException;
 import java.util.*;
@@ -13,12 +13,10 @@ public class TextUI {
 
     private IStoreLN model;
     private Scanner scan;
-    private IFuncionario funcionario;
 
     public TextUI() throws IOException {
-        this.model = Parser.parse();
+        this.model = new StoreLNFacade();
         this.scan = new Scanner(System.in);
-        this.funcionario = new FuncionarioFacade();
     }
 
     public void run() throws IOException {
@@ -100,25 +98,25 @@ public class TextUI {
             String mail = scan.nextLine();
             System.out.println("Indique o ID do equipamento:");
             String equip = scan.nextLine();
-            this.model.registaCliente(id, nome, nif, telemovel, mail, equip);
+            this.model.getClientesFacade().registaCliente(id, nome, nif, telemovel, mail, equip);
             System.out.println("O cliente foi registado com sucesso!");
         });
         menu.setHandlers(2,()-> {
             System.out.println("Indique o ID do cliente a remover:");
             String id = scan.nextLine();
-            this.model.removeCliente(id);
+            this.model.getClientesFacade().removeCliente(id);
             System.out.println("O cliente foi removido com sucesso!");
         });
         menu.setHandlers(3,()-> {
             System.out.println("Indique o ID do cliente a contactar:");
             String id = scan.nextLine();
-            List<String> contactados = this.model.getContactados();
-            List<String> naoContactados = this.model.getNaoContactados();
-            String time = this.funcionario.contactaCliente(id,contactados,naoContactados);
+            List<String> contactados = this.model.getClientesFacade().getContactados();
+            List<String> naoContactados = this.model.getClientesFacade().getNaoContactados();
+            String time = this.model.getFuncionariosFacade().contactaCliente(id,contactados,naoContactados);
             System.out.println("O cliente foi contactado em " + time + "!");
         });
         menu.setHandlers(4,()-> {
-            this.model.consultaClientes();
+            this.model.getClientesFacade().consultaClientes();
         });
 
         menu.run();
@@ -142,7 +140,7 @@ public class TextUI {
         Menu menu = new Menu(new String[]{
                 "Registar Equipamento",
                 "Consultar Estado",
-                "Levantamento do Equipamento",
+                "Levantar Equipamento",
                 "Apagar Equipamento"});
 
         //Registar pré-condições das transições
@@ -153,25 +151,25 @@ public class TextUI {
             int nif = Integer.parseInt(scan.nextLine());
             System.out.println("Indique o ID do equipamento:");
             String equip = scan.nextLine();
-            this.model.registaEquip(nif,equip,"em processo");
+            this.model.getEquipamentosFacade().registaEquip(nif,equip,"em processo");
             System.out.println("O equipamento foi registado com sucesso!");
         });
         menu.setHandlers(2,()-> {
             System.out.println("Indique o NIF do cliente:");
             int nif = Integer.parseInt(scan.nextLine());
-            String estado = this.model.getEquipamentos().get(nif).getEstado();
+            String estado = this.model.getEquipamentosFacade().consultaEstado(nif);
             System.out.println("O equipamento está " + estado + "!");
         });
         menu.setHandlers(3,()-> {
             System.out.println("Indique o NIF do cliente:");
             int nif = Integer.parseInt(scan.nextLine());
-            this.model.getEquipamentos().get(nif).setEstado("entregue");
+            this.model.getEquipamentosFacade().levantaEquipamento(nif);
             System.out.println("O equipamento foi levantado com sucesso!");
         });
         menu.setHandlers(4,()-> {
             System.out.println("Indique o NIF do cliente:");
             int nif = Integer.parseInt(scan.nextLine());
-            this.model.getEquipamentos().remove(nif);
+            this.model.getEquipamentosFacade().apagaEquipamento(nif);
             System.out.println("O equipamento foi apagado com sucesso!");
         });
 

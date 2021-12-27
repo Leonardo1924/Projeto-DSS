@@ -10,41 +10,54 @@ import java.util.List;
 import java.util.Map;
 
 import Business.Cliente.Cliente;
+import Business.Cliente.ClientesFacade;
+import Business.Store.Equipamento.EquipamentosFacade;
 import Business.Store.Funcionario.Funcionario;
-import Business.Store.StoreLNFacade;
-import Business.Store.Equipamento;
+import Business.Store.Funcionario.FuncionariosFacade;
+import Business.Store.Equipamento.Equipamento;
 
 public class Parser {
 
-    public static StoreLNFacade parse() throws IOException {
+    public static ClientesFacade parseCliente() throws IOException {
+        List<String> lines = readFile("input/dadosClientes.txt");
+        Map<String,Cliente> clientes = new HashMap<>();  // id do cliente, cliente
+        String[] tokens;
 
+        for (String l : lines) {
+            tokens = l.split(";", 6);
+            Cliente cliente = new Cliente(tokens[0],tokens[1],Integer.parseInt(tokens[2]),Integer.parseInt(tokens[3]),tokens[4],tokens[5]);
+            clientes.put(tokens[0],cliente.clone());
+        }
+        ClientesFacade dataCliente = new ClientesFacade(clientes);
+        return dataCliente;
+    }
+
+    public static FuncionariosFacade parseLogin() throws IOException {
         List<String> lines = readFile("input/authetication.txt");
-        List<String> lines1 = readFile("input/dadosClientes.txt");
-        List<String> lines2 = readFile("input/dadosEquipamentos.txt");
         Map<String,Funcionario> loginData = new HashMap<>();       // username do funcionario, funcionario
-        Map<String,Cliente> clientes = new HashMap<>();            // id do cliente, cliente
-        Map<Integer,Equipamento> equipamentos = new HashMap<>(); // nif do cliente, equipamento
-        String[] tokens; // para as credenciais
-        String[] tokens1; // para os clientes
-        String[] tokens2; // para os equipamentos
+        String[] tokens;
 
         for (String l : lines) {
             tokens = l.split(";", 3);
             Funcionario func = new Funcionario(tokens[0],tokens[1],tokens[2]);
             loginData.put(tokens[0],func.clone());
         }
-        for (String l : lines1) {
-            tokens1 = l.split(";", 6);
-            Cliente cliente = new Cliente(tokens1[0],tokens1[1],Integer.parseInt(tokens1[2]),Integer.parseInt(tokens1[3]),tokens1[4],tokens1[5]);
-            clientes.put(tokens1[0],cliente.clone());
+        FuncionariosFacade dataFunc = new FuncionariosFacade(loginData);
+        return dataFunc;
+    }
+
+    public static EquipamentosFacade parseEquip() throws IOException {
+        List<String> lines = readFile("input/dadosEquipamentos.txt");
+        Map<Integer,Equipamento> equipamentos = new HashMap<>(); // nif do cliente, equipamento
+        String[] tokens;
+
+        for (String l : lines) {
+            tokens = l.split(";", 3);
+            Equipamento equip = new Equipamento(tokens[1],tokens[2]);
+            equipamentos.put(Integer.parseInt(tokens[0]),equip.clone());
         }
-        for (String l : lines2) {
-            tokens2 = l.split(";", 3);
-            Equipamento equip = new Equipamento(tokens2[1],tokens2[2]);
-            equipamentos.put(Integer.parseInt(tokens2[0]),equip.clone());
-        }
-        StoreLNFacade data = new StoreLNFacade(true,loginData,clientes,equipamentos);
-        return data;
+        EquipamentosFacade dataEquip = new EquipamentosFacade(equipamentos);
+        return dataEquip;
     }
 
     public static List<String> readFile(String file) {

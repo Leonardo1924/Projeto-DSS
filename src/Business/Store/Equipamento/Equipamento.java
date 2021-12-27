@@ -1,4 +1,4 @@
-package Business.Store;
+package Business.Store.Equipamento;
 
 public class Equipamento {
     private String id;

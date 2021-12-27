@@ -1,33 +1,22 @@
 package Business;
 
-import Business.Cliente.Cliente;
-import Business.Store.Equipamento;
+import Business.Cliente.IGestClientes;
+import Business.Store.Funcionario.IGestFuncionarios;
+import Business.Store.Equipamento.IGestEquipamentos;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 public interface IStoreLN {
 
-    Map<String, Cliente> getClientes();
+    IGestClientes getClientesFacade();
 
-    Map<Integer, Equipamento> getEquipamentos();
+    IGestEquipamentos getEquipamentosFacade();
 
-    List<String> getContactados();
-
-    List<String> getNaoContactados();
+    IGestFuncionarios getFuncionariosFacade();
 
     void start();
 
     boolean login(String user,String password) throws IOException;
-
-    void removeCliente(String id);
-
-    void registaCliente(String idCliente, String nome, int nif, int telemovel, String mail, String equip);
-
-    void registaEquip(int nif, String idEquip, String estado);
-
-    void consultaClientes();
 
     void shutdown();
 }

@@ -48,7 +48,7 @@ public class Menu {
      * Cria um menu vazio, ao qual se podem adicionar opções
      */
     public Menu() throws IOException{
-        this.model = Parser.parse();
+        this.model = new StoreLNFacade();
         this.scan = new Scanner(System.in);
         this.opcoes = new ArrayList<>();
         this.disponivel = new ArrayList<>();
@@ -63,7 +63,7 @@ public class Menu {
      * @param opcoes Uma lista de Strings com as opções do menu.
      */
     public Menu(List<String> opcoes) throws IOException{
-        this.model = Parser.parse();
+        this.model = new StoreLNFacade();
         this.scan = new Scanner(System.in);
         this.opcoes = new ArrayList<>(opcoes);
         this.disponivel = new ArrayList<>();

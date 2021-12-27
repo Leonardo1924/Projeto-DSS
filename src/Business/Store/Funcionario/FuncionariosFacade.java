@@ -1,15 +1,18 @@
 package Business.Store.Funcionario;
 
-import Business.Store.IFuncionario;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-public class FuncionarioFacade implements IFuncionario {
+public class FuncionariosFacade implements IGestFuncionarios {
 
-    public FuncionarioFacade() {
+    Map<String,Funcionario> credentials;
+
+    public FuncionariosFacade(Map<String,Funcionario> credentials) {
+        this.credentials = credentials.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
     }
 
     /*
@@ -18,6 +21,18 @@ public class FuncionarioFacade implements IFuncionario {
      *    notContacted - lista de clientes que ainda não foram contactados
      *    contacted - lista de clientes que já foram contactados
      */
+
+    public boolean login(String username,String password) throws IOException {
+        Boolean res = false;
+        if (this.credentials.containsKey(username)) {
+            Funcionario func = this.credentials.get(username);
+            if (password.equals(func.getPassword())) {
+                res = true;
+            }
+        }
+        return res;
+    }
+
     public String contactaCliente(String idCliente, List<String> contactados, List<String> naoContactados){
         String timeToString = null;
         if(naoContactados.contains(idCliente)){

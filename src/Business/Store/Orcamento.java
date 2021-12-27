@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import Business.PlanoTrabalho;
+import Business.Store.Equipamento.Equipamento;
 import Business.Store.Funcionario.Funcionario;
 
 
