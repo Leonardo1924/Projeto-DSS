@@ -12,6 +12,7 @@ import java.util.Map;
 import Business.Cliente.Cliente;
 import Business.Store.Funcionario.Funcionario;
 import Business.Store.StoreLNFacade;
+import Business.Store.Equipamento;
 
 public class Parser {
 
@@ -19,13 +20,13 @@ public class Parser {
 
         List<String> lines = readFile("input/authetication.txt");
         List<String> lines1 = readFile("input/dadosClientes.txt");
-        //List<String> lines2 = readFile("input/dadosEquipamentos.txt");
+        List<String> lines2 = readFile("input/dadosEquipamentos.txt");
         Map<String,Funcionario> loginData = new HashMap<>();       // username do funcionario, funcionario
         Map<String,Cliente> clientes = new HashMap<>();            // id do cliente, cliente
-        //Map<Integer,Equipamento> equipamentos = new HashMap<>(); // nif do cliente, equipamento
+        Map<Integer,Equipamento> equipamentos = new HashMap<>(); // nif do cliente, equipamento
         String[] tokens; // para as credenciais
         String[] tokens1; // para os clientes
-        //String[] tokens2; // para os equipamentos
+        String[] tokens2; // para os equipamentos
 
         for (String l : lines) {
             tokens = l.split(";", 3);
@@ -37,7 +38,12 @@ public class Parser {
             Cliente cliente = new Cliente(tokens1[0],tokens1[1],Integer.parseInt(tokens1[2]),Integer.parseInt(tokens1[3]),tokens1[4],tokens1[5]);
             clientes.put(tokens1[0],cliente.clone());
         }
-        StoreLNFacade data = new StoreLNFacade(true,loginData,clientes/*,equipamentos*/);
+        for (String l : lines2) {
+            tokens2 = l.split(";", 3);
+            Equipamento equip = new Equipamento(tokens2[1],tokens2[2]);
+            equipamentos.put(Integer.parseInt(tokens2[0]),equip.clone());
+        }
+        StoreLNFacade data = new StoreLNFacade(true,loginData,clientes,equipamentos);
         return data;
     }
 

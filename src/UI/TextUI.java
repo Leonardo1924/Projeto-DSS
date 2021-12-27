@@ -146,7 +146,6 @@ public class TextUI {
                 "Apagar Equipamento"});
 
         //Registar pré-condições das transições
-
         //Registar os handlers
 
         menu.setHandlers(1,()-> {
@@ -154,33 +153,27 @@ public class TextUI {
             int nif = Integer.parseInt(scan.nextLine());
             System.out.println("Indique o ID do equipamento:");
             String equip = scan.nextLine();
-            this.model.registaEquip(nif,equip);
+            this.model.registaEquip(nif,equip,"em processo");
             System.out.println("O equipamento foi registado com sucesso!");
         });
         menu.setHandlers(2,()-> {
-            try {
-                gestaoDeEquipamentos();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }});
+            System.out.println("Indique o NIF do cliente:");
+            int nif = Integer.parseInt(scan.nextLine());
+            String estado = this.model.getEquipamentos().get(nif).getEstado();
+            System.out.println("O equipamento está " + estado + "!");
+        });
         menu.setHandlers(3,()-> {
-            try {
-                gestaoDeEquipamentos();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }});
+            System.out.println("Indique o NIF do cliente:");
+            int nif = Integer.parseInt(scan.nextLine());
+            this.model.getEquipamentos().get(nif).setEstado("reparado");
+            System.out.println("O equipamento foi levantado com sucesso!");
+        });
         menu.setHandlers(4,()-> {
-            try {
-                gestaoDoPlano();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }});
-        menu.setHandlers(5,()-> {
-            try {
-                gestaoDeEstatisticas();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }});
+            System.out.println("Indique o NIF do cliente:");
+            int nif = Integer.parseInt(scan.nextLine());
+            this.model.getEquipamentos().remove(nif);
+            System.out.println("O equipamento foi apagado com sucesso!");
+        });
 
         menu.run();
     }

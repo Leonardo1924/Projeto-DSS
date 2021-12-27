@@ -19,16 +19,20 @@ public class StoreLNFacade implements IStoreLN {
     private List<String> contactados;
     private List<String> naoContactados;
 
-    public StoreLNFacade(boolean funcional, Map<String,Funcionario> credentials,Map<String,Cliente> clientes/*,Map<Integer,Equipamento> equipamentos*/){
+    public StoreLNFacade(boolean funcional, Map<String,Funcionario> credentials, Map<String,Cliente> clientes, Map<Integer,Equipamento> equipamentos){
         this.funcional = funcional;
         this.credentials = credentials.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
         this.clientes = clientes.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
-        //this.equipamentos = equipamentos.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
+        this.equipamentos = equipamentos.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
         this.contactados = null;
         this.naoContactados = new ArrayList<String>(clientes.keySet());
     }
     public Map<String,Cliente> getClientes() {
         return this.clientes.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
+    }
+
+    public Map<Integer,Equipamento> getEquipamentos() {
+        return this.equipamentos.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
     }
 
     public List<String> getContactados(){
@@ -62,8 +66,8 @@ public class StoreLNFacade implements IStoreLN {
         this.clientes.put(idCliente,cliente.clone());
     }
 
-    public void registaEquip(int nif, String idEquip){
-        Equipamento equip = new Equipamento(idEquip);
+    public void registaEquip(int nif, String idEquip, String estado){
+        Equipamento equip = new Equipamento(idEquip,estado);
         this.equipamentos.put(nif,equip.clone());
     }
 
