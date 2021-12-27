@@ -1,6 +1,7 @@
 package UI;
 
 import Business.IStoreLN;
+import Business.Store.Funcionario.Funcionario;
 import Business.Store.Funcionario.IGestFuncionarios;
 import Business.Store.Funcionario.FuncionariosFacade;
 import Business.Parser;
@@ -41,7 +42,6 @@ public class TextUI {
                 "Serviço",
                 "Relatório de estatísticas"});
 
-        //Registar pré-condições das transições
         //Registar os handlers
         menu.setHandlers(1, this::gestaoDeClientes);
         menu.setHandlers(2, this::gestaoDeOrcamento);
@@ -110,12 +110,13 @@ public class TextUI {
                 "Apagar Orçamento"});
 
         //Registar pré-condições das transições
+        menu.setPreCondition(1,()->!this.model.getFuncionariosFacade().isRececionista(this.model.);
         //menu.setPreCondition(2,()->);
         //menu.setPreCondition(3,()->);
         //menu.setPreCondition(4,()->);
 
         //Registar os handlers
-
+        //menu.setHandlers(1,()->);
         menu.run();
     }
 

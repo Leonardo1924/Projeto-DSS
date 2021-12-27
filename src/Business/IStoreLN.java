@@ -22,4 +22,5 @@ public interface IStoreLN {
     boolean login(String user,String password) throws IOException;
 
     void shutdown();
+
 }

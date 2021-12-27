@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 public class FuncionariosFacade implements IGestFuncionarios {
 
     Map<String,Funcionario> credentials;
+    private String user;
+
+
 
     public FuncionariosFacade(Map<String,Funcionario> credentials) {
         this.credentials = credentials.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
@@ -44,5 +47,17 @@ public class FuncionariosFacade implements IGestFuncionarios {
             contactados.add(idCliente);
         }
         return timeToString;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public boolean isRececionista(String username){
+        String tipo = this.credentials.get(username).getTipo();
+        if (tipo.equals("Rececionista")) {
+            return true;
+        }
+        return false;
     }
 }

@@ -43,7 +43,7 @@ public class StoreLNFacade implements IStoreLN {
         return this.orcamentosFacade;
     }
 
-    public boolean login(String username,String password) throws IOException {
+    public boolean login(String username, String password) throws IOException {
         return this.funcionariosFacade.login(username,password);
     }
 

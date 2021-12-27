@@ -8,4 +8,5 @@ public interface IGestFuncionarios {
     boolean login(String username,String password) throws IOException;
 
     String contactaCliente(String idCliente, List<String> naoContactados, List<String> contactados);
+
 }
