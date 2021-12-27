@@ -61,6 +61,8 @@ public class TextUI {
 
         //Registar pré-condições das transições
         menu.setPreCondition(2, () -> !this.model.getClientesFacade().getClientes().isEmpty());
+        menu.setPreCondition(3, () -> !this.model.getClientesFacade().getClientes().isEmpty());
+        menu.setPreCondition(4, () -> !this.model.getClientesFacade().getClientes().isEmpty());
         //Registar os handlers
 
         menu.setHandlers(1, () -> {
@@ -108,6 +110,9 @@ public class TextUI {
                 "Apagar Orçamento"});
 
         //Registar pré-condições das transições
+        //menu.setPreCondition(2,()->);
+        //menu.setPreCondition(3,()->);
+        //menu.setPreCondition(4,()->);
 
         //Registar os handlers
 
@@ -122,6 +127,9 @@ public class TextUI {
                 "Apagar Equipamento"});
 
         //Registar pré-condições das transições
+        menu.setPreCondition(2,()->!this.model.getEquipamentosFacade().getEquipamentos().isEmpty());
+        menu.setPreCondition(3,()->!this.model.getEquipamentosFacade().getEquipamentos().isEmpty());
+        menu.setPreCondition(4,()->!this.model.getEquipamentosFacade().getEquipamentos().isEmpty());
         //Registar os handlers
 
         menu.setHandlers(1, () -> {
@@ -159,9 +167,13 @@ public class TextUI {
                 "Serviço Expresso",
                 "Serviço Programado"});
 
-        //menu.setHandlers(1,this::something);
+        menu.setHandlers(1,this::servicoExpresso);
         menu.setHandlers(2, this::gestaoDoPlano);
         menu.run();
+    }
+
+    private void servicoExpresso() throws IOException{
+        System.out.println("Somos tão rapidos que ja esta arranjado");
     }
 
     private void gestaoDoPlano() throws IOException {
