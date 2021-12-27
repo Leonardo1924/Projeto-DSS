@@ -9,50 +9,50 @@ import Business.Store.Funcionario.Funcionario;
 
 
 public class Orcamento {
-    private Equipamento equipamento;              //equipamento
+    private String idEquip;              //equipamento
     private LocalDateTime data;
     private float custo;
     private int prazo;  
-    private Funcionario funcionario;
+    private String tecnico;
     private String notas;
-    private PlanoTrabalho plano;
+    private String idPlano;
 
     public Orcamento(){
-        this.equipamento = new Equipamento();
+        this.idEquip = "";
         this.data = LocalDateTime.now();
         this.custo = 0;
         this.prazo = 0;
-        this.funcionario = new Funcionario();
+        this.tecnico = "";
         this.notas = "";
-        this.plano = new PlanoTrabalho();
+        this.idPlano = "";
     }
 
-    public Orcamento(Equipamento equipamento, LocalDateTime data, float custo, int prazo, Funcionario funcionario, String notas, PlanoTrabalho plano){
-        this.equipamento = equipamento;
+    public Orcamento(String equipamento, LocalDateTime data, float custo, int prazo, String tecnico, String notas, String plano){
+        this.idEquip = equipamento;
         this.data = LocalDateTime.now();
         this.custo = custo;
         this.prazo = prazo;
-        this.funcionario = funcionario;
+        this.tecnico = tecnico;
         this.notas = notas;
-        this.plano = plano;
+        this.idPlano = plano;
     }
 
     public Orcamento(Orcamento orcamento){
-        this.equipamento = orcamento.getEquipamento();
+        this.idEquip = orcamento.getEquipamento();
         this.data = orcamento.getData();
         this.custo = orcamento.getCusto();
         this.prazo = orcamento.getPrazo();
-        this.funcionario = orcamento.getFuncionario();
+        this.tecnico = orcamento.getTecnico();
         this.notas = orcamento.getNotas();
-        this.plano = orcamento.getPlano();
+        this.idPlano = orcamento.getPlano();
     }
 
     public LocalDateTime getData(){
         return this.data;
     }
 
-    public Equipamento getEquipamento(){
-        return this.equipamento;
+    public String getEquipamento(){
+        return this.idEquip;
     }
 
     public float getCusto(){
@@ -63,40 +63,40 @@ public class Orcamento {
         return this.prazo;
     }
 
-    public Funcionario getFuncionario(){
-        return this.funcionario;
+    public String getTecnico(){
+        return this.tecnico;
     }
 
     public String getNotas(){
         return this.notas;
     }
 
-    public PlanoTrabalho getPlano(){
-        return this.plano;
+    public String getPlano(){
+        return this.idPlano;
     }
 
     public void setData(LocalDateTime data){
         this.data = data;
     }
 
-    public void setEquipamento(Equipamento equipamento){
-        this.equipamento = equipamento;
+    public void setEquipamento(String equipamento){
+        this.idEquip = equipamento;
     }
 
     public void setCusto(float custo){
         this.custo = custo;
     }
 
-    public void setFuncionario(Funcionario funcionario){
-        this.funcionario = funcionario;
+    public void setFuncionario(String tecnico){
+        this.tecnico = tecnico;
     }
 
     public void setNotas(String notas){
         this.notas = notas;
     }
 
-    public void setPlano(PlanoTrabalho plano){
-        this.plano = plano;
+    public void setPlano(String plano){
+        this.idPlano = plano;
     }
 
     /*public void calculaPrazo(){
@@ -111,15 +111,13 @@ public class Orcamento {
 */
     public String toString(){
         DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        return "Orcamento{" + 
-                "Equipamento: " + equipamento.toString() +
-                "Data: " + data.format(dataformatada) +
-                "Custo: " + custo +
-                "Prazo: " + prazo +
-                "Funcionario:" + funcionario.toString() + 
-                "Notas:" + notas + 
-                "Plano: " + plano.toString() +
-                '}';
+        return "\033[1;35mEquipamento: \033[0m" + idEquip +
+                " \033[1;35mData: \033[0m" + data.format(dataformatada) +
+                " \033[1;35mCusto: \033[0m" + custo +
+                " \033[1;35mPrazo: \033[0m" + prazo +
+                " \033[1;35mFuncionario: \033[0m" + tecnico +
+                " \033[1;35mNotas: \033[0m" + notas +
+                " \033[1;35mPlano: \033[0m" + idPlano;
     }
 
     public Orcamento clone(){
@@ -130,12 +128,12 @@ public class Orcamento {
         if (obj == this) return true;
         if (obj == null || obj.getClass().equals(this.getClass())) return false;
         Orcamento orcamento = (Orcamento) obj;
-        return this.equipamento.equals(orcamento.getEquipamento()) && 
+        return this.idEquip.equals(orcamento.getEquipamento()) &&
                 this.data == orcamento.getData() &&
                 this.custo == orcamento.getCusto() &&
                 this.prazo == orcamento.getPrazo() &&
-                this.funcionario.equals(orcamento.getFuncionario()) &&
+                this.tecnico.equals(orcamento.getTecnico()) &&
                 this.notas.equals(orcamento.getNotas()) &&
-                this.plano.equals(orcamento.getPlano());
+                this.idPlano.equals(orcamento.getPlano());
     }
 }
