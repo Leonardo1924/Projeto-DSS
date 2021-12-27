@@ -1,6 +1,6 @@
 package Business.Store;
 
-import Business.Cliente.IGestClientes;
+import Business.Store.Cliente.IGestClientes;
 import Business.IStoreLN;
 import Business.Parser;
 import Business.Store.Funcionario.IGestFuncionarios;

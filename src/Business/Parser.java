@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Business.Cliente.Cliente;
-import Business.Cliente.ClientesFacade;
+import Business.Store.Cliente.Cliente;
+import Business.Store.Cliente.ClientesFacade;
 import Business.Store.Equipamento.EquipamentosFacade;
 import Business.Store.Funcionario.Funcionario;
 import Business.Store.Funcionario.FuncionariosFacade;

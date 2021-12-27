@@ -1,6 +1,6 @@
 package Business;
 
-import Business.Cliente.IGestClientes;
+import Business.Store.Cliente.IGestClientes;
 import Business.Store.Funcionario.IGestFuncionarios;
 import Business.Store.Equipamento.IGestEquipamentos;
 
