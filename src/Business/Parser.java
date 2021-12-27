@@ -21,6 +21,8 @@ public class Parser {
     public static ClientesFacade parseCliente() throws IOException {
         List<String> lines = readFile("input/dadosClientes.txt");
         Map<String,Cliente> clientes = new HashMap<>();  // id do cliente, cliente
+        List<String> contactados = new ArrayList<>();
+        List<String> naoContactados = new ArrayList<>();
         String[] tokens;
 
         for (String l : lines) {
@@ -28,7 +30,8 @@ public class Parser {
             Cliente cliente = new Cliente(tokens[0],tokens[1],Integer.parseInt(tokens[2]),Integer.parseInt(tokens[3]),tokens[4],tokens[5]);
             clientes.put(tokens[0],cliente.clone());
         }
-        ClientesFacade dataCliente = new ClientesFacade(clientes);
+        naoContactados = new ArrayList<>(clientes.keySet());
+        ClientesFacade dataCliente = new ClientesFacade(clientes,contactados,naoContactados);
         return dataCliente;
     }
 
