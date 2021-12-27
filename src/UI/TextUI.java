@@ -110,7 +110,7 @@ public class TextUI {
                 "Apagar Orçamento"});
 
         //Registar pré-condições das transições
-        menu.setPreCondition(1,()->!this.model.getFuncionariosFacade().isRececionista(this.model.);
+        menu.setPreCondition(1,()->!this.model.getFuncionariosFacade().isRececionista(this.model.getFuncionariosFacade().getUserAtual()));
         //menu.setPreCondition(2,()->);
         //menu.setPreCondition(3,()->);
         //menu.setPreCondition(4,()->);

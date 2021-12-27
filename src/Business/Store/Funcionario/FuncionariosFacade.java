@@ -10,12 +10,13 @@ import java.util.stream.Collectors;
 public class FuncionariosFacade implements IGestFuncionarios {
 
     Map<String,Funcionario> credentials;
-    private String user;
+    private String userAtual;
 
 
 
     public FuncionariosFacade(Map<String,Funcionario> credentials) {
         this.credentials = credentials.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
+        this.userAtual = "";
     }
 
     /*
@@ -24,6 +25,9 @@ public class FuncionariosFacade implements IGestFuncionarios {
      *    notContacted - lista de clientes que ainda não foram contactados
      *    contacted - lista de clientes que já foram contactados
      */
+    public String getUserAtual(){
+        return this.userAtual;
+    }
 
     public boolean login(String username,String password) throws IOException {
         Boolean res = false;
@@ -47,10 +51,6 @@ public class FuncionariosFacade implements IGestFuncionarios {
             contactados.add(idCliente);
         }
         return timeToString;
-    }
-
-    public String getUser() {
-        return user;
     }
 
     public boolean isRececionista(String username){
