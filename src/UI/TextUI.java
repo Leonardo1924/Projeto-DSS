@@ -97,7 +97,6 @@ public class TextUI {
         });
         menu.setHandlers(4, () -> {
             this.model.getClientesFacade().consultaClientes();
-            System.out.println("Lista" + this.model.getOrcamentosFacade().getOrcamentos().values());
         });
 
         menu.run();
