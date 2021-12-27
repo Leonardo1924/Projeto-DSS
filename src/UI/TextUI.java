@@ -39,38 +39,11 @@ public class TextUI {
 
         //Registar pré-condições das transições
         //Registar os handlers
-
-        menu.setHandlers(1,()-> {
-            try {
-                gestaoDeClientes();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }});
-        menu.setHandlers(2,()-> {
-            try {
-                gestaoDeOrcamento();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }});
-        menu.setHandlers(3,()-> {
-            try {
-                gestaoDeEquipamentos();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }});
-        menu.setHandlers(4,()-> {
-            try {
-                gestaoDoPlano();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }});
-        menu.setHandlers(5,()-> {
-            try {
-                gestaoDeEstatisticas();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }});
-
+        menu.setHandlers(1, this::gestaoDeClientes);
+        menu.setHandlers(2, this::gestaoDeOrcamento);
+        menu.setHandlers(3, this::gestaoDeEquipamentos);
+        menu.setHandlers(4, this::gestaoDoPlano);
+        menu.setHandlers(5, this::gestaoDeEstatisticas);
         menu.run();
     }
 
