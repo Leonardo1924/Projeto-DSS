@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,6 +18,7 @@ import Business.Store.Equipamento.Equipamento;
 import Business.Store.Orcamento.Orcamento;
 import Business.Store.Orcamento.OrcamentosFacade;
 import Business.Store.PlanoTrabalho.PlanoFacade;
+import Business.Store.PlanoTrabalho.PlanoTrabalho;
 import Business.Store.Servico.Servico;
 import Business.Store.Servico.ServicosFacade;
 
@@ -89,8 +91,8 @@ public class Parser {
         String[] tokens;
 
         for (String l : lines) {
-            tokens = l.split(";", 4);
-            Servico ser = new Servico(tokens[0],tokens[1],tokens[2],Float.parseFloat(tokens[3]),Float.parseFloat(tokens[4]));
+            tokens = l.split(";", 5);
+            Servico ser = new Servico(tokens[0],tokens[1],tokens[2],Float.parseFloat(tokens[3]),Duration.parse(tokens[4]));
             servicos.put(Integer.parseInt(tokens[0]),ser.clone());
         }
         ServicosFacade dataSer = new ServicosFacade(servicos);
@@ -98,8 +100,17 @@ public class Parser {
     }
 
     public static PlanoFacade parsePlano() throws IOException {
-        // INCOMPLETO
-        return null;
+        List<String> lines = readFile("input/dadosPlano.txt");
+        Map<Integer, PlanoTrabalho> planos = new TreeMap<>();       // id do plano, plano de trabalho
+        String[] tokens;
+
+        for (String l : lines) {
+            tokens = l.split(";", 5);
+            PlanoTrabalho pt = new PlanoTrabalho(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),tokens[2],Float.parseFloat(tokens[3]), Duration.parse(tokens[4]));
+            planos.put(Integer.parseInt(tokens[0]),pt.clone());
+        }
+        PlanoFacade dataPt = new PlanoFacade(planos);
+        return dataPt;
     }
 
     public static List<String> readFile(String file) {

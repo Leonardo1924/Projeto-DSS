@@ -2,22 +2,25 @@ package Business.Store.Servico;
 
 import Business.Store.Cliente.Cliente;
 
+import java.time.Duration;
+import java.util.Objects;
+
 public class Servico {
     private String id;
     private String tipo;       // expresso ; normal
     private String idPlano;
     private float custoTotal;
-    private float tempoTotal;
+    private Duration tempoTotal;
 
     public Servico() {
         this.id = "";
         this.tipo = "";
         this.idPlano = "";
-        this.custoTotal = 0;
-        this.tempoTotal = 0;
+        this.custoTotal = -1;
+        this.tempoTotal = Duration.ZERO;
     }
 
-    public Servico(String id, String tipo, String idPlano, float custoTotal, float tempoTotal) {
+    public Servico(String id, String tipo, String idPlano, float custoTotal, Duration tempoTotal) {
         this.id = id;
         this.tipo = tipo;
         this.idPlano = idPlano;
@@ -49,7 +52,7 @@ public class Servico {
         return this.custoTotal;
     }
 
-    public float getTempoTotal() {
+    public Duration getTempoTotal() {
         return this.tempoTotal;
     }
 
@@ -65,14 +68,12 @@ public class Servico {
                 " \033[1;35mTempo Total: \033[0m" + this.tempoTotal;
     }
 
-    public boolean equals(Object obj){
-        if (obj == this) return true;
-        if (obj == null || obj.getClass().equals(this.getClass())) return false;
-        Servico servico = (Servico) obj;
-        return this.id.equals(servico.getId()) &&
-                this.tipo.equals(servico.getTipo()) &&
-                this.idPlano.equals(servico.getIdPlano()) &&
-                this.custoTotal == servico.getCustoTotal() &&
-                this.tempoTotal == servico.getTempoTotal();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Servico servico = (Servico) o;
+        return Float.compare(servico.custoTotal, custoTotal) == 0 && Objects.equals(id, servico.id) && Objects.equals(tipo, servico.tipo) && Objects.equals(idPlano, servico.idPlano) && Objects.equals(tempoTotal, servico.tempoTotal);
     }
+
 }
