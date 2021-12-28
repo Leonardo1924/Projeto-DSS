@@ -131,9 +131,9 @@ public class TextUI {
             System.out.print("Indique o ID do orçamento a alterar: ");
             Integer idOrc = Integer.parseInt(scan.nextLine());
             System.out.print("Indique o ID do técnico responsável: ");
+            // APÓS A VERIFICAÇÃO ALTERAR O MODO DE CRIAÇÃO DO PLANO
             String idTecnico = scan.nextLine();
             if(this.model.getFuncionariosFacade().validateFuncionario(idTecnico)){
-                this.model.getPlanosFacade().createPlano(idOrc,idTecnico);
                 System.out.print("Indique o custo da reparação: ");
                 float custo = Float.parseFloat(scan.nextLine());
                 System.out.print("Indique o tempo necessário para realizar a reparação: ");

@@ -1,5 +1,7 @@
 package Business.Store.PlanoTrabalho;
 
+import java.util.Map;
+
 public interface IGestPlano {
-    void createPlano(Integer idOrc, String idTecnico);
+    Map<Integer, PlanoTrabalho> getPlanos();
 }
