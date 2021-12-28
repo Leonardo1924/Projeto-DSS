@@ -1,1 +1,0 @@
-idGestor;idFuncionario;Nome;TipodeServiço;DuraçãoPrevista;DuraçãoReal
