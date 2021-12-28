@@ -161,6 +161,7 @@ public class TextUI {
                 "Apagar Equipamento"});
 
         //Registar pré-condições das transições
+        menu.setPreCondition(1,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Rececionista"));
         menu.setPreCondition(2,()->!this.model.getEquipamentosFacade().getEquipamentos().isEmpty());
         menu.setPreCondition(3,()->!this.model.getEquipamentosFacade().getEquipamentos().isEmpty());
         menu.setPreCondition(4,()->!this.model.getEquipamentosFacade().getEquipamentos().isEmpty());
@@ -201,13 +202,22 @@ public class TextUI {
                 "Serviço Expresso",
                 "Serviço Programado"});
 
-        menu.setHandlers(1,this::servicoExpresso);
+        menu.setHandlers(1, this::servicoExpresso);
         menu.setHandlers(2, this::gestaoDoPlano);
         menu.run();
     }
 
     private void servicoExpresso() throws IOException{
-        System.out.println("Somos tão rapidos que ja esta arranjado");
+       Menu menu = new Menu(new String[]{
+                "Arranjar Ecrã",
+                "Instalar OS",
+                "Colocar Película",
+                "Comprar Equipamento Novo"});
+       //menu.setHandlers(1,()->);
+       //menu.setHandlers(2,()->);
+       //menu.setHandlers(3,()->);
+       //menu.setHandlers(4,()->);
+       menu.run();
     }
 
     private void gestaoDoPlano() throws IOException {
@@ -218,6 +228,7 @@ public class TextUI {
                 "Apagar Plano"});
 
         //Registar pré-condições das transições
+        menu.setPreCondition(1,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Tecnico"));
         //menu.setPreCondition(2,()->têm que existir um plano para editar);
         //menu.setPreCondition(3,()->têm que existir um plano para consultar);
         //menu.setPreCondition(4,()->têm que existir um plano para apagar);
@@ -234,7 +245,10 @@ public class TextUI {
                 "Apagar Relatório"});
 
         //Registar pré-condições das transições
-
+        menu.setPreCondition(1,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Gestor"));
+        //menu.setPreCondition(2,()->têm que existir um Relatorio para editar);
+        //menu.setPreCondition(3,()->têm que existir um Relatorio para consultar);
+        //menu.setPreCondition(4,()->têm que existir um Relatorio para apagar);
         //Registar os handlers
         menu.run();
     }
