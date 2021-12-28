@@ -37,7 +37,7 @@ public class Parser {
     }
 
     public static FuncionariosFacade parseLogin() throws IOException {
-        List<String> lines = readFile("input/authetication.txt");
+        List<String> lines = readFile("input/dadosFuncionarios.txt");
         Map<String,Funcionario> loginData = new HashMap<>();       // username do funcionario, funcionario
         String[] tokens;
 
