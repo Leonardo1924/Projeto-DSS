@@ -213,6 +213,7 @@ public class TextUI {
                 "Instalar OS",
                 "Colocar Película",
                 "Comprar Equipamento Novo"});
+
        //menu.setHandlers(1,()->);
        //menu.setHandlers(2,()->);
        //menu.setHandlers(3,()->);
@@ -232,8 +233,13 @@ public class TextUI {
         //menu.setPreCondition(2,()->têm que existir um plano para editar);
         //menu.setPreCondition(3,()->têm que existir um plano para consultar);
         //menu.setPreCondition(4,()->têm que existir um plano para apagar);
+
         //Registar os handlers
 
+        //menu.setHandlers(1,()->);
+        //menu.setHandlers(2,()->);
+        //menu.setHandlers(3,()->);
+        //menu.setHandlers(4,()->);
         menu.run();
     }
 
@@ -249,7 +255,12 @@ public class TextUI {
         //menu.setPreCondition(2,()->têm que existir um Relatorio para editar);
         //menu.setPreCondition(3,()->têm que existir um Relatorio para consultar);
         //menu.setPreCondition(4,()->têm que existir um Relatorio para apagar);
+
         //Registar os handlers
+        //menu.setHandlers(1,()->);
+        //menu.setHandlers(2,()->);
+        //menu.setHandlers(3,()->);
+        //menu.setHandlers(4,()->);
         menu.run();
     }
 
