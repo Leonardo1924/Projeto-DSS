@@ -4,10 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-import Business.Store.PlanoTrabalho;
-import Business.Store.Equipamento.Equipamento;
-import Business.Store.Funcionario.Funcionario;
-
 
 public class Orcamento {
     private int idOrcamento;

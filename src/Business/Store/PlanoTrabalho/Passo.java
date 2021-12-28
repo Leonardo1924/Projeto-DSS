@@ -1,4 +1,4 @@
-package Business.Store;
+package Business.Store.PlanoTrabalho;
 
 import java.time.Duration;
 

@@ -1,6 +1,6 @@
-package Business.Store;
+package Business.Store.PlanoTrabalho;
 
-import Business.Store.Passo;
+import Business.Store.PlanoTrabalho.Passo;
 
 public class SubPasso extends Passo {
 /*

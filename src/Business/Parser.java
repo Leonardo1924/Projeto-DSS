@@ -16,6 +16,8 @@ import Business.Store.Funcionario.FuncionariosFacade;
 import Business.Store.Equipamento.Equipamento;
 import Business.Store.Orcamento.Orcamento;
 import Business.Store.Orcamento.OrcamentosFacade;
+import Business.Store.Servico.Servico;
+import Business.Store.Servico.ServicosFacade;
 
 public class Parser {
 
@@ -78,6 +80,20 @@ public class Parser {
         }
         OrcamentosFacade dataOrc = new OrcamentosFacade(orcamentos);
         return dataOrc;
+    }
+
+    public static ServicosFacade parseServico() throws IOException {
+        List<String> lines = readFile("input/dadosServico.txt");
+        Map<Integer, Servico> servicos = new TreeMap<>();       // id do serviço, serviço
+        String[] tokens;
+
+        for (String l : lines) {
+            tokens = l.split(";", 3);
+            Servico ser = new Servico(tokens[0],tokens[1],Float.parseFloat(tokens[2]),Float.parseFloat(tokens[3]));
+            servicos.put(Integer.parseInt(tokens[0]),ser.clone());
+        }
+        ServicosFacade dataSer = new ServicosFacade(servicos);
+        return dataSer;
     }
 
     public static List<String> readFile(String file) {
