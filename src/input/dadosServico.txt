@@ -1,4 +1,3 @@
-id;tipo;custoTotal;TempoTotal
 1;expresso;10;00:10
 2;normal;50;00:50
 3;normal;150;01:30
