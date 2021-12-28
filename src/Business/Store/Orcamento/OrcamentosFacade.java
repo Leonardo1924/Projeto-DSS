@@ -16,9 +16,22 @@ public class OrcamentosFacade implements IGestOrcamento {
         return this.orcamentos.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
     }
 
-    public void registaOrcamento(int id,String idEq, LocalDateTime data, float custo, int prazo, String tecnico, String notas, String idPlano){
-        Orcamento orc = new Orcamento(id, idEq, data,custo,prazo,tecnico,notas,idPlano);
-        this.orcamentos.put(id,orc);
+    public void removeOrcamento(Integer id) {
+        this.orcamentos.remove(id);
+    }
+
+
+    public void registaOrcamento(int idOrc, String idEq, LocalDateTime now, String notas){
+        Orcamento orc = new Orcamento(idOrc,idEq,now,notas);
+        this.orcamentos.put(idOrc,orc);
+    }
+
+    public void atualizaOrcamento(Integer idOrc, float custo, int prazo, String idTecnico, String idPlano) {
+        this.orcamentos.get(idOrc).setCusto(custo);
+        this.orcamentos.get(idOrc).setPrazo(prazo);
+        this.orcamentos.get(idOrc).setTecnico(idTecnico);
+        this.orcamentos.get(idOrc).setIdPlano(idPlano);
+        this.orcamentos.get(idOrc).setStatus(true);
     }
 
     public void consultaOrcamentos(){

@@ -7,7 +7,11 @@ public interface IGestOrcamento {
 
     Map<Integer,Orcamento> getOrcamentos();
 
-    void registaOrcamento(int id,String idEq, LocalDateTime data, float custo, int prazo, String tecnico, String notas, String idPlano);
-
     void consultaOrcamentos();
+
+    void removeOrcamento(Integer id);
+
+    void registaOrcamento(int idOrc, String idEq, LocalDateTime now, String notas);
+
+    void atualizaOrcamento(Integer idOrc, float custo, int prazo, String idTecnico, String idPlano);
 }

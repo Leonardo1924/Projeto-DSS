@@ -70,15 +70,15 @@ public class TextUI {
         menu.setHandlers(1, () -> {
             System.out.print("Indique o ID do cliente: ");
             String id = scan.nextLine();
-            System.out.print("\nIndique o nome do cliente: ");
+            System.out.print("Indique o nome do cliente: ");
             String nome = scan.nextLine();
-            System.out.print("\nIndique o nif do cliente: ");
+            System.out.print("Indique o nif do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
-            System.out.print("\nIndique o telemovel do cliente: ");
+            System.out.print("Indique o telemovel do cliente: ");
             int telemovel = Integer.parseInt(scan.nextLine());
-            System.out.print("\nIndique o email do cliente: ");
+            System.out.print("Indique o email do cliente: ");
             String mail = scan.nextLine();
-            System.out.print("\nIndique o ID do equipamento: ");
+            System.out.print("Indique o ID do equipamento: ");
             String equip = scan.nextLine();
             this.model.getClientesFacade().registaCliente(id, nome, nif, telemovel, mail, equip);
             System.out.println("O cliente foi registado com sucesso!");
@@ -121,26 +121,32 @@ public class TextUI {
         menu.setHandlers(1, () -> {
             System.out.print("Indique o ID do equipamento: ");
             String idEq = scan.nextLine();
+            System.out.print("Descrição do problema: ");
+            String notas = scan.nextLine();
+            int idOrc = this.model.getOrcamentosFacade().getOrcamentos().get(this.model.getOrcamentosFacade().getOrcamentos().size()).getIdOrcamento()+1;
+            this.model.getOrcamentosFacade().registaOrcamento(idOrc,idEq,LocalDateTime.now(),notas);
+        });
+
+        menu.setHandlers(2, () -> {
+            System.out.print("Indique o ID do orçamento a alterar: ");
+            Integer idOrc = Integer.parseInt(scan.nextLine());
             System.out.print("Indique o custo da reparação: ");
             float custo = Float.parseFloat(scan.nextLine());
             System.out.print("Indique o tempo necessário para realizar a reparação: ");
             int prazo = Integer.parseInt(scan.nextLine());
             System.out.print("Indique o ID do técnico responsável: ");
             String idTecnico = scan.nextLine();
-            System.out.print("Descrição do problema: ");
-            String notas = scan.nextLine();
             System.out.print("Indique ID do plano de trabalhos: ");
             String idPlano = scan.nextLine();
-            int idOrc = this.model.getOrcamentosFacade().getOrcamentos().size()+1;
-            this.model.getOrcamentosFacade().registaOrcamento(idOrc,idEq,LocalDateTime.now(),custo,prazo,idTecnico,notas,idPlano);
-        });
+            this.model.getOrcamentosFacade().atualizaOrcamento(idOrc,custo,prazo,idTecnico,idPlano);
 
-//        menu.setHandlers(2, () ->  );
+        }
+        );
         menu.setHandlers(3, () ->  this.model.getOrcamentosFacade().consultaOrcamentos());
         menu.setHandlers(4, () ->  {
             System.out.print("Indique o ID do orçamento a remover: ");
-            int id = Integer.parseInt(scan.nextLine());
-            this.model.getOrcamentosFacade().getOrcamentos().remove(id);
+            Integer id = Integer.parseInt(scan.nextLine());
+            this.model.getOrcamentosFacade().removeOrcamento(id);
             System.out.println("O orçamento foi removido com sucesso!");
         });
 
@@ -163,7 +169,7 @@ public class TextUI {
         menu.setHandlers(1, () -> {
             System.out.print("Indique o NIF do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
-            System.out.print("\nIndique o ID do equipamento: ");
+            System.out.print("Indique o ID do equipamento: ");
             String equip = scan.nextLine();
             this.model.getEquipamentosFacade().registaEquip(nif, equip, "em processo");
             System.out.println("O equipamento foi registado com sucesso!");
@@ -240,7 +246,7 @@ public class TextUI {
         int tentativas = 0;
 
         if (tentativas == 3)
-            System.out.println("\n\n O Sistema será encerrado agora");
+            System.out.println("\n\n O Sistema será encerrado agora.");
 
         while (!sucesso && tentativas < 3) {
             try {
@@ -249,7 +255,7 @@ public class TextUI {
                 System.out.print("Insira a sua password: ");
                 password = scan.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println(e.toString());
+                System.out.println(e);
             }
             sucesso = this.model.login(user, password);
 
@@ -263,8 +269,8 @@ public class TextUI {
     public void ExitScreen(boolean login){
         Menu.Logo();
         if(!login)
-            System.out.println("\nNúmero de tentativas excedido");
-            System.out.println("\nO sistema será encerrado agora");
+            System.out.println("\nNúmero máximo de tentativas excedido.");
+            System.out.println("\nO sistema será encerrado agora.");
             System.out.println("\033[1;36m" + "Sessão Terminada!" + "\033[0m");
     }
 }

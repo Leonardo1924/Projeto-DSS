@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -69,13 +66,14 @@ public class Parser {
 
     public static OrcamentosFacade parseOrcamento() throws IOException {
         List<String> lines = readFile("input/dadosOrcamento.txt");
-        Map<Integer, Orcamento> orcamentos = new HashMap<>();       // id do equipamento, orçamento
+        Map<Integer, Orcamento> orcamentos = new TreeMap<>();       // id do equipamento, orçamento
         String[] tokens;
         DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
         for (String l : lines) {
-            tokens = l.split(";", 8);
-            Orcamento orc = new Orcamento(Integer.parseInt(tokens[0]),tokens[1],LocalDateTime.parse(tokens[2],dataformatada),Float.parseFloat(tokens[3]),Integer.parseInt(tokens[4]),tokens[5],tokens[6],tokens[7]);
+            tokens = l.split(";", 9);
+            Orcamento orc = new Orcamento(Integer.parseInt(tokens[0]),tokens[1],LocalDateTime.parse(tokens[2],dataformatada),
+                    Float.parseFloat(tokens[3]),Integer.parseInt(tokens[4]),tokens[5],tokens[6],tokens[7],Boolean.parseBoolean(tokens[8]));
             orcamentos.put(Integer.parseInt(tokens[0]),orc.clone());
         }
         OrcamentosFacade dataOrc = new OrcamentosFacade(orcamentos);
