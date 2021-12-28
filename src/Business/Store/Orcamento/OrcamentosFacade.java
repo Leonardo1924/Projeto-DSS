@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class OrcamentosFacade implements IGestOrcamento {
+public class OrcamentosFacade implements IGestOrcamentos {
 
     private Map<Integer,Orcamento> orcamentos;
 

@@ -3,7 +3,7 @@ package Business.Store.Orcamento;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-public interface IGestOrcamento {
+public interface IGestOrcamentos {
 
     Map<Integer,Orcamento> getOrcamentos();
 
