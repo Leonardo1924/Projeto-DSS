@@ -66,7 +66,7 @@ public class Parser {
 
     public static OrcamentosFacade parseOrcamento() throws IOException {
         List<String> lines = readFile("input/dadosOrcamento.txt");
-        Map<Integer, Orcamento> orcamentos = new TreeMap<>();       // id do equipamento, orçamento
+        Map<Integer, Orcamento> orcamentos = new TreeMap<>();       // id do orçamento, orçamento
         String[] tokens;
         DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
