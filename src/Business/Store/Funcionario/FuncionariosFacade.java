@@ -57,4 +57,8 @@ public class FuncionariosFacade implements IGestFuncionarios {
     public String getTipoFuncionario(String username){
         return this.credentials.get(username).getTipo();
     }
+
+    public boolean validateFuncionario(String idTecnico){
+        return this.credentials.containsKey(idTecnico);
+    }
 }

@@ -130,18 +130,21 @@ public class TextUI {
         menu.setHandlers(2, () -> {
             System.out.print("Indique o ID do orçamento a alterar: ");
             Integer idOrc = Integer.parseInt(scan.nextLine());
-            System.out.print("Indique o custo da reparação: ");
-            float custo = Float.parseFloat(scan.nextLine());
-            System.out.print("Indique o tempo necessário para realizar a reparação: ");
-            int prazo = Integer.parseInt(scan.nextLine());
             System.out.print("Indique o ID do técnico responsável: ");
             String idTecnico = scan.nextLine();
-            System.out.print("Indique ID do plano de trabalhos: ");
-            String idPlano = scan.nextLine();
-            this.model.getOrcamentosFacade().atualizaOrcamento(idOrc,custo,prazo,idTecnico,idPlano);
+            if(this.model.getFuncionariosFacade().validateFuncionario(idTecnico)){
+                this.model.getPlanosFacade().createPlano(idOrc,idTecnico);
+                System.out.print("Indique o custo da reparação: ");
+                float custo = Float.parseFloat(scan.nextLine());
+                System.out.print("Indique o tempo necessário para realizar a reparação: ");
+                int prazo = Integer.parseInt(scan.nextLine());
 
-        }
-        );
+                System.out.print("Indique ID do plano de trabalhos: ");
+                String idPlano = scan.nextLine();
+                this.model.getOrcamentosFacade().atualizaOrcamento(idOrc,custo,prazo,idTecnico,idPlano);
+            }
+            else System.out.println("ID de funcionário inválido.");
+        });
         menu.setHandlers(3, () ->  this.model.getOrcamentosFacade().consultaOrcamentos());
         menu.setHandlers(4, () ->  {
             System.out.print("Indique o ID do orçamento a remover: ");

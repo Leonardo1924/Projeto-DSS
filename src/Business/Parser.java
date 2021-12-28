@@ -16,6 +16,7 @@ import Business.Store.Funcionario.FuncionariosFacade;
 import Business.Store.Equipamento.Equipamento;
 import Business.Store.Orcamento.Orcamento;
 import Business.Store.Orcamento.OrcamentosFacade;
+import Business.Store.PlanoTrabalho.PlanoFacade;
 import Business.Store.Servico.Servico;
 import Business.Store.Servico.ServicosFacade;
 
@@ -94,6 +95,11 @@ public class Parser {
         }
         ServicosFacade dataSer = new ServicosFacade(servicos);
         return dataSer;
+    }
+
+    public static PlanoFacade parsePlano() throws IOException {
+        // INCOMPLETO
+        return null;
     }
 
     public static List<String> readFile(String file) {

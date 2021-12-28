@@ -12,4 +12,6 @@ public interface IGestFuncionarios {
     String contactaCliente(String idCliente, List<String> naoContactados, List<String> contactados);
 
     String getTipoFuncionario(String username);
+
+    boolean validateFuncionario(String idTecnico);
 }
