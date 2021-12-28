@@ -1,0 +1,10 @@
+id;tipo;custoTotal;TempoTotal
+1;expresso;10;00:10
+2;normal;50;00:50
+3;normal;150;01:30
+4;expresso;20;00:20
+5;expresso;30;00:30
+6;normal;80;01:05
+7;normal;100;01:45
+8;normal;120;02:00
+9;expresso;150;02:30
