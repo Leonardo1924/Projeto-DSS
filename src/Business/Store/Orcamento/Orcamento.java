@@ -2,6 +2,7 @@ package Business.Store.Orcamento;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 import Business.Store.PlanoTrabalho;
 import Business.Store.Equipamento.Equipamento;
@@ -9,6 +10,7 @@ import Business.Store.Funcionario.Funcionario;
 
 
 public class Orcamento {
+    private int idOrcamento;
     private String idEquip;              //equipamento
     private LocalDateTime data;
     private float custo;
@@ -18,6 +20,7 @@ public class Orcamento {
     private String idPlano;
 
     public Orcamento(){
+        this.idOrcamento = 0;
         this.idEquip = "";
         this.data = LocalDateTime.now();
         this.custo = 0;
@@ -27,7 +30,8 @@ public class Orcamento {
         this.idPlano = "";
     }
 
-    public Orcamento(String equipamento, LocalDateTime data, float custo, int prazo, String tecnico, String notas, String plano){
+    public Orcamento(int id, String equipamento, LocalDateTime data, float custo, int prazo, String tecnico, String notas, String plano){
+        this.idOrcamento = id;
         this.idEquip = equipamento;
         this.data = LocalDateTime.now();
         this.custo = custo;
@@ -38,6 +42,7 @@ public class Orcamento {
     }
 
     public Orcamento(Orcamento orcamento){
+        this.idOrcamento = orcamento.getIdOrcamento();
         this.idEquip = orcamento.getEquipamento();
         this.data = orcamento.getData();
         this.custo = orcamento.getCusto();
@@ -45,6 +50,14 @@ public class Orcamento {
         this.tecnico = orcamento.getTecnico();
         this.notas = orcamento.getNotas();
         this.idPlano = orcamento.getPlano();
+    }
+
+    public int getIdOrcamento() {
+        return idOrcamento;
+    }
+
+    public void setIdOrcamento(int idOrcamento) {
+        this.idOrcamento = idOrcamento;
     }
 
     public LocalDateTime getData(){
@@ -111,7 +124,8 @@ public class Orcamento {
 */
     public String toString(){
         DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        return "\033[1;35mEquipamento: \033[0m" + idEquip +
+        return "\033[1;35mID: \033[0m" + idOrcamento  +
+                " \033[1;35mEquipamento: \033[0m" + idEquip +
                 " \033[1;35mData: \033[0m" + data.format(dataformatada) +
                 " \033[1;35mCusto: \033[0m" + custo +
                 " \033[1;35mPrazo: \033[0m" + prazo +
@@ -124,16 +138,11 @@ public class Orcamento {
         return new Orcamento(this);
     }
 
-    public boolean equals(Object obj){
-        if (obj == this) return true;
-        if (obj == null || obj.getClass().equals(this.getClass())) return false;
-        Orcamento orcamento = (Orcamento) obj;
-        return this.idEquip.equals(orcamento.getEquipamento()) &&
-                this.data == orcamento.getData() &&
-                this.custo == orcamento.getCusto() &&
-                this.prazo == orcamento.getPrazo() &&
-                this.tecnico.equals(orcamento.getTecnico()) &&
-                this.notas.equals(orcamento.getNotas()) &&
-                this.idPlano.equals(orcamento.getPlano());
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Orcamento orcamento = (Orcamento) o;
+        return idOrcamento == orcamento.idOrcamento && Float.compare(orcamento.custo, custo) == 0 && prazo == orcamento.prazo && Objects.equals(idEquip, orcamento.idEquip) && Objects.equals(data, orcamento.data) && Objects.equals(tecnico, orcamento.tecnico) && Objects.equals(notas, orcamento.notas) && Objects.equals(idPlano, orcamento.idPlano);
     }
 }

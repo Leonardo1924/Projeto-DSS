@@ -106,7 +106,7 @@ public class Menu {
                 System.out.println("\033[1;33m" + "\n0 - Logout || Back" + "\033[0m");
                 op = readOption();
                 if (op > 0 && !this.disponivel.get(op - 1).validate()) {
-                    System.out.println("Opção Indisponível!Try again");
+                    System.out.println("Opção Indisponível! Try again");
                 } else if (op > 0) {
                     this.handlers.get(op - 1).execute();
                 }
@@ -150,7 +150,7 @@ public class Menu {
     private int readOption() throws IOException {
         int op;
 
-        System.out.print("\nOpção:");
+        System.out.print("\nOpção: ");
         try {
             String line = scan.nextLine();
             op = Integer.parseInt(line);
@@ -172,7 +172,8 @@ public class Menu {
     public static void Logo(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
-        System.out.println(ANSI_RED + "                    |       | |\\       /| "+ ANSI_GREEN + "_ _ _ _    _ _ _ _ _    _ _ _ _      /\\         _    _ _ _ _\n" +
+        System.out.println(
+                ANSI_RED + "                    |       | |\\       /| "+ ANSI_GREEN + "_ _ _ _    _ _ _ _ _    _ _ _ _      /\\         _    _ _ _ _\n" +
                 ANSI_RED + "                    |       | | \\     / |" + ANSI_GREEN + "|       |   |           |       |    /  \\       | |  |       |\n" +
                 ANSI_RED + "                    |       | |  \\   /  |" + ANSI_GREEN + "|       |   |           |       |   / /\\ \\      | |  |       |\n" +
                 ANSI_RED + "                    |       | |   \\ /   |" + ANSI_GREEN + "|_ _ _ _|   |_ _ _ _ _  |_ _ _ _|  /      \\     | |  |_ _ _ _|\n" +

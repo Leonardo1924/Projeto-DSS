@@ -5,9 +5,11 @@ import Business.Store.Funcionario.Funcionario;
 import Business.Store.Funcionario.IGestFuncionarios;
 import Business.Store.Funcionario.FuncionariosFacade;
 import Business.Parser;
+import Business.Store.Orcamento.Orcamento;
 import Business.Store.StoreLNFacade;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class TextUI {
@@ -66,29 +68,29 @@ public class TextUI {
         //Registar os handlers
 
         menu.setHandlers(1, () -> {
-            System.out.println("Indique o ID do cliente:");
+            System.out.print("Indique o ID do cliente: ");
             String id = scan.nextLine();
-            System.out.println("Indique o nome do cliente:");
+            System.out.print("\nIndique o nome do cliente: ");
             String nome = scan.nextLine();
-            System.out.println("Indique o nif do cliente:");
+            System.out.print("\nIndique o nif do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
-            System.out.println("Indique o telemovel do cliente:");
+            System.out.print("\nIndique o telemovel do cliente: ");
             int telemovel = Integer.parseInt(scan.nextLine());
-            System.out.println("Indique o email do cliente:");
+            System.out.print("\nIndique o email do cliente: ");
             String mail = scan.nextLine();
-            System.out.println("Indique o ID do equipamento:");
+            System.out.print("\nIndique o ID do equipamento: ");
             String equip = scan.nextLine();
             this.model.getClientesFacade().registaCliente(id, nome, nif, telemovel, mail, equip);
             System.out.println("O cliente foi registado com sucesso!");
         });
         menu.setHandlers(2, () -> {
-            System.out.println("Indique o ID do cliente a remover:");
+            System.out.print("Indique o ID do cliente a remover: ");
             String id = scan.nextLine();
             this.model.getClientesFacade().removeCliente(id);
             System.out.println("O cliente foi removido com sucesso!");
         });
         menu.setHandlers(3, () -> {
-            System.out.println("Indique o ID do cliente a contactar:");
+            System.out.print("Indique o ID do cliente a contactar: ");
             String id = scan.nextLine();
             List<String> contactados = this.model.getClientesFacade().getContactados();
             List<String> naoContactados = this.model.getClientesFacade().getNaoContactados();
@@ -116,7 +118,32 @@ public class TextUI {
         menu.setPreCondition(4,()->!this.model.getOrcamentosFacade().getOrcamentos().isEmpty());
 
         //Registar os handlers
-        //menu.setHandlers(1,()->);
+        menu.setHandlers(1, () -> {
+            System.out.print("Indique o ID do equipamento: ");
+            String idEq = scan.nextLine();
+            System.out.print("Indique o custo da reparação: ");
+            float custo = Float.parseFloat(scan.nextLine());
+            System.out.print("Indique o tempo necessário para realizar a reparação: ");
+            int prazo = Integer.parseInt(scan.nextLine());
+            System.out.print("Indique o ID do técnico responsável: ");
+            String idTecnico = scan.nextLine();
+            System.out.print("Descrição do problema: ");
+            String notas = scan.nextLine();
+            System.out.print("Indique ID do plano de trabalhos: ");
+            String idPlano = scan.nextLine();
+            int idOrc = this.model.getOrcamentosFacade().getOrcamentos().size()+1;
+            this.model.getOrcamentosFacade().registaOrcamento(idOrc,idEq,LocalDateTime.now(),custo,prazo,idTecnico,notas,idPlano);
+        });
+
+//        menu.setHandlers(2, () ->  );
+        menu.setHandlers(3, () ->  this.model.getOrcamentosFacade().consultaOrcamentos());
+        menu.setHandlers(4, () ->  {
+            System.out.print("Indique o ID do orçamento a remover: ");
+            int id = Integer.parseInt(scan.nextLine());
+            this.model.getOrcamentosFacade().getOrcamentos().remove(id);
+            System.out.println("O orçamento foi removido com sucesso!");
+        });
+
         menu.run();
     }
 
@@ -134,27 +161,27 @@ public class TextUI {
         //Registar os handlers
 
         menu.setHandlers(1, () -> {
-            System.out.println("Indique o NIF do cliente:");
+            System.out.print("Indique o NIF do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
-            System.out.println("Indique o ID do equipamento:");
+            System.out.print("\nIndique o ID do equipamento: ");
             String equip = scan.nextLine();
             this.model.getEquipamentosFacade().registaEquip(nif, equip, "em processo");
             System.out.println("O equipamento foi registado com sucesso!");
         });
         menu.setHandlers(2, () -> {
-            System.out.println("Indique o NIF do cliente:");
+            System.out.print("Indique o NIF do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
             String estado = this.model.getEquipamentosFacade().consultaEstado(nif);
             System.out.println("O equipamento está " + estado + "!");
         });
         menu.setHandlers(3, () -> {
-            System.out.println("Indique o NIF do cliente:");
+            System.out.print("Indique o NIF do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
             this.model.getEquipamentosFacade().levantaEquipamento(nif);
             System.out.println("O equipamento foi levantado com sucesso!");
         });
         menu.setHandlers(4, () -> {
-            System.out.println("Indique o NIF do cliente:");
+            System.out.print("Indique o NIF do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
             this.model.getEquipamentosFacade().apagaEquipamento(nif);
             System.out.println("O equipamento foi apagado com sucesso!");
@@ -217,9 +244,9 @@ public class TextUI {
 
         while (!sucesso && tentativas < 3) {
             try {
-                System.out.println("\nInsire o seu nome:");
+                System.out.print("\nInsire o seu nome: ");
                 user = scan.nextLine();
-                System.out.println("Insira a sua password:");
+                System.out.print("Insira a sua password: ");
                 password = scan.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println(e.toString());
@@ -227,7 +254,7 @@ public class TextUI {
             sucesso = this.model.login(user, password);
 
             if (!sucesso && ++tentativas < 3) {
-                System.out.println("Dados Inválidos,tente novamente.\n" + "Tentativas restantes: " + (3 - tentativas));
+                System.out.println("Dados Inválidos, tente novamente.\n" + "Tentativas restantes: " + (3 - tentativas));
             }
         }
         return sucesso;

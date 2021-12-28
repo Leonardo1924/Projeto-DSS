@@ -13,7 +13,7 @@ public class Main {
             new TextUI().run();
         }
         catch (Exception e) {
-            System.out.println("Não foi possivel iniciar o sistema!: " + e.getMessage());
+            System.out.println("Não foi possível iniciar o sistema!: " + e.getMessage());
         }
     }
 }
