@@ -89,8 +89,8 @@ public class Parser {
         String[] tokens;
 
         for (String l : lines) {
-            tokens = l.split(";", 3);
-            Servico ser = new Servico(tokens[0],tokens[1],Float.parseFloat(tokens[2]),Float.parseFloat(tokens[3]));
+            tokens = l.split(";", 4);
+            Servico ser = new Servico(tokens[0],tokens[1],tokens[2],Float.parseFloat(tokens[3]),Float.parseFloat(tokens[4]));
             servicos.put(Integer.parseInt(tokens[0]),ser.clone());
         }
         ServicosFacade dataSer = new ServicosFacade(servicos);

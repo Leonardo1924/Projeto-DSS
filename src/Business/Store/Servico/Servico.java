@@ -5,19 +5,22 @@ import Business.Store.Cliente.Cliente;
 public class Servico {
     private String id;
     private String tipo;       // expresso ; normal
+    private String idPlano;
     private float custoTotal;
     private float tempoTotal;
 
     public Servico() {
         this.id = "";
         this.tipo = "";
+        this.idPlano = "";
         this.custoTotal = 0;
         this.tempoTotal = 0;
     }
 
-    public Servico(String id, String tipo, float custoTotal, float tempoTotal) {
+    public Servico(String id, String tipo, String idPlano, float custoTotal, float tempoTotal) {
         this.id = id;
         this.tipo = tipo;
+        this.idPlano = idPlano;
         this.custoTotal = custoTotal;
         this.tempoTotal = tempoTotal;
     }
@@ -25,6 +28,7 @@ public class Servico {
     public Servico(Servico servico) {
         this.id = servico.getId();
         this.tipo = servico.getTipo();
+        this.idPlano = servico.getIdPlano();
         this.custoTotal = servico.getCustoTotal();
         this.tempoTotal = servico.getTempoTotal();
     }
@@ -35,6 +39,10 @@ public class Servico {
 
     public String getTipo() {
         return this.tipo;
+    }
+
+    public String getIdPlano() {
+        return this.idPlano;
     }
 
     public float getCustoTotal() {
@@ -52,6 +60,7 @@ public class Servico {
     public String toString(){
         return "\033[1;35mId: \033[0m" + this.id +
                 " \033[1;35mTipo: \033[0m" + this.tipo +
+                " \033[1;35mId Plano: \033[0m" + this.idPlano +
                 " \033[1;35mCusto Total: \033[0m" + this.custoTotal +
                 " \033[1;35mTempo Total: \033[0m" + this.tempoTotal;
     }
@@ -62,6 +71,7 @@ public class Servico {
         Servico servico = (Servico) obj;
         return this.id.equals(servico.getId()) &&
                 this.tipo.equals(servico.getTipo()) &&
+                this.idPlano.equals(servico.getIdPlano()) &&
                 this.custoTotal == servico.getCustoTotal() &&
                 this.tempoTotal == servico.getTempoTotal();
     }
