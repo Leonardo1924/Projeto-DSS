@@ -7,5 +7,5 @@ public interface IGestPlano {
 
     Map<Integer, PlanoTrabalho> getPlanos();
 
-    void adicionaPlano(int idOrc, String idTecnico, float custo, Duration prazo);
+    int adicionaPlano(int idOrc, String idTecnico, float custo, Duration prazo);
 }

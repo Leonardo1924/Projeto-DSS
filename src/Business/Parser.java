@@ -78,7 +78,7 @@ public class Parser {
         for (String l : lines) {
             tokens = l.split(";", 9);
             Orcamento orc = new Orcamento(Integer.parseInt(tokens[0]),tokens[1],LocalDateTime.parse(tokens[2],dataformatada),
-                    Float.parseFloat(tokens[3]),Integer.parseInt(tokens[4]),tokens[5],tokens[6],tokens[7],Boolean.parseBoolean(tokens[8]));
+                    Float.parseFloat(tokens[3]),Duration.parse(tokens[4]),tokens[5],tokens[6],Integer.parseInt(tokens[7]),Boolean.parseBoolean(tokens[8]));
             orcamentos.put(Integer.parseInt(tokens[0]),orc.clone());
         }
         OrcamentosFacade dataOrc = new OrcamentosFacade(orcamentos);

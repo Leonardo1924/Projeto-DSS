@@ -1,5 +1,6 @@
 package Business.Store.Orcamento;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -10,25 +11,25 @@ public class Orcamento {
     private String idEquip;              //equipamento
     private LocalDateTime data;
     private float custo;
-    private int prazo;  
+    private Duration prazo;
     private String tecnico;
     private String notas;
-    private String idPlano;
+    private int idPlano;
     private boolean status;
 
     public Orcamento(){
-        this.idOrcamento = 0;
+        this.idOrcamento = -1;
         this.idEquip = null;
         this.data = LocalDateTime.now();
-        this.custo = 0;
-        this.prazo = 0;
+        this.custo = -1;
+        this.prazo = Duration.ZERO;
         this.tecnico = null;
         this.notas = null;
-        this.idPlano = null;
+        this.idPlano = -1;
         this.status = false;
     }
 
-    public Orcamento(int id, String equipamento, LocalDateTime data, float custo, int prazo, String tecnico, String notas, String plano, boolean status){
+    public Orcamento(int id, String equipamento, LocalDateTime data, float custo, Duration prazo, String tecnico, String notas, int plano, boolean status){
         this.idOrcamento = id;
         this.idEquip = equipamento;
         this.data = data;
@@ -57,10 +58,10 @@ public class Orcamento {
         this.idEquip = idEq;
         this.data = now;
         this.custo = 0;
-        this.prazo = 0;
+        this.prazo = Duration.ZERO;
         this.tecnico = null;
         this.notas = notas;
-        this.idPlano = null;
+        this.idPlano = -1;
         this.status = false;
     }
 
@@ -97,11 +98,11 @@ public class Orcamento {
         this.custo = custo;
     }
 
-    public int getPrazo() {
+    public Duration getPrazo() {
         return prazo;
     }
 
-    public void setPrazo(int prazo) {
+    public void setPrazo(Duration prazo) {
         this.prazo = prazo;
     }
 
@@ -121,11 +122,11 @@ public class Orcamento {
         this.notas = notas;
     }
 
-    public String getIdPlano() {
+    public int getIdPlano() {
         return idPlano;
     }
 
-    public void setIdPlano(String idPlano) {
+    public void setIdPlano(int idPlano) {
         this.idPlano = idPlano;
     }
 
@@ -172,6 +173,6 @@ public class Orcamento {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Orcamento orcamento = (Orcamento) o;
-        return idOrcamento == orcamento.idOrcamento && Float.compare(orcamento.custo, custo) == 0 && prazo == orcamento.prazo && status == orcamento.status && Objects.equals(idEquip, orcamento.idEquip) && Objects.equals(data, orcamento.data) && Objects.equals(tecnico, orcamento.tecnico) && Objects.equals(notas, orcamento.notas) && Objects.equals(idPlano, orcamento.idPlano);
+        return idOrcamento == orcamento.idOrcamento && Float.compare(orcamento.custo, custo) == 0 && idPlano == orcamento.idPlano && status == orcamento.status && Objects.equals(idEquip, orcamento.idEquip) && Objects.equals(data, orcamento.data) && Objects.equals(prazo, orcamento.prazo) && Objects.equals(tecnico, orcamento.tecnico) && Objects.equals(notas, orcamento.notas);
     }
 }

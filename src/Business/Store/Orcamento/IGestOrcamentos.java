@@ -1,5 +1,6 @@
 package Business.Store.Orcamento;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -13,5 +14,5 @@ public interface IGestOrcamentos {
 
     void registaOrcamento(int idOrc, String idEq, LocalDateTime now, String notas);
 
-    void atualizaOrcamento(Integer idOrc, float custo, int prazo, String idTecnico, String idPlano);
+    void atualizaOrcamento(Integer idOrc, float custo, Duration prazo, String idTecnico, int idPlano);
 }

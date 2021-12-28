@@ -1,5 +1,6 @@
 package Business.Store.Orcamento;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,7 +27,7 @@ public class OrcamentosFacade implements IGestOrcamentos {
         this.orcamentos.put(idOrc,orc);
     }
 
-    public void atualizaOrcamento(Integer idOrc, float custo, int prazo, String idTecnico, String idPlano) {
+    public void atualizaOrcamento(Integer idOrc, float custo, Duration prazo, String idTecnico, int idPlano) {
         this.orcamentos.get(idOrc).setCusto(custo);
         this.orcamentos.get(idOrc).setPrazo(prazo);
         this.orcamentos.get(idOrc).setTecnico(idTecnico);

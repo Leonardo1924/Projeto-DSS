@@ -134,12 +134,16 @@ public class TextUI {
             int idOrc = Integer.parseInt(scan.nextLine());
             System.out.print("Indique o ID do técnico responsável: ");
             String idTecnico = scan.nextLine();
-            if(this.model.getFuncionariosFacade().getTipoFuncionario(idTecnico).equals("Tecnico")){
-                System.out.print("Indique o custo da reparação: ");
-                float custo = Float.parseFloat(scan.nextLine());
-                System.out.print("Indique o tempo necessário para realizar a reparação: ");
-                Duration prazo = Duration.parse(scan.nextLine());
-                this.model.getPlanosFacade().adicionaPlano(idOrc,idTecnico,custo,prazo);
+            if(this.model.getFuncionariosFacade().validateFuncionario(idTecnico)) {
+                if (this.model.getFuncionariosFacade().getTipoFuncionario(idTecnico).equals("Tecnico")) {
+                    System.out.print("Indique o custo da reparação: ");
+                    float custo = Float.parseFloat(scan.nextLine());
+                    System.out.print("Indique o tempo necessário para realizar a reparação (min): ");
+                    int value = scan.nextInt();
+                    Duration prazo = Duration.parse("PT"+value+"M");
+                    int idPlano = this.model.getPlanosFacade().adicionaPlano(idOrc, idTecnico, custo, prazo);
+                    this.model.getOrcamentosFacade().atualizaOrcamento(idOrc,custo,prazo,idTecnico,idPlano);
+                }
             }
             else System.out.println("Funcionário inválido.");
         });
