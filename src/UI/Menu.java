@@ -154,6 +154,7 @@ public class Menu {
         try {
             String line = scan.nextLine();
             op = Integer.parseInt(line);
+            System.out.println("\n\n");
         } catch (NumberFormatException e) {
             op = -1;
         }

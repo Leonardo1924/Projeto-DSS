@@ -1,6 +1,7 @@
 package UI;
 
 import Business.IStoreLN;
+import Business.Parser;
 import Business.Saver;
 import Business.Store.StoreLNFacade;
 
@@ -74,8 +75,8 @@ public class TextUI {
         menu.setPreCondition(2, () -> !this.model.getClientesFacade().getClientes().isEmpty());
         menu.setPreCondition(3, () -> !this.model.getClientesFacade().getClientes().isEmpty());
         menu.setPreCondition(4, () -> !this.model.getClientesFacade().getClientes().isEmpty());
-        //Registar os handlers
 
+        //Registar os handlers
         menu.setHandlers(1, () -> {
             System.out.print("Indique o ID do cliente: ");
             String id = scan.nextLine();
@@ -199,8 +200,8 @@ public class TextUI {
         menu.setPreCondition(2,()->!this.model.getEquipamentosFacade().getEquipamentos().isEmpty());
         menu.setPreCondition(3,()->!this.model.getEquipamentosFacade().getEquipamentos().isEmpty());
         menu.setPreCondition(4,()->!this.model.getEquipamentosFacade().getEquipamentos().isEmpty());
-        //Registar os handlers
 
+        //Registar os handlers
         menu.setHandlers(1, () -> {
             System.out.print("Indique o NIF do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
@@ -235,24 +236,64 @@ public class TextUI {
     private void gestaoDeServico() throws IOException {
         Menu menu = new Menu(new String[]{
                 "Serviço Expresso",
-                "Serviço Programado"});
+                "Serviço Programado",
+                "Consultar Serviço",
+                "Lista de Serviços",
+                "Apagar Serviço"});
 
+        //Registar pré-condições das transições
+        menu.setPreCondition(1,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Tecnico"));
+        menu.setPreCondition(2,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Tecnico"));
+        menu.setPreCondition(3,()->!this.model.getEquipamentosFacade().getEquipamentos().isEmpty());
+        menu.setPreCondition(4,()->!this.model.getEquipamentosFacade().getEquipamentos().isEmpty());
+
+        //Registar os handlers
         menu.setHandlers(1, this::servicoExpresso);
         menu.setHandlers(2, this::servicoProgramado);
+        menu.setHandlers(3, () ->  {
+            System.out.print("Indique o ID do serviço a consultar: ");
+            Integer id = Integer.parseInt(scan.nextLine());
+            this.model.getServicosFacade().consultaServico(id);
+        });
+        menu.setHandlers(4, () -> System.out.print(this.model.getServicosFacade().getServicos()));
+        menu.setHandlers(5, () ->  {
+            System.out.print("Indique o ID do serviço a remover: ");
+            Integer id = Integer.parseInt(scan.nextLine());
+            this.model.getServicosFacade().removeServico(id);
+            System.out.println("O serviço foi removido com sucesso!");
+        });
+
         menu.run();
     }
 
     private void servicoExpresso() throws IOException{
        Menu menu = new Menu(new String[]{
-                "Arranjar Ecrã",
-                "Instalar OS",
-                "Colocar Película",
-                "Comprar Equipamento Novo"});
+                "Arranjar ecrã",
+                "Instalar Sistema Operativo",
+                "Colocar película",
+                "Limpar equipamento"});
 
-       //menu.setHandlers(1,()->);
-       //menu.setHandlers(2,()->);
-       //menu.setHandlers(3,()->);
-       //menu.setHandlers(4,()->);
+       menu.setHandlers(1,()->{
+           Duration tempo = Duration.parse( "PT30M");
+           float custo = 60;
+           this.model.getServicosFacade().adicionaServicoExpresso(custo,tempo);
+       });
+        menu.setHandlers(1,()->{
+            Duration tempo = Duration.parse( "PT10M");
+            float custo = 20;
+            this.model.getServicosFacade().adicionaServicoExpresso(custo,tempo);
+        });
+        menu.setHandlers(3,()->{
+            Duration tempo = Duration.parse( "PT5M");
+            float custo = 10;
+            this.model.getServicosFacade().adicionaServicoExpresso(custo,tempo);
+        });
+        menu.setHandlers(4,()->{
+            Duration tempo = Duration.parse( "PT60M");
+            float custo = 50;
+            this.model.getServicosFacade().adicionaServicoExpresso(custo,tempo);
+        });
+
        menu.run();
     }
 
@@ -260,21 +301,16 @@ public class TextUI {
         Menu menu = new Menu(new String[]{
                 "Adicionar Serviço",
                 "Editar Serviço",
-                "Consultar Serviço",
-                "Lista de Serviços",
-                "Apagar Serviço"});
+                });
 
         //Registar pré-condições das transições
         menu.setPreCondition(1,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Tecnico"));
-        //menu.setPreCondition(2,()->têm que existir um plano para editar);
-        //menu.setPreCondition(3,()->têm que existir um plano para consultar);
-        //menu.setPreCondition(4,()->têm que existir um plano para apagar);
+        menu.setPreCondition(2,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Tecnico"));
 
         //Registar os handlers
-
         //menu.setHandlers(1,()->);
         //menu.setHandlers(2,()->);
-        //menu.setHandlers(3,()->);
+        //menu.setHandlers(3,()-> System.out.println(this.model.getServicosFacade().getServicos()));
         //menu.setHandlers(4,()->);
         menu.run();
     }

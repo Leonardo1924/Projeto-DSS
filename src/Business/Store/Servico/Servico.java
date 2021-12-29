@@ -37,6 +37,14 @@ public class Servico {
         this.tempoTotal = servico.getTempoTotal();
     }
 
+    public Servico(int id, float custo, Duration tempo, String expresso) {
+        this.id = String.valueOf(id);
+        this.tipo = expresso;
+        this.idPlano = "0";
+        this.custoTotal = custo;
+        this.tempoTotal = tempo;
+    }
+
     public String getId() {
         return this.id;
     }
@@ -62,6 +70,7 @@ public class Servico {
     }
 
     public String toString(){
+        if (this.idPlano.equals("0")) this.idPlano = "n/a";
         return "\033[1;35mId: \033[0m" + this.id +
                 " \033[1;35mTipo: \033[0m" + this.tipo +
                 " \033[1;35mId Plano: \033[0m" + this.idPlano +
