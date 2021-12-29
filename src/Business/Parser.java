@@ -108,7 +108,6 @@ public class Parser {
         for (String l : lines) {
             tokens = l.split(";", 5);
             PlanoTrabalho pt = new PlanoTrabalho(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),tokens[2],Float.parseFloat(tokens[3]), Duration.parse(tokens[4]));
-            System.out.println(pt.getPrazo());
             planos.put(Integer.parseInt(tokens[0]),pt.clone());
         }
         PlanoFacade dataPt = new PlanoFacade(planos);
