@@ -309,8 +309,13 @@ public class TextUI {
         menu.setPreCondition(2,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Tecnico"));
 
         //Registar os handlers
-        //menu.setHandlers(1,()->);
-        //menu.setHandlers(2,()->);
+        menu.setHandlers(1,()-> {
+            System.out.println("Introduza o Id do Serviço:");
+            Integer id = Integer.parseInt(scan.nextLine());
+        });
+        menu.setHandlers(2,()->{
+            System.out.println("Introduza o Id do Serviço a editar:");
+        });
         //menu.setHandlers(3,()-> System.out.println(this.model.getServicosFacade().getServicos()));
         //menu.setHandlers(4,()->);
         menu.run();
