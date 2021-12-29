@@ -18,37 +18,37 @@ public class Saver {
      */
     public void gravar(IStoreLN store){
         try {
-            FileOutputStream fileFunc = new FileOutputStream("dadosFuncionarios.txt");
+            FileOutputStream fileFunc = new FileOutputStream("input/dadosFuncionarios.txt");
             for (Funcionario func : store.getFuncionariosFacade().getFuncionarios().values()) {
                 ObjectOutputStream objOut = new ObjectOutputStream(fileFunc);
                 objOut.writeObject(func);
                 objOut.close();
             }
-            FileOutputStream fileClient = new FileOutputStream("dadosClientes.txt");
+            FileOutputStream fileClient = new FileOutputStream("input/dadosClientes.txt");
             for (Cliente cl : store.getClientesFacade().getClientes().values()) {
                 ObjectOutputStream objOut = new ObjectOutputStream(fileClient);
                 objOut.writeObject(cl);
                 objOut.close();
             }
-            FileOutputStream fileEquip = new FileOutputStream("dadosEquipamentos.txt");
+            FileOutputStream fileEquip = new FileOutputStream("input/dadosEquipamentos.txt");
             for (Equipamento eq : store.getEquipamentosFacade().getEquipamentos().values()) {
                 ObjectOutputStream objOut = new ObjectOutputStream(fileEquip);
                 objOut.writeObject(eq);
                 objOut.close();
             }
-            FileOutputStream fileOrc = new FileOutputStream("dadosOrcamento.txt");
+            FileOutputStream fileOrc = new FileOutputStream("input/dadosOrcamento.txt");
             for (Orcamento orc : store.getOrcamentosFacade().getOrcamentos().values()) {
                 ObjectOutputStream objOut = new ObjectOutputStream(fileOrc);
                 objOut.writeObject(orc);
                 objOut.close();
             }
-            FileOutputStream fileServ = new FileOutputStream("dadosServico.txt");
+            FileOutputStream fileServ = new FileOutputStream("input/dadosServico.txt");
             for (Servico s : store.getServicosFacade().getServicos().values()) {
                 ObjectOutputStream objOut = new ObjectOutputStream(fileServ);
                 objOut.writeObject(s);
                 objOut.close();
             }
-            FileOutputStream filePlano = new FileOutputStream("dadosPlano.txt");
+            FileOutputStream filePlano = new FileOutputStream("input/dadosPlano.txt");
             for (PlanoTrabalho pl : store.getPlanosFacade().getPlanos().values()) {
                 ObjectOutputStream objOut = new ObjectOutputStream(filePlano);
                 objOut.writeObject(pl);
