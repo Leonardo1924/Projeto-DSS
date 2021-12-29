@@ -140,7 +140,8 @@ public class Orcamento {
     }
 
     public void gravar(PrintWriter print){
-        print.println(this.idOrcamento + ";" + this.idEquip + ";" + this.data + ";" + this.custo + ";" + this.prazo.toString() + ";" + this.tecnico + ";" + this.notas + ";" + this.idPlano + ";" + this.status);
+        DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        print.println(this.idOrcamento + ";" + this.idEquip + ";" + this.data.format(dataformatada) + ";" + this.custo + ";" + this.prazo.toString() + ";" + this.tecnico + ";" + this.notas + ";" + this.idPlano + ";" + this.status);
     }
 
     public String toString(){
@@ -152,7 +153,7 @@ public class Orcamento {
                 " \033[1;35mEquipamento: \033[0m" + idEquip +
                 " \033[1;35mData: \033[0m" + data.format(dataformatada) +
                 " \033[1;35mCusto: \033[0m" + custo +
-                " \033[1;35mPrazo: \033[0m" + prazo +
+                " \033[1;35mPrazo: \033[0m" + prazo.toString() +
                 " \033[1;35mFuncionario: \033[0m" + tecnico +
                 " \033[1;35mNotas: \033[0m" + notas +
                 " \033[1;35mPlano: \033[0m" + idPlano +

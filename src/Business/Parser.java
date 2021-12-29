@@ -70,12 +70,17 @@ public class Parser {
     }
 
     public static OrcamentosFacade parseOrcamento() throws IOException {
+        Scanner scan = new Scanner(System.in);
         List<String> lines = readFile("input/dadosOrcamento.txt");
         Map<Integer, Orcamento> orcamentos = new TreeMap<>();       // id do orçamento, orçamento
         String[] tokens;
-        DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         for (String l : lines) {
             tokens = l.split(";", 9);
+/*
+            Duration d = Duration.parse(tokens[4]);
+            System.out.println(d.toMinutes());
+ */
             Orcamento orc = new Orcamento(Integer.parseInt(tokens[0]),tokens[1],LocalDateTime.parse(tokens[2],dataformatada),
                     Float.parseFloat(tokens[3]),Duration.parse(tokens[4]),tokens[5],tokens[6],Integer.parseInt(tokens[7]),Boolean.parseBoolean(tokens[8]));
             orcamentos.put(Integer.parseInt(tokens[0]),orc.clone());
