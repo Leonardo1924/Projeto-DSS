@@ -1,4 +1,4 @@
-package Business;
+package Business.Store;
 
 import Business.Store.Cliente.IGestClientes;
 import Business.Store.Funcionario.IGestFuncionarios;

@@ -1,12 +1,10 @@
 package Business.Store.PlanoTrabalho;
 
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.time.Duration;
-import java.util.stream.Collectors;
 
 public class PlanoTrabalho {
     private int idPlano;

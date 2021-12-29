@@ -1,8 +1,7 @@
 package UI;
 
-import Business.IStoreLN;
+import Business.Store.IStoreLN;
 import Business.Store.StoreLNFacade;
-import Business.Parser;
 
 import java.io.IOException;
 import java.util.*;

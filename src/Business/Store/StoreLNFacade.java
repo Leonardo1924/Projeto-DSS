@@ -1,8 +1,7 @@
 package Business.Store;
 
 import Business.Store.Cliente.IGestClientes;
-import Business.IStoreLN;
-import Business.Parser;
+import Business.InPutOutPut.Parser;
 import Business.Store.Funcionario.IGestFuncionarios;
 import Business.Store.Equipamento.IGestEquipamentos;
 import Business.Store.Orcamento.IGestOrcamentos;

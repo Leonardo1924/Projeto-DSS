@@ -1,8 +1,9 @@
-package Business;
+package Business.InPutOutPut;
 
 import Business.Store.Cliente.Cliente;
 import Business.Store.Equipamento.Equipamento;
 import Business.Store.Funcionario.Funcionario;
+import Business.Store.IStoreLN;
 import Business.Store.Orcamento.Orcamento;
 import Business.Store.PlanoTrabalho.PlanoTrabalho;
 import Business.Store.Servico.Servico;
