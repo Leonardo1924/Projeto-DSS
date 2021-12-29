@@ -219,7 +219,7 @@ public class TextUI {
                 "Serviço Programado"});
 
         menu.setHandlers(1, this::servicoExpresso);
-        menu.setHandlers(2, this::gestaoDoPlano);
+        menu.setHandlers(2, this::servicoProgramado);
         menu.run();
     }
 
@@ -237,12 +237,13 @@ public class TextUI {
        menu.run();
     }
 
-    private void gestaoDoPlano() throws IOException {
+    private void servicoProgramado() throws IOException {
         Menu menu = new Menu(new String[]{
-                "Elaborar Plano de Trabalhos",
-                "Editar Plano de Trabalhos",
-                "Consultar Plano",
-                "Apagar Plano"});
+                "Adicionar Serviço",
+                "Editar Serviço",
+                "Consultar Serviço",
+                "Lista de Serviços",
+                "Apagar Serviço"});
 
         //Registar pré-condições das transições
         menu.setPreCondition(1,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Tecnico"));
