@@ -5,7 +5,7 @@ import java.util.Map;
 public interface IGestEquipamentos {
     Map<Integer, Equipamento> getEquipamentos();
 
-    boolean registaEquip(int nif, String idEquip, String estado);
+    void registaEquip(int nif, String idEquip, String estado);
 
     String consultaEstado(int nif);
 
