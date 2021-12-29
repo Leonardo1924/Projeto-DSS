@@ -52,4 +52,8 @@ public class OrcamentosFacade implements IGestOrcamentos {
         for(Orcamento o : this.orcamentos.values())
             System.out.println(o.toString());
     }
+
+    public boolean existeOrcamento(int id){
+        return this.orcamentos.containsKey(id);
+    }
 }

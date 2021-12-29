@@ -11,7 +11,9 @@ public interface IGestEquipamentos {
 
     void levantaEquipamento(int nif);
 
-    void apagaEquipamento(int nif);
+    boolean apagaEquipamento(int nif);
 
-    boolean existeEquipamento(int nif);
+    boolean existeEquipamentoNIF(int nif);
+
+    boolean existeEquipamentoID(String id);
 }

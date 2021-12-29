@@ -15,4 +15,6 @@ public interface IGestOrcamentos {
     void registaOrcamento(int idOrc, String idEq, LocalDateTime now, String notas);
 
     void atualizaOrcamento(int idOrc, String idTecnico, int idPlano, float custoTotal, Duration prazoTotal);
+
+    boolean existeOrcamento(int id);
 }

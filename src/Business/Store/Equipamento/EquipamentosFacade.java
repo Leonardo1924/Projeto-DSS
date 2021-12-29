@@ -27,11 +27,22 @@ public class EquipamentosFacade implements IGestEquipamentos {
         this.equipamentos.get(nif).setEstado("entregue");
     }
 
-    public void apagaEquipamento(int nif){
-        this.equipamentos.remove(nif);
+    public boolean apagaEquipamento(int nif){
+        if(this.equipamentos.containsKey(nif)) {
+            this.equipamentos.remove(nif);
+            return true;
+        }
+        else return false;
     }
 
-    public boolean existeEquipamento(int nif){
+    public boolean existeEquipamentoNIF(int nif){
         return this.equipamentos.containsKey(nif);
+    }
+
+    public boolean existeEquipamentoID(String id){
+        for(Equipamento eq: this.equipamentos.values()){
+            if(eq.getId().equals(id)) return true;
+        }
+        return false;
     }
 }

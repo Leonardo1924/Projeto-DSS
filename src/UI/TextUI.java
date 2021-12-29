@@ -56,8 +56,8 @@ public class TextUI {
             String id = scan.nextLine();
             System.out.print("Inserir password: ");
             String pass = scan.nextLine();
-            if (this.model.login(id,pass)) System.out.println("\nUtilizador alterado.\n");
-            else System.out.println("\nDados fornecidos incorretos\n");
+            if (this.model.login(id,pass)) System.out.print("\nUtilizador alterado.\n");
+            else System.out.print("\nDados fornecidos incorretos\n");
         });
         menu.run();
     }
@@ -97,16 +97,16 @@ public class TextUI {
                 System.out.print("Indique o ID do equipamento: ");
                 String equip = scan.nextLine();
                 this.model.getClientesFacade().registaCliente(id, nome, nif, telemovel, mail, equip);
-                System.out.println("O cliente foi registado com sucesso!");
+                System.out.print("O cliente foi registado com sucesso!\n\n");
             }
-            else System.out.println("Este ID de cliente não se encontra disponivel!");
+            else System.out.print("Este ID de cliente não se encontra disponivel!\n\n");
         });
         menu.setHandlers(2, () -> {
             System.out.print("Indique o ID do cliente a remover: ");
             String id = scan.nextLine();
             if(this.model.getClientesFacade().removeCliente(id))
-                System.out.print("O cliente foi removido com sucesso!");
-            else  System.out.print("Este cliente não existe no sistema!");
+                System.out.print("O cliente foi removido com sucesso!\n\n");
+            else  System.out.print("Este cliente não existe no sistema!\n\n");
         });
         menu.setHandlers(3, () -> {
             System.out.print("Indique o ID do cliente a contactar: ");
@@ -115,12 +115,13 @@ public class TextUI {
                 List<String> contactados = this.model.getClientesFacade().getContactados();
                 List<String> naoContactados = this.model.getClientesFacade().getNaoContactados();
                 String time = this.model.getFuncionariosFacade().contactaCliente(id, contactados, naoContactados);
-                System.out.println("O cliente foi contactado em " + time + "!");
+                System.out.print("O cliente foi contactado em " + time + "!\n\n");
             }
-            else System.out.print("Este cliente não existe no sistema!");
+            else System.out.print("Este cliente não existe no sistema!\n\n");
         });
         menu.setHandlers(4, () -> {
             this.model.getClientesFacade().consultaClientes();
+            System.out.println("\n\n");
         });
 
         menu.run();
@@ -145,56 +146,62 @@ public class TextUI {
         menu.setHandlers(1, () -> {
             System.out.print("Indique o ID do equipamento: ");
             String idEq = scan.nextLine();
-            System.out.print("Descrição do problema: ");
-            String notas = scan.nextLine();
-            int idOrc = this.model.getOrcamentosFacade().getOrcamentos().get(this.model.getOrcamentosFacade().getOrcamentos().size()).getIdOrcamento() + 1;
-            this.model.getOrcamentosFacade().registaOrcamento(idOrc, idEq, LocalDateTime.now(), notas);
+            if(this.model.getEquipamentosFacade().existeEquipamentoID(idEq)){
+                System.out.print("Descrição do problema: ");
+                String notas = scan.nextLine();
+                int idOrc = this.model.getOrcamentosFacade().getOrcamentos().get(this.model.getOrcamentosFacade().getOrcamentos().size()).getIdOrcamento() + 1;
+                this.model.getOrcamentosFacade().registaOrcamento(idOrc, idEq, LocalDateTime.now(), notas);
+                System.out.println("\n\n");
+            }
+            else System.out.print("Este equipamento não existe no sistema!\n\n");
         });
         menu.setHandlers(2, () -> {
             System.out.print("Indique o ID do orçamento a alterar: ");
             int idOrc = Integer.parseInt(scan.nextLine());
-            System.out.print("Indique o ID do técnico responsável: ");
-            String idTecnico = scan.nextLine();
-            if(this.model.getFuncionariosFacade().validateFuncionario(idTecnico)) {
-                if (this.model.getFuncionariosFacade().getTipoFuncionario(idTecnico).equals("Tecnico")) {
-                    boolean regista = true;
-                    int idPlano = this.model.getPlanosFacade().getPlanos().size()+1;
-                    this.model.getPlanosFacade().adicionaPlano(idPlano,idOrc,idTecnico);
-                    while(regista) {
-                        System.out.print("Passo a executar: ");
-                        String desc = scan.nextLine();
-                        System.out.print("Custo: ");
-                        float custo = scan.nextFloat();
-                        System.out.print("Duração: ");
-                        int val = scan.nextInt();
-                        Duration prazo = Duration.parse("PT" + val + "M");
-                        this.model.getPlanosFacade().atualizaPlano(idPlano,desc,custo,prazo);
-                        System.out.print("Continuar? sim / não ");
-                        scan.nextLine();
-                        String opt = scan.nextLine();
-                        regista = opt.equals("sim");
+            if(this.model.getOrcamentosFacade().existeOrcamento(idOrc)){
+                System.out.print("Indique o ID do técnico responsável: ");
+                String idTecnico = scan.nextLine();
+                if (this.model.getFuncionariosFacade().validateFuncionario(idTecnico)) {
+                    if (this.model.getFuncionariosFacade().getTipoFuncionario(idTecnico).equals("Tecnico")) {
+                        boolean regista = true;
+                        int idPlano = this.model.getPlanosFacade().getPlanos().size() + 1;
+                        this.model.getPlanosFacade().adicionaPlano(idPlano, idOrc, idTecnico);
+                        while (regista) {
+                            System.out.print("Passo a executar: ");
+                            String desc = scan.nextLine();
+                            System.out.print("Custo: ");
+                            float custo = scan.nextFloat();
+                            System.out.print("Duração: ");
+                            int val = scan.nextInt();
+                            Duration prazo = Duration.parse("PT" + val + "M");
+                            this.model.getPlanosFacade().atualizaPlano(idPlano, desc, custo, prazo);
+                            System.out.print("Continuar? sim / não ");
+                            scan.nextLine();
+                            String opt = scan.nextLine();
+                            regista = opt.equals("sim");
+                        }
+                        float custoTotal = this.model.getPlanosFacade().getPlanos().get(idPlano).getCusto();
+                        Duration prazoTotal = this.model.getPlanosFacade().getPlanos().get(idPlano).getPrazo();
+                        this.model.getOrcamentosFacade().atualizaOrcamento(idOrc, idTecnico, idPlano, custoTotal, prazoTotal);
                     }
-                    float custoTotal = this.model.getPlanosFacade().getPlanos().get(idPlano).getCusto();
-                    Duration prazoTotal = this.model.getPlanosFacade().getPlanos().get(idPlano).getPrazo();
-                    this.model.getOrcamentosFacade().atualizaOrcamento(idOrc,idTecnico,idPlano,custoTotal,prazoTotal);
-                }
+                } else System.out.print("Funcionário inválido.\n\n");
             }
-            else System.out.println("Funcionário inválido.");
+            else System.out.print("Não existe este orçamento no sistema!\n\n");
         });
         menu.setHandlers(3, () ->  this.model.getOrcamentosFacade().consultaOrcamentos());
         menu.setHandlers(4, () ->  {
             System.out.print("Indique o ID do orçamento a remover: ");
             Integer id = Integer.parseInt(scan.nextLine());
             if(this.model.getOrcamentosFacade().removeOrcamento(id))
-                System.out.println("O orçamento foi removido com sucesso!");
-            else System.out.print("Este orçamento não existe no sistema!");
+                System.out.print("O orçamento foi removido com sucesso!\n\n");
+            else System.out.print("Este orçamento não existe no sistema!\n\n");
         });
         menu.setHandlers(5, () ->  {
             System.out.print("Indique o ID do plano a consultar: ");
             int id = Integer.parseInt(scan.nextLine());
             if(id <= this.model.getPlanosFacade().getPlanos().size() && this.model.getPlanosFacade().existePlano(id))
-                System.out.println(this.model.getPlanosFacade().getPlanos().get(id));
-            else System.out.println("ID de plano inválido!");
+                System.out.print(this.model.getPlanosFacade().getPlanos().get(id));
+            else System.out.print("ID de plano inválido!\n\n");
         });
 
         menu.run();
@@ -220,40 +227,39 @@ public class TextUI {
             int nif = 0;
             if(lengNif.length() == 9){ nif = Integer.parseInt(lengNif);}
             else{ nif = verificarNif(); }
-            if(!this.model.getEquipamentosFacade().existeEquipamento(nif)) {
+            if(!this.model.getEquipamentosFacade().existeEquipamentoNIF(nif)) {
                 System.out.print("Indique o ID do equipamento: ");
                 String equip = scan.nextLine();
                 this.model.getEquipamentosFacade().registaEquip(nif, equip, "no armazem");
-                System.out.println("O equipamento foi registado com sucesso!");
+                System.out.print("O equipamento foi registado com sucesso!\n\n");
             }
-            else System.out.println("Este ID de equipamento não se encontra disponivel!");
+            else System.out.print("Este ID de equipamento não se encontra disponivel!\n\n");
         });
         menu.setHandlers(2, () -> {
             System.out.print("Indique o NIF do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
-            if(this.model.getEquipamentosFacade().existeEquipamento(nif)) {
+            if(this.model.getEquipamentosFacade().existeEquipamentoNIF(nif)) {
                 String estado = this.model.getEquipamentosFacade().consultaEstado(nif);
-                System.out.println("O equipamento está " + estado + "!");
+                System.out.print("O equipamento está " + estado + "!\n\n");
             }
-            else System.out.print("Este equipamento não existe no sistema!");
+            else System.out.print("Este equipamento não existe no sistema!\n\n");
         });
         menu.setHandlers(3, () -> {
             System.out.print("Indique o NIF do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
-            if(this.model.getEquipamentosFacade().existeEquipamento(nif)) {
+            if(this.model.getEquipamentosFacade().existeEquipamentoNIF(nif)) {
                 this.model.getEquipamentosFacade().levantaEquipamento(nif);
-                System.out.println("O equipamento foi levantado com sucesso!");
+                System.out.print("O equipamento foi levantado com sucesso!\n\n");
             }
-            else System.out.print("Este equipamento não existe no sistema!");
+            else System.out.print("Este equipamento não existe no sistema!\n\n");
         });
         menu.setHandlers(4, () -> {
             System.out.print("Indique o NIF do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
-            if(this.model.getEquipamentosFacade().existeEquipamento(nif)) {
-                this.model.getEquipamentosFacade().apagaEquipamento(nif);
-                System.out.println("O equipamento foi apagado com sucesso!");
+            if(this.model.getEquipamentosFacade().apagaEquipamento(nif)){
+                System.out.print("O equipamento foi apagado com sucesso!\n\n");
             }
-            else System.out.print("Este equipamento não existe no sistema!");
+            else System.out.print("Este equipamento não existe no sistema!\n\n");
         });
 
         menu.run();
@@ -282,7 +288,7 @@ public class TextUI {
             if(this.model.getServicosFacade().existeServico(id)) {
                 this.model.getServicosFacade().consultaServico(id);
             }
-            else System.out.print("Este serviço não existe no sistema!");
+            else System.out.print("Este serviço não existe no sistema!\n\n");
         });
         menu.setHandlers(4, () -> System.out.print(this.model.getServicosFacade().getServicos()));
         menu.setHandlers(5, () ->  {
@@ -290,9 +296,9 @@ public class TextUI {
             int id = Integer.parseInt(scan.nextLine());
             if(this.model.getServicosFacade().existeServico(id)) {
                 this.model.getServicosFacade().removeServico(id);
-                System.out.println("O serviço foi removido com sucesso!");
+                System.out.print("O serviço foi removido com sucesso!\n\n");
             }
-            else System.out.print("Este serviço não existe no sistema!");
+            else System.out.print("Este serviço não existe no sistema!\n\n");
         });
 
         menu.run();
@@ -341,22 +347,22 @@ public class TextUI {
 
         //Registar os handlers
         menu.setHandlers(1,()-> {
-            System.out.println("Introduza o Id do Serviço:");
+            System.out.print("Introduza o Id do Serviço:");
             int id = Integer.parseInt(scan.nextLine());
             if(!this.model.getServicosFacade().existeServico(id)){
                 // .....................
             }
-            else System.out.println("Este ID de Serviço não se encontra disponivel!");
+            else System.out.print("Este ID de Serviço não se encontra disponivel!\n\n");
         });
         menu.setHandlers(2,()->{
-            System.out.println("Introduza o Id do Serviço a editar:");
+            System.out.print("Introduza o Id do Serviço a editar:");
             int id = Integer.parseInt(scan.nextLine());
             if(this.model.getServicosFacade().existeServico(id)){
                 // .....................
             }
-            else System.out.println("Este serviço não existe no sistema!");
+            else System.out.print("Este serviço não existe no sistema!\n\n");
         });
-        //menu.setHandlers(3,()-> System.out.println(this.model.getServicosFacade().getServicos()));
+        //menu.setHandlers(3,()-> System.out.print(this.model.getServicosFacade().getServicos()));
         //menu.setHandlers(4,()->);
         menu.run();
     }
