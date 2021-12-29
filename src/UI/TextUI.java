@@ -1,13 +1,7 @@
 package UI;
 
 import Business.IStoreLN;
-import Business.Store.Funcionario.Funcionario;
-import Business.Store.Funcionario.IGestFuncionarios;
-import Business.Store.Funcionario.FuncionariosFacade;
-import Business.Parser;
-import Business.Store.Orcamento.Orcamento;
-import Business.Store.PlanoTrabalho.Passo;
-import Business.Store.PlanoTrabalho.PlanoTrabalho;
+import Business.Saver;
 import Business.Store.StoreLNFacade;
 
 import java.io.IOException;
@@ -34,6 +28,7 @@ public class TextUI {
         } else {
             this.ExitScreen(login);
         }
+        Saver.gravar(this.model);
     }
 
     /**

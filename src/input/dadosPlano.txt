@@ -1,4 +1,4 @@
-1;1;rui;9.0;PT23M
-2;2;pedro;9.0;PT10M
-3;3;gomes;9.0;PT15M
-4;4;coelho;10.0;PT37M
+1;1;rui;0.0;PT0S;[]
+2;2;pedro;0.0;PT0S;[]
+3;3;gomes;0.0;PT0S;[]
+4;4;coelho;0.0;PT0S;[]
