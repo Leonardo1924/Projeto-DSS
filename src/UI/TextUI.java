@@ -6,6 +6,7 @@ import Business.Store.Funcionario.IGestFuncionarios;
 import Business.Store.Funcionario.FuncionariosFacade;
 import Business.Parser;
 import Business.Store.Orcamento.Orcamento;
+import Business.Store.PlanoTrabalho.Passo;
 import Business.Store.PlanoTrabalho.PlanoTrabalho;
 import Business.Store.StoreLNFacade;
 
@@ -136,13 +137,27 @@ public class TextUI {
             String idTecnico = scan.nextLine();
             if(this.model.getFuncionariosFacade().validateFuncionario(idTecnico)) {
                 if (this.model.getFuncionariosFacade().getTipoFuncionario(idTecnico).equals("Tecnico")) {
-                    System.out.print("Indique o custo da reparação: ");
-                    float custo = Float.parseFloat(scan.nextLine());
-                    System.out.print("Indique o tempo necessário para realizar a reparação (min): ");
-                    int value = scan.nextInt();
-                    Duration prazo = Duration.parse("PT"+value+"M");
-                    int idPlano = this.model.getPlanosFacade().adicionaPlano(idOrc, idTecnico, custo, prazo);
-                    this.model.getOrcamentosFacade().atualizaOrcamento(idOrc,custo,prazo,idTecnico,idPlano);
+                    boolean regista = true;
+                    int idPlano = this.model.getPlanosFacade().getPlanos().size()+1;
+                    this.model.getPlanosFacade().adicionaPlano(idPlano,idOrc,idTecnico);
+                    while(regista) {
+                        System.out.print("Passo a executar: ");
+                        String desc = scan.nextLine();
+                        System.out.print("Custo: ");
+                        float custo = scan.nextFloat();
+                        System.out.print("Duração: ");
+                        int val = scan.nextInt();
+                        Duration prazo = Duration.parse("PT" + val + "M");
+                        this.model.getPlanosFacade().atualizaPlano(idPlano,desc,custo,prazo);
+                        /*
+                        System.out.print("Continuar? ");
+                        String opt = scan.nextLine();
+                        regista = opt.equalsIgnoreCase("sim");
+                         */
+                    }
+                    float custoTotal = this.model.getPlanosFacade().getPlanos().get(idPlano).getCusto();
+                    Duration prazoTotal = this.model.getPlanosFacade().getPlanos().get(idPlano).getPrazo();
+                    this.model.getOrcamentosFacade().atualizaOrcamento(idOrc,idTecnico,idPlano,custoTotal,prazoTotal);
                 }
             }
             else System.out.println("Funcionário inválido.");

@@ -26,18 +26,28 @@ public class PlanoTrabalho {
         this.idPlano = pt.getIdPlano();
         this.idOrcamento = pt.getIdOrcamento();
         this.idTecnico = pt.getIdTecnico();
+        this.passos = new ArrayList<>(pt.getPassos());
         this.custo = pt.getCusto();
         this.prazo = pt.getPrazo();
-        this.passos = new ArrayList<>(pt.getPassos());
     }
 
     public PlanoTrabalho(int idPlano, int idOrcamento, String idTecnico, float custo, Duration prazo){
         this.idPlano = idPlano;
         this.idOrcamento = idOrcamento;
         this.idTecnico = idTecnico;
-        this.custo = custo;
-        this.prazo = prazo;
         this.passos = new ArrayList<>();
+        this.custo = this.custoTotal();
+        this.prazo = this.prazoTotal();
+    }
+
+    public PlanoTrabalho(int idPlano, int idOrc, String idTecnico) {
+        this.idPlano = idPlano;
+        this.idOrcamento = idOrc;
+        this.idTecnico = idTecnico;
+        this.passos = new ArrayList<>();
+        this.custo = 0;
+        this.prazo = Duration.ZERO;
+
     }
 
     public int getIdPlano() {
@@ -107,5 +117,26 @@ public class PlanoTrabalho {
                 " \033[1;35m Custo: \033[0m" + custo +
                 " \033[1;35mPrazo: \033[0m" + prazo +
                 " \033[1;35mPassos: \033[0m" + passos;
+    }
+
+    float custoTotal(){
+        float ct = 0;
+        for(Passo p : this.passos)
+            ct += p.getCustoPasso();
+        return ct;
+    }
+
+    Duration prazoTotal(){
+        Duration dt = Duration.ZERO;
+        for(Passo p : this.passos)
+            dt = dt.plus(p.getTempoPasso());
+        return dt;
+    }
+
+    public void addPasso(String descricao, float custo, Duration prazo) {
+        Passo novoPasso = new Passo(descricao,custo,prazo);
+        this.passos.add(novoPasso);
+        this.prazo = this.prazoTotal();
+        this.custo = this.custoTotal();
     }
 }

@@ -65,7 +65,6 @@ public class Orcamento {
         this.status = false;
     }
 
-
     public int getIdOrcamento() {
         return idOrcamento;
     }
@@ -138,16 +137,6 @@ public class Orcamento {
         this.status = status;
     }
 
-    /*public void calculaPrazo(){
-            this.prazo = this.plano.tempoTotalPlano();
-        }*/
-/*
-    public void calcularCusto(){  
-        String somaTempo = this.plano.tempoTotalPlano().toString();
-        float somaCusto = this.plano.custoTotalPlano();
-        this.custo = Float.parseFloat(somaTempo)*0.25 + somaCusto;        // 25€ por hora
-    }
-*/
     public String toString(){
         DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String estado;

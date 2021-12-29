@@ -14,5 +14,5 @@ public interface IGestOrcamentos {
 
     void registaOrcamento(int idOrc, String idEq, LocalDateTime now, String notas);
 
-    void atualizaOrcamento(Integer idOrc, float custo, Duration prazo, String idTecnico, int idPlano);
+    void atualizaOrcamento(int idOrc, String idTecnico, int idPlano, float custoTotal, Duration prazoTotal);
 }

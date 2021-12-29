@@ -16,11 +16,13 @@ public class PlanoFacade implements IGestPlano {
         return this.planos.entrySet().stream().collect(Collectors.toMap(e->e.getKey(),e->e.getValue().clone()));
     }
 
-    public int adicionaPlano(int idOrc, String idTecnico, float custo, Duration prazo){
-        int idPlano = this.planos.size()+1;
-        PlanoTrabalho pt = new PlanoTrabalho(idPlano,idOrc,idTecnico,custo,prazo);
-        this.planos.put(idPlano,pt.clone());
-        return idPlano;
+    public void atualizaPlano(int idPlano, String descricao, float custo, Duration prazo) {
+        this.planos.get(idPlano).addPasso(descricao,custo,prazo);
+    }
+
+    public void adicionaPlano(int idPlano, int idOrc, String idTecnico) {
+        PlanoTrabalho pt = new PlanoTrabalho(idPlano,idOrc,idTecnico);
+        this.planos.put(idPlano,pt);
     }
 
 

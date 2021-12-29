@@ -1,4 +1,4 @@
-1;1;rui;9.0;PT01M
-2;1;pedro;9.0;PT10M
-3;1;gomes;9.0;PT15M
-4;1;coelho;10.0;PT33M
+1;1;rui;9.0;PT23M
+2;2;pedro;9.0;PT10M
+3;3;gomes;9.0;PT15M
+4;4;coelho;10.0;PT37M
