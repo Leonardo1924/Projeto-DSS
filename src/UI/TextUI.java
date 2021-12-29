@@ -23,7 +23,7 @@ public class TextUI {
         Menu.Logo();
         boolean login = verificaLogin();
         if (login) {
-            System.out.println("\033[1;35mBem vindo ao Sistema da Loja!\033[0m");
+            System.out.println("\n\033[1;35mBem vindo ao Sistema da Loja!\033[0m\n");
             this.menuPrincipal();
         } else {
             this.ExitScreen(login);
@@ -110,13 +110,15 @@ public class TextUI {
                 "Pedido de Orçamento",
                 "Editar Orçamento",
                 "Consultar Lista de Orçamentos",
-                "Apagar Orçamento"});
+                "Apagar Orçamento",
+                "Consultar plano"});
 
         //Registar pré-condições das transições
         menu.setPreCondition(1,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Rececionista"));
         menu.setPreCondition(2,()->!this.model.getOrcamentosFacade().getOrcamentos().isEmpty());
         menu.setPreCondition(3,()->!this.model.getOrcamentosFacade().getOrcamentos().isEmpty());
         menu.setPreCondition(4,()->!this.model.getOrcamentosFacade().getOrcamentos().isEmpty());
+        menu.setPreCondition(5,()->!this.model.getPlanosFacade().getPlanos().isEmpty());
 
         //Registar os handlers
         menu.setHandlers(1, () -> {
@@ -127,7 +129,6 @@ public class TextUI {
             int idOrc = this.model.getOrcamentosFacade().getOrcamentos().get(this.model.getOrcamentosFacade().getOrcamentos().size()).getIdOrcamento()+1;
             this.model.getOrcamentosFacade().registaOrcamento(idOrc,idEq,LocalDateTime.now(),notas);
         });
-
         menu.setHandlers(2, () -> {
             System.out.print("Indique o ID do orçamento a alterar: ");
             int idOrc = Integer.parseInt(scan.nextLine());
@@ -165,6 +166,13 @@ public class TextUI {
             Integer id = Integer.parseInt(scan.nextLine());
             this.model.getOrcamentosFacade().removeOrcamento(id);
             System.out.println("O orçamento foi removido com sucesso!");
+        });
+        menu.setHandlers(5, () ->  {
+            System.out.print("Indique o ID do plano a consultar: ");
+            Integer id = Integer.parseInt(scan.nextLine());
+            if(id <= this.model.getPlanosFacade().getPlanos().size())
+                System.out.println(this.model.getPlanosFacade().getPlanos().get(id));
+            else System.out.println("ID de plano inválido ");
         });
 
         menu.run();
