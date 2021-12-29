@@ -25,6 +25,9 @@ public class PlanoFacade implements IGestPlano {
         this.planos.put(idPlano,pt);
     }
 
+    public boolean existePlano(int id){
+        return this.planos.containsKey(id);
+    }
 
     /*
 

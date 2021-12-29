@@ -12,4 +12,6 @@ public interface IGestEquipamentos {
     void levantaEquipamento(int nif);
 
     void apagaEquipamento(int nif);
+
+    boolean existeEquipamento(int id);
 }

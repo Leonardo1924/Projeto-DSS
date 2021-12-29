@@ -30,8 +30,12 @@ public class ClientesFacade implements IGestClientes{
         return this.clientes.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
     }
 
-    public void removeCliente(String id){
-        this.clientes.remove(id);
+    public boolean removeCliente(String id){
+        if(this.clientes.containsKey(id)) {
+            this.clientes.remove(id);
+            return true;
+        }
+        else return false;
     }
 
     public boolean registaCliente(String idCliente, String nome, int nif, int telemovel, String mail, String idEquip){
@@ -47,5 +51,9 @@ public class ClientesFacade implements IGestClientes{
         for(Cliente c : this.clientes.values()){
             System.out.println(c.toString());
         }
+    }
+
+    public boolean existeCliente(String id){
+        return this.clientes.containsKey(id);
     }
 }

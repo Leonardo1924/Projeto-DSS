@@ -11,9 +11,11 @@ public interface IGestClientes {
 
     Map<String,Cliente> getClientes();
 
-    void removeCliente(String id);
+    boolean removeCliente(String id);
 
     boolean registaCliente(String idCliente, String nome, int nif, int telemovel, String mail, String idEquip);
 
     void consultaClientes();
+
+    boolean existeCliente(String id);
 }

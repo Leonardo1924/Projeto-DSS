@@ -10,4 +10,6 @@ public interface IGestPlano {
     void atualizaPlano(int idPlano, String descricao, float custo, Duration prazo);
 
     void adicionaPlano(int idPlano, int idOrc, String idTecnico);
+
+    boolean existePlano(int id);
 }

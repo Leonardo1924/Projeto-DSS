@@ -17,8 +17,12 @@ public class OrcamentosFacade implements IGestOrcamentos {
         return this.orcamentos.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
     }
 
-    public void removeOrcamento(Integer id) {
-        this.orcamentos.remove(id);
+    public boolean removeOrcamento(Integer id) {
+        if(this.orcamentos.containsKey(id)) {
+            this.orcamentos.remove(id);
+            return true;
+        }
+        return false;
     }
 
 

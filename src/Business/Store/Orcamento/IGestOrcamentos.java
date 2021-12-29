@@ -10,7 +10,7 @@ public interface IGestOrcamentos {
 
     void consultaOrcamentos();
 
-    void removeOrcamento(Integer id);
+    boolean removeOrcamento(Integer id);
 
     void registaOrcamento(int idOrc, String idEq, LocalDateTime now, String notas);
 
