@@ -1,5 +1,6 @@
 package UI;
 
+import Business.InPutOutPut.Saver;
 import Business.Store.IStoreLN;
 import Business.Store.StoreLNFacade;
 
@@ -27,7 +28,7 @@ public class TextUI {
         } else {
             this.ExitScreen(login);
         }
-        // Saver.gravar(this.model);
+        Saver.gravar(this.model);
     }
 
     /**
@@ -96,7 +97,7 @@ public class TextUI {
             String equip = scan.nextLine();
             if(this.model.getClientesFacade().registaCliente(id, nome, nif, telemovel, mail, equip))
                 System.out.println("O cliente foi registado com sucesso!");
-            else System.out.println("Não foi possível registar o cliente introduzido!");
+            else System.out.println("Este ID de cliente não se encontra disponivel!");
         });
         menu.setHandlers(2, () -> {
             System.out.print("Indique o ID do cliente a remover: ");
@@ -221,7 +222,7 @@ public class TextUI {
             String equip = scan.nextLine();
             if(this.model.getEquipamentosFacade().registaEquip(nif, equip, "em processo"))
                 System.out.println("O equipamento foi registado com sucesso!");
-            else System.out.println("Não foi possível registar o equipamento!");
+            else System.out.println("Este ID de equipamento não se encontra disponivel!");
         });
         menu.setHandlers(2, () -> {
             System.out.print("Indique o NIF do cliente: ");
