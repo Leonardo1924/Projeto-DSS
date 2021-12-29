@@ -81,12 +81,15 @@ public class TextUI {
             System.out.print("Indique o nome do cliente: ");
             String nome = scan.nextLine();
             System.out.print("Indique o nif do cliente: ");
-            int nif = Integer.parseInt(scan.nextLine());
+            String lengNif = scan.nextLine();
+            int nif = 0;
+            if(lengNif.length() == 9){ nif = Integer.parseInt(lengNif);}
+            else{ nif = verificarNif(); }
             System.out.print("Indique o telemóvel do cliente: ");
-            int lengNr = scan.nextLine().length();
+            String lengNr = scan.nextLine();
             int telemovel = 0;
-            if(lengNr!=9){ telemovel = verificarNrTelemovel();}
-            else{ telemovel = Integer.parseInt(scan.nextLine()); }
+            if(lengNr.length() != 9){ telemovel = verificarNrTelemovel();}
+            else{ telemovel = Integer.parseInt(lengNr); }
             System.out.print("Indique o email do cliente: ");
             String mail = scan.nextLine();
             System.out.print("Indique o ID do equipamento: ");
@@ -374,7 +377,7 @@ public class TextUI {
         String telemovel = null;
             while(!sucesso){
                 try{
-                    System.out.print("Número de telemovel só pode ter 9 dígitos! Tente Novamente \nteste");
+                    System.out.print("Número de telemovel tem 9 dígitos! Tente Novamente \n");
                     System.out.print("Indique o telemóvel do cliente: ");
                     telemovel = scan.nextLine();
                 } catch (InputMismatchException e) {
@@ -385,6 +388,24 @@ public class TextUI {
                 }
             }
         return Integer.parseInt(telemovel);
+    }
+
+    public int verificarNif() throws IOException {
+        boolean sucesso = false;
+        String nif = null;
+        while(!sucesso){
+            try{
+                System.out.print("Nif tem 9 dígitos! Tente Novamente \n");
+                System.out.print("Indique o nif do cliente: ");
+                nif = scan.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println(e);
+            }
+            if(nif.length() == 9){
+                sucesso = true;
+            }
+        }
+        return Integer.parseInt(nif);
     }
 
     public void ExitScreen(boolean login){
