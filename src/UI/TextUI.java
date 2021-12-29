@@ -150,12 +150,10 @@ public class TextUI {
                         int val = scan.nextInt();
                         Duration prazo = Duration.parse("PT" + val + "M");
                         this.model.getPlanosFacade().atualizaPlano(idPlano,desc,custo,prazo);
-                        /*
-                        System.out.print("Continuar? ");
+                        System.out.print("Continuar? sim / não ");
+                        scan.nextLine();
                         String opt = scan.nextLine();
-                        regista = opt.equalsIgnoreCase("sim");
-                         */
-                        regista = false;
+                        regista = opt.equals("sim");
                     }
                     float custoTotal = this.model.getPlanosFacade().getPlanos().get(idPlano).getCusto();
                     Duration prazoTotal = this.model.getPlanosFacade().getPlanos().get(idPlano).getPrazo();
