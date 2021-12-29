@@ -77,10 +77,7 @@ public class Parser {
         DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         for (String l : lines) {
             tokens = l.split(";", 9);
-/*
-            Duration d = Duration.parse(tokens[4]);
-            System.out.println(d.toMinutes());
- */
+
             Orcamento orc = new Orcamento(Integer.parseInt(tokens[0]),tokens[1],LocalDateTime.parse(tokens[2],dataformatada),
                     Float.parseFloat(tokens[3]),Duration.parse(tokens[4]),tokens[5],tokens[6],Integer.parseInt(tokens[7]),Boolean.parseBoolean(tokens[8]));
             orcamentos.put(Integer.parseInt(tokens[0]),orc.clone());
@@ -111,6 +108,7 @@ public class Parser {
         for (String l : lines) {
             tokens = l.split(";", 5);
             PlanoTrabalho pt = new PlanoTrabalho(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),tokens[2],Float.parseFloat(tokens[3]), Duration.parse(tokens[4]));
+            System.out.println(pt.getPrazo());
             planos.put(Integer.parseInt(tokens[0]),pt.clone());
         }
         PlanoFacade dataPt = new PlanoFacade(planos);

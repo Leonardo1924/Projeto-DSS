@@ -15,7 +15,7 @@ public class Saver {
     /**
      * Método que grava os dados fornecidos por um utilizador antes do seu logout.
      * @param store Estrutura principal que implementa as funcionalidades do sistema
-     */
+    */
     public static void gravar(IStoreLN store){
             Map<String,Funcionario> func = store.getFuncionariosFacade().getFuncionarios();
             Map<String,Cliente> clientes = store.getClientesFacade().getClientes();

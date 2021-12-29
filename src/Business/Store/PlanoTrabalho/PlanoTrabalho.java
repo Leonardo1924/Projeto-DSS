@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.time.Duration;
+import java.util.stream.Collectors;
 
 public class PlanoTrabalho {
     private int idPlano;
@@ -49,7 +50,6 @@ public class PlanoTrabalho {
         this.passos = new ArrayList<>();
         this.custo = 0;
         this.prazo = Duration.ZERO;
-
     }
 
     public int getIdPlano() {
@@ -101,7 +101,7 @@ public class PlanoTrabalho {
     }
 
     public void gravar(PrintWriter print){
-        print.println(this.idPlano + ";" + this.idOrcamento + ";" + this.idTecnico + ";" + this.custo + ";" + this.prazo + ";" + Arrays.toString(this.passos.toArray()));
+        print.println(this.idPlano + ";" + this.idOrcamento + ";" + this.idTecnico + ";" + this.custo + ";" + this.prazo.toString());
     }
 
     @Override

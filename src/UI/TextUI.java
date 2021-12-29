@@ -28,7 +28,7 @@ public class TextUI {
         } else {
             this.ExitScreen(login);
         }
-        Saver.gravar(this.model);
+        // Saver.gravar(this.model);
     }
 
     /**

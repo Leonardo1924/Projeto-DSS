@@ -1,4 +1,11 @@
-1;1;rui;0.0;PT0S;[]
-2;2;pedro;0.0;PT0S;[]
-3;3;gomes;0.0;PT0S;[]
-4;4;coelho;0.0;PT0S;[]
+1;1;annaphens;75;PT26M
+2;2;parkercvist;142.2;PT45M
+3;3;ruipgcoelho;51.90;PT40M
+4;4;parkercvist;120;PT10M
+5;5;zvksboba;13.5;PT2M
+6;6;rexfeels;95;PT10M
+7;7;ruipgcoelho;39;PT31M
+8;8;Leonardo1924;72;PT46M
+9;9;annaphens;87;PT10M
+10;10;rexfeels;69.99;PT28M
+11;11;taogataquemia;51;PT20M
