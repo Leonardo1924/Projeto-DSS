@@ -40,7 +40,8 @@ public class TextUI {
                 "Orçamento",
                 "Equipamento",
                 "Serviço",
-                "Relatório de estatísticas"});
+                "Relatório de estatísticas",
+                "Alterar utilizador"});
 
         menu.setPreCondition(5,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Gestor"));
 
@@ -50,6 +51,14 @@ public class TextUI {
         menu.setHandlers(3, this::gestaoDeEquipamentos);
         menu.setHandlers(4, this::gestaoDeServico);
         menu.setHandlers(5, this::gestaoDeEstatisticas);
+        menu.setHandlers(6, () -> {
+            System.out.print("Inserir username: ");
+            String id = scan.nextLine();
+            System.out.print("Inserir password: ");
+            String pass = scan.nextLine();
+            if (this.model.login(id,pass)) System.out.println("\nUtilizador alterado.\n");
+            else System.out.println("\nDados fornecidos incorretos\n");
+        });
         menu.run();
     }
 
@@ -74,7 +83,7 @@ public class TextUI {
             String nome = scan.nextLine();
             System.out.print("Indique o nif do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
-            System.out.print("Indique o telemovel do cliente: ");
+            System.out.print("Indique o telemóvel do cliente: ");
             int telemovel = Integer.parseInt(scan.nextLine());
             System.out.print("Indique o email do cliente: ");
             String mail = scan.nextLine();
@@ -302,9 +311,9 @@ public class TextUI {
 
         while (!sucesso && tentativas < 3) {
             try {
-                System.out.print("\nInsire o seu nome: ");
+                System.out.print("\nInserir username: ");
                 user = scan.nextLine();
-                System.out.print("Insira a sua password: ");
+                System.out.print("Inserir password: ");
                 password = scan.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println(e);
