@@ -12,8 +12,6 @@ public class FuncionariosFacade implements IGestFuncionarios {
     Map<String,Funcionario> credentials;
     private String userAtual;
 
-
-
     public FuncionariosFacade(Map<String,Funcionario> credentials) {
         this.credentials = credentials.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
         this.userAtual = "";
@@ -25,6 +23,10 @@ public class FuncionariosFacade implements IGestFuncionarios {
      *    notContacted - lista de clientes que ainda não foram contactados
      *    contacted - lista de clientes que já foram contactados
      */
+    public Map<String,Funcionario> getFuncionarios(){
+        return this.credentials.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
+    }
+
     public String getUserAtual(){
         return this.userAtual;
     }

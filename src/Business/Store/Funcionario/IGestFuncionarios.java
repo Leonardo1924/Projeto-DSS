@@ -2,10 +2,13 @@ package Business.Store.Funcionario;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public interface IGestFuncionarios {
 
     String getUserAtual();
+
+    Map<String,Funcionario> getFuncionarios();
 
     boolean login(String username,String password) throws IOException;
 
