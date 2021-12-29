@@ -98,7 +98,7 @@ public class Cliente implements Serializable {
         return  "\033[1;35mId: \033[0m" + idCliente +
                 " \033[1;35mNome: \033[0m" + name +
                 " \033[1;35mNIF: \033[0m" + nif +
-                " \033[1;35mTelemÃ³vel: \033[0m" + telemovel +
+                " \033[1;35mTelemovel: \033[0m" + telemovel +
                 " \033[1;35mMail: \033[0m" + mail +
                 " \033[1;35mEquipamento: \033[0m" + idEquip;
     }

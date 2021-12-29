@@ -117,8 +117,8 @@ public class PlanoTrabalho {
     public String toString(){
         return "\033[1;35mID plano: \033[0m" + idPlano +
                 " \033[1;35mID orçamento: \033[0m" + idOrcamento +
-                " \033[1;35mID técnico: \033[0m" + idTecnico +
-                " \033[1;35m Custo: \033[0m" + custo +
+                " \033[1;35mTecnico: \033[0m" + idTecnico +
+                " \033[1;35mCusto: \033[0m" + custo +
                 " \033[1;35mPrazo: \033[0m" + prazo +
                 " \033[1;35mPassos: \033[0m" + passos;
     }

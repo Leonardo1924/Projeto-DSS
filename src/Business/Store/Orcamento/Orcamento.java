@@ -153,7 +153,7 @@ public class Orcamento {
                 " \033[1;35mData: \033[0m" + data.format(dataformatada) +
                 " \033[1;35mCusto: \033[0m" + custo +
                 " \033[1;35mPrazo: \033[0m" + prazo.toString() +
-                " \033[1;35mFuncionario: \033[0m" + tecnico +
+                " \033[1;35mTecnico: \033[0m" + tecnico +
                 " \033[1;35mNotas: \033[0m" + notas +
                 " \033[1;35mPlano: \033[0m" + idPlano +
                 " \033[1;35mEstado: \033[0m" + estado ;
