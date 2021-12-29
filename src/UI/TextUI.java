@@ -101,16 +101,20 @@ public class TextUI {
         menu.setHandlers(2, () -> {
             System.out.print("Indique o ID do cliente a remover: ");
             String id = scan.nextLine();
-            this.model.getClientesFacade().removeCliente(id);
-            System.out.println("O cliente foi removido com sucesso!");
+            if(this.model.getClientesFacade().removeCliente(id))
+                System.out.print("O cliente foi removido com sucesso!");
+            else  System.out.print("Este cliente não existe no sistema!");
         });
         menu.setHandlers(3, () -> {
             System.out.print("Indique o ID do cliente a contactar: ");
             String id = scan.nextLine();
-            List<String> contactados = this.model.getClientesFacade().getContactados();
-            List<String> naoContactados = this.model.getClientesFacade().getNaoContactados();
-            String time = this.model.getFuncionariosFacade().contactaCliente(id, contactados, naoContactados);
-            System.out.println("O cliente foi contactado em " + time + "!");
+            if(this.model.getClientesFacade().existeCliente(id)) {
+                List<String> contactados = this.model.getClientesFacade().getContactados();
+                List<String> naoContactados = this.model.getClientesFacade().getNaoContactados();
+                String time = this.model.getFuncionariosFacade().contactaCliente(id, contactados, naoContactados);
+                System.out.println("O cliente foi contactado em " + time + "!");
+            }
+            else System.out.print("Este cliente não existe no sistema!");
         });
         menu.setHandlers(4, () -> {
             this.model.getClientesFacade().consultaClientes();
@@ -140,8 +144,8 @@ public class TextUI {
             String idEq = scan.nextLine();
             System.out.print("Descrição do problema: ");
             String notas = scan.nextLine();
-            int idOrc = this.model.getOrcamentosFacade().getOrcamentos().get(this.model.getOrcamentosFacade().getOrcamentos().size()).getIdOrcamento()+1;
-            this.model.getOrcamentosFacade().registaOrcamento(idOrc,idEq,LocalDateTime.now(),notas);
+            int idOrc = this.model.getOrcamentosFacade().getOrcamentos().get(this.model.getOrcamentosFacade().getOrcamentos().size()).getIdOrcamento() + 1;
+            this.model.getOrcamentosFacade().registaOrcamento(idOrc, idEq, LocalDateTime.now(), notas);
         });
         menu.setHandlers(2, () -> {
             System.out.print("Indique o ID do orçamento a alterar: ");
@@ -178,15 +182,16 @@ public class TextUI {
         menu.setHandlers(4, () ->  {
             System.out.print("Indique o ID do orçamento a remover: ");
             Integer id = Integer.parseInt(scan.nextLine());
-            this.model.getOrcamentosFacade().removeOrcamento(id);
-            System.out.println("O orçamento foi removido com sucesso!");
+            if(this.model.getOrcamentosFacade().removeOrcamento(id))
+                System.out.println("O orçamento foi removido com sucesso!");
+            else System.out.print("Este orçamento não existe no sistema!");
         });
         menu.setHandlers(5, () ->  {
             System.out.print("Indique o ID do plano a consultar: ");
-            Integer id = Integer.parseInt(scan.nextLine());
-            if(id <= this.model.getPlanosFacade().getPlanos().size())
+            int id = Integer.parseInt(scan.nextLine());
+            if(id <= this.model.getPlanosFacade().getPlanos().size() && this.model.getPlanosFacade().existePlano(id))
                 System.out.println(this.model.getPlanosFacade().getPlanos().get(id));
-            else System.out.println("ID de plano inválido ");
+            else System.out.println("ID de plano inválido!");
         });
 
         menu.run();
@@ -221,20 +226,29 @@ public class TextUI {
         menu.setHandlers(2, () -> {
             System.out.print("Indique o NIF do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
-            String estado = this.model.getEquipamentosFacade().consultaEstado(nif);
-            System.out.println("O equipamento está " + estado + "!");
+            if(this.model.getEquipamentosFacade().existeEquipamento(nif)) {
+                String estado = this.model.getEquipamentosFacade().consultaEstado(nif);
+                System.out.println("O equipamento está " + estado + "!");
+            }
+            else System.out.print("Este equipamento não existe no sistema!");
         });
         menu.setHandlers(3, () -> {
             System.out.print("Indique o NIF do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
-            this.model.getEquipamentosFacade().levantaEquipamento(nif);
-            System.out.println("O equipamento foi levantado com sucesso!");
+            if(this.model.getEquipamentosFacade().existeEquipamento(nif)) {
+                this.model.getEquipamentosFacade().levantaEquipamento(nif);
+                System.out.println("O equipamento foi levantado com sucesso!");
+            }
+            else System.out.print("Este equipamento não existe no sistema!");
         });
         menu.setHandlers(4, () -> {
             System.out.print("Indique o NIF do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
-            this.model.getEquipamentosFacade().apagaEquipamento(nif);
-            System.out.println("O equipamento foi apagado com sucesso!");
+            if(this.model.getEquipamentosFacade().existeEquipamento(nif)) {
+                this.model.getEquipamentosFacade().apagaEquipamento(nif);
+                System.out.println("O equipamento foi apagado com sucesso!");
+            }
+            else System.out.print("Este equipamento não existe no sistema!");
         });
 
         menu.run();
@@ -245,7 +259,7 @@ public class TextUI {
                 "Serviço Expresso",
                 "Serviço Programado",
                 "Consultar Serviço",
-                "Lista de Serviços",
+                "Consultar Lista de Serviços",
                 "Apagar Serviço"});
 
         //Registar pré-condições das transições
@@ -259,15 +273,21 @@ public class TextUI {
         menu.setHandlers(2, this::servicoProgramado);
         menu.setHandlers(3, () ->  {
             System.out.print("Indique o ID do serviço a consultar: ");
-            Integer id = Integer.parseInt(scan.nextLine());
-            this.model.getServicosFacade().consultaServico(id);
+            int id = Integer.parseInt(scan.nextLine());
+            if(this.model.getServicosFacade().existeServico(id)) {
+                this.model.getServicosFacade().consultaServico(id);
+            }
+            else System.out.print("Este serviço não existe no sistema!");
         });
         menu.setHandlers(4, () -> System.out.print(this.model.getServicosFacade().getServicos()));
         menu.setHandlers(5, () ->  {
             System.out.print("Indique o ID do serviço a remover: ");
-            Integer id = Integer.parseInt(scan.nextLine());
-            this.model.getServicosFacade().removeServico(id);
-            System.out.println("O serviço foi removido com sucesso!");
+            int id = Integer.parseInt(scan.nextLine());
+            if(this.model.getServicosFacade().existeServico(id)) {
+                this.model.getServicosFacade().removeServico(id);
+                System.out.println("O serviço foi removido com sucesso!");
+            }
+            else System.out.print("Este serviço não existe no sistema!");
         });
 
         menu.run();
@@ -317,10 +337,19 @@ public class TextUI {
         //Registar os handlers
         menu.setHandlers(1,()-> {
             System.out.println("Introduza o Id do Serviço:");
-            Integer id = Integer.parseInt(scan.nextLine());
+            int id = Integer.parseInt(scan.nextLine());
+            if(!this.model.getServicosFacade().existeServico(id)){
+                // .....................
+            }
+            else System.out.println("Este ID de Serviço não se encontra disponivel!");
         });
         menu.setHandlers(2,()->{
             System.out.println("Introduza o Id do Serviço a editar:");
+            int id = Integer.parseInt(scan.nextLine());
+            if(this.model.getServicosFacade().existeServico(id)){
+                // .....................
+            }
+            else System.out.println("Este serviço não existe no sistema!");
         });
         //menu.setHandlers(3,()-> System.out.println(this.model.getServicosFacade().getServicos()));
         //menu.setHandlers(4,()->);

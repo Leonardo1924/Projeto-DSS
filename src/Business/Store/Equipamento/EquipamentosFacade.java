@@ -35,7 +35,7 @@ public class EquipamentosFacade implements IGestEquipamentos {
         this.equipamentos.remove(nif);
     }
 
-    public boolean existeEquipamento(int id){
-        return this.equipamentos.containsKey(id);
+    public boolean existeEquipamento(int nif){
+        return this.equipamentos.containsKey(nif);
     }
 }

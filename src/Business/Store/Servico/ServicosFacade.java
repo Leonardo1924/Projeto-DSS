@@ -34,4 +34,8 @@ public class ServicosFacade implements IGestServicos {
     public void removeServico(Integer id) {
         this.servicos.remove(id);
     }
+
+    public boolean existeServico(int id){
+        return this.servicos.containsKey(id);
+    }
 }

@@ -12,4 +12,6 @@ public interface IGestServicos {
     void consultaServico(Integer id);
 
     void removeServico(Integer id);
+
+    boolean existeServico(int id);
 }
