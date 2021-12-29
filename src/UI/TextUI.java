@@ -83,7 +83,10 @@ public class TextUI {
             System.out.print("Indique o nif do cliente: ");
             int nif = Integer.parseInt(scan.nextLine());
             System.out.print("Indique o telemóvel do cliente: ");
-            int telemovel = Integer.parseInt(scan.nextLine());
+            int lengNr = scan.nextLine().length();
+            int telemovel = 0;
+            if(lengNr!=9){ telemovel = verificarNrTelemovel();}
+            else{ telemovel = Integer.parseInt(scan.nextLine()); }
             System.out.print("Indique o email do cliente: ");
             String mail = scan.nextLine();
             System.out.print("Indique o ID do equipamento: ");
@@ -359,6 +362,24 @@ public class TextUI {
             }
         }
         return sucesso;
+    }
+
+    public int verificarNrTelemovel() throws IOException {
+        boolean sucesso = false;
+        String telemovel = null;
+            while(!sucesso){
+                try{
+                    System.out.print("Número de telemovel só pode ter 9 dígitos! Tente Novamente \nteste");
+                    System.out.print("Indique o telemóvel do cliente: ");
+                    telemovel = scan.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println(e);
+                }
+                if(telemovel.length() == 9){
+                    sucesso = true;
+                }
+            }
+        return Integer.parseInt(telemovel);
     }
 
     public void ExitScreen(boolean login){
