@@ -13,7 +13,7 @@ public interface IGestClientes {
 
     boolean removeCliente(String id);
 
-    boolean registaCliente(String idCliente, String nome, int nif, int telemovel, String mail, String idEquip);
+    void registaCliente(String idCliente, String nome, int nif, int telemovel, String mail, String idEquip);
 
     void consultaClientes();
 

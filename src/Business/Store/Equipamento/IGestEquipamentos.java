@@ -13,5 +13,5 @@ public interface IGestEquipamentos {
 
     void apagaEquipamento(int nif);
 
-    boolean existeEquipamento(int id);
+    boolean existeEquipamento(int nif);
 }

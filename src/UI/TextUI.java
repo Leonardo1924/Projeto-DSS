@@ -79,24 +79,26 @@ public class TextUI {
         menu.setHandlers(1, () -> {
             System.out.print("Indique o ID do cliente: ");
             String id = scan.nextLine();
-            System.out.print("Indique o nome do cliente: ");
-            String nome = scan.nextLine();
-            System.out.print("Indique o nif do cliente: ");
-            String lengNif = scan.nextLine();
-            int nif = 0;
-            if(lengNif.length() == 9){ nif = Integer.parseInt(lengNif);}
-            else{ nif = verificarNif(); }
-            System.out.print("Indique o telemóvel do cliente: ");
-            String lengNr = scan.nextLine();
-            int telemovel = 0;
-            if(lengNr.length() != 9){ telemovel = verificarNrTelemovel();}
-            else{ telemovel = Integer.parseInt(lengNr); }
-            System.out.print("Indique o email do cliente: ");
-            String mail = scan.nextLine();
-            System.out.print("Indique o ID do equipamento: ");
-            String equip = scan.nextLine();
-            if(this.model.getClientesFacade().registaCliente(id, nome, nif, telemovel, mail, equip))
+            if(!this.model.getClientesFacade().existeCliente(id)){
+                System.out.print("Indique o nome do cliente: ");
+                String nome = scan.nextLine();
+                System.out.print("Indique o nif do cliente: ");
+                String lengNif = scan.nextLine();
+                int nif = 0;
+                if(lengNif.length() == 9){ nif = Integer.parseInt(lengNif);}
+                else{ nif = verificarNif(); }
+                System.out.print("Indique o telemóvel do cliente: ");
+                String lengNr = scan.nextLine();
+                int telemovel = 0;
+                if(lengNr.length() != 9){ telemovel = verificarNrTelemovel();}
+                else{ telemovel = Integer.parseInt(lengNr); }
+                System.out.print("Indique o email do cliente: ");
+                String mail = scan.nextLine();
+                System.out.print("Indique o ID do equipamento: ");
+                String equip = scan.nextLine();
+                this.model.getClientesFacade().registaCliente(id, nome, nif, telemovel, mail, equip);
                 System.out.println("O cliente foi registado com sucesso!");
+            }
             else System.out.println("Este ID de cliente não se encontra disponivel!");
         });
         menu.setHandlers(2, () -> {
@@ -218,10 +220,12 @@ public class TextUI {
             int nif = 0;
             if(lengNif.length() == 9){ nif = Integer.parseInt(lengNif);}
             else{ nif = verificarNif(); }
-            System.out.print("Indique o ID do equipamento: ");
-            String equip = scan.nextLine();
-            if(this.model.getEquipamentosFacade().registaEquip(nif, equip, "em processo"))
+            if(!this.model.getEquipamentosFacade().existeEquipamento(nif)) {
+                System.out.print("Indique o ID do equipamento: ");
+                String equip = scan.nextLine();
+                this.model.getEquipamentosFacade().registaEquip(nif, equip, "no armazem");
                 System.out.println("O equipamento foi registado com sucesso!");
+            }
             else System.out.println("Este ID de equipamento não se encontra disponivel!");
         });
         menu.setHandlers(2, () -> {
