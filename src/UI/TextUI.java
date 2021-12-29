@@ -187,8 +187,9 @@ public class TextUI {
             int nif = Integer.parseInt(scan.nextLine());
             System.out.print("Indique o ID do equipamento: ");
             String equip = scan.nextLine();
-            this.model.getEquipamentosFacade().registaEquip(nif, equip, "em processo");
-            System.out.println("O equipamento foi registado com sucesso!");
+            if(this.model.getEquipamentosFacade().registaEquip(nif, equip, "em processo"))
+                System.out.println("O equipamento foi registado com sucesso!");
+            else System.out.println("Não foi possível registar o equipamento!");
         });
         menu.setHandlers(2, () -> {
             System.out.print("Indique o NIF do cliente: ");

@@ -3,6 +3,7 @@ package Business.Store.Orcamento;
 import java.io.PrintWriter;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -139,7 +140,7 @@ public class Orcamento {
     }
 
     public void gravar(PrintWriter print){
-        print.println(this.idOrcamento + ";" + this.idEquip + ";" + this.data + ";" + this.custo + ";" + this.prazo + ";" + this.tecnico + ";" + this.notas + ";" + this.idPlano + ";" + this.status);
+        print.println(this.idOrcamento + ";" + this.idEquip + ";" + this.data + ";" + this.custo + ";" + this.prazo.toString() + ";" + this.tecnico + ";" + this.notas + ";" + this.idPlano + ";" + this.status);
     }
 
     public String toString(){

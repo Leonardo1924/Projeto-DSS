@@ -14,9 +14,13 @@ public class EquipamentosFacade implements IGestEquipamentos {
         return this.equipamentos.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
     }
 
-    public void registaEquip(int nif, String idEquip, String estado){
-        Equipamento equip = new Equipamento(idEquip,estado);
-        this.equipamentos.put(nif,equip.clone());
+    public boolean registaEquip(int nif, String idEquip, String estado){
+        if(!this.equipamentos.containsKey(nif)) {
+            Equipamento equip = new Equipamento(idEquip, estado);
+            this.equipamentos.put(nif, equip.clone());
+            return true;
+        }
+        else return false;
     }
 
     public String consultaEstado(int nif){
