@@ -154,6 +154,7 @@ public class TextUI {
                         String opt = scan.nextLine();
                         regista = opt.equalsIgnoreCase("sim");
                          */
+                        regista = false;
                     }
                     float custoTotal = this.model.getPlanosFacade().getPlanos().get(idPlano).getCusto();
                     Duration prazoTotal = this.model.getPlanosFacade().getPlanos().get(idPlano).getPrazo();
