@@ -311,7 +311,5 @@ public class TextUI {
         Menu.Logo();
         if(!login)
             System.out.println("\nNúmero máximo de tentativas excedido.");
-            System.out.println("\nO sistema será encerrado agora.");
-            System.out.println("\033[1;36m" + "Sessão Terminada!" + "\033[0m");
     }
 }

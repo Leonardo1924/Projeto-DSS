@@ -15,5 +15,7 @@ public class Main {
         catch (Exception e) {
             System.out.println("Não foi possível iniciar o sistema!: " + e.getMessage());
         }
+        System.out.println("\nO sistema será encerrado agora.");
+        System.out.println("\033[1;36m" + "Sessão Terminada!" + "\033[0m");
     }
 }
