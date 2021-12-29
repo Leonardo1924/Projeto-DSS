@@ -73,8 +73,7 @@ public class Parser {
         List<String> lines = readFile("input/dadosOrcamento.txt");
         Map<Integer, Orcamento> orcamentos = new TreeMap<>();       // id do orçamento, orçamento
         String[] tokens;
-        DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-
+        DateTimeFormatter dataformatada = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         for (String l : lines) {
             tokens = l.split(";", 9);
             Orcamento orc = new Orcamento(Integer.parseInt(tokens[0]),tokens[1],LocalDateTime.parse(tokens[2],dataformatada),
