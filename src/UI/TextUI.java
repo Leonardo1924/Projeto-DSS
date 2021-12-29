@@ -208,7 +208,10 @@ public class TextUI {
         //Registar os handlers
         menu.setHandlers(1, () -> {
             System.out.print("Indique o NIF do cliente: ");
-            int nif = Integer.parseInt(scan.nextLine());
+            String lengNif = scan.nextLine();
+            int nif = 0;
+            if(lengNif.length() == 9){ nif = Integer.parseInt(lengNif);}
+            else{ nif = verificarNif(); }
             System.out.print("Indique o ID do equipamento: ");
             String equip = scan.nextLine();
             if(this.model.getEquipamentosFacade().registaEquip(nif, equip, "em processo"))
