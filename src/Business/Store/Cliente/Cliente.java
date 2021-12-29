@@ -1,5 +1,6 @@
 package Business.Store.Cliente;
 
+import java.io.PrintWriter;
 import java.io.Serializable;
 
 public class Cliente implements Serializable {
@@ -87,6 +88,10 @@ public class Cliente implements Serializable {
 
     public Cliente clone(){
         return new Cliente(this);
+    }
+
+    public void gravar(PrintWriter print){
+        print.println(this.idCliente + ";" + this.name + ";" + this.nif + ";" + this.telemovel + ";" + this.mail + ";" + this.idEquip);
     }
 
     public String toString(){

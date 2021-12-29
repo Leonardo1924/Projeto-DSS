@@ -83,8 +83,9 @@ public class TextUI {
             String mail = scan.nextLine();
             System.out.print("Indique o ID do equipamento: ");
             String equip = scan.nextLine();
-            this.model.getClientesFacade().registaCliente(id, nome, nif, telemovel, mail, equip);
-            System.out.println("O cliente foi registado com sucesso!");
+            if(this.model.getClientesFacade().registaCliente(id, nome, nif, telemovel, mail, equip))
+                System.out.println("O cliente foi registado com sucesso!");
+            else System.out.println("Não foi possível registar o cliente introduzido!");
         });
         menu.setHandlers(2, () -> {
             System.out.print("Indique o ID do cliente a remover: ");

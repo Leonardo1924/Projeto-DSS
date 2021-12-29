@@ -1,5 +1,6 @@
 package Business.Store.Funcionario;
 
+import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -43,6 +44,10 @@ public class Funcionario{
 
     public String getTipo(){
         return this.tipo;
+    }
+
+    public void gravar(PrintWriter print){
+        print.println(this.username + ";" + this.password + ";" + this.tipo);
     }
 
     public Funcionario clone(){

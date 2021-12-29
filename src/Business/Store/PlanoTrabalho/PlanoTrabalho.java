@@ -1,5 +1,7 @@
 package Business.Store.PlanoTrabalho;
 
+import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -96,6 +98,10 @@ public class PlanoTrabalho {
 
     public void setPassos(List<Passo> passos) {
         this.passos = passos;
+    }
+
+    public void gravar(PrintWriter print){
+        print.println(this.idPlano + ";" + this.idOrcamento + ";" + this.idTecnico + ";" + this.custo + ";" + this.prazo + ";" + Arrays.toString(this.passos.toArray()));
     }
 
     @Override

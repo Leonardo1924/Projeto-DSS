@@ -34,9 +34,13 @@ public class ClientesFacade implements IGestClientes{
         this.clientes.remove(id);
     }
 
-    public void registaCliente(String idCliente, String nome, int nif, int telemovel, String mail, String idEquip){
-        Cliente cliente = new Cliente(idCliente,nome,nif,telemovel,mail,idEquip);
-        this.clientes.put(idCliente,cliente.clone());
+    public boolean registaCliente(String idCliente, String nome, int nif, int telemovel, String mail, String idEquip){
+        if(!this.clientes.containsKey(idCliente)) {
+            Cliente cliente = new Cliente(idCliente, nome, nif, telemovel, mail, idEquip);
+            this.clientes.put(idCliente, cliente.clone());
+            return true;
+        }
+        return false;
     }
 
     public void consultaClientes(){

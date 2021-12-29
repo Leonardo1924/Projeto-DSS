@@ -2,6 +2,7 @@ package Business.Store.Servico;
 
 import Business.Store.Cliente.Cliente;
 
+import java.io.PrintWriter;
 import java.time.Duration;
 import java.util.Objects;
 
@@ -66,6 +67,10 @@ public class Servico {
                 " \033[1;35mId Plano: \033[0m" + this.idPlano +
                 " \033[1;35mCusto Total: \033[0m" + this.custoTotal +
                 " \033[1;35mTempo Total: \033[0m" + this.tempoTotal;
+    }
+
+    public void gravar(PrintWriter print){
+        print.println(this.id + ";" + this.tipo + ";" + this.idPlano + ";" + this.custoTotal + ";" + this.tempoTotal);
     }
 
     @Override

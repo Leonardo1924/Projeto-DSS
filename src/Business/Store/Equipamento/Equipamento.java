@@ -1,5 +1,7 @@
 package Business.Store.Equipamento;
 
+import java.io.PrintWriter;
+
 public class Equipamento {
     private String id;
     private String estado; // em processamento ; reparado ; entregue
@@ -38,6 +40,10 @@ public class Equipamento {
     @Override
     public Equipamento clone(){
         return new Equipamento(this);
+    }
+
+    public void gravar(int nif, PrintWriter print){
+        print.println(nif + ";" + this.id + ";" + this.estado);
     }
 
     public String toString(){

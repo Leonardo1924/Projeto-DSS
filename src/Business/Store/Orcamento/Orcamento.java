@@ -1,5 +1,6 @@
 package Business.Store.Orcamento;
 
+import java.io.PrintWriter;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -135,6 +136,10 @@ public class Orcamento {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public void gravar(PrintWriter print){
+        print.println(this.idOrcamento + ";" + this.idEquip + ";" + this.data + ";" + this.custo + ";" + this.prazo + ";" + this.tecnico + ";" + this.notas + ";" + this.idPlano + ";" + this.status);
     }
 
     public String toString(){
