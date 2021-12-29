@@ -42,6 +42,8 @@ public class TextUI {
                 "Serviço",
                 "Relatório de estatísticas"});
 
+        menu.setPreCondition(5,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Gestor"));
+
         //Registar os handlers
         menu.setHandlers(1, this::gestaoDeClientes);
         menu.setHandlers(2, this::gestaoDeOrcamento);
