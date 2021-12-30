@@ -30,7 +30,7 @@ public class TextUI {
         } else {
             this.ExitScreen(login);
         }
-        Saver.gravar(this.model);
+        //Saver.gravar(this.model);
     }
 
     /**
@@ -391,12 +391,14 @@ public class TextUI {
                     int newPlano = this.model.getPlanosFacade().getPlanos().size() + 1;
                     this.model.getPlanosFacade().adicionaPlano(newPlano, idOrc, this.model.getFuncionariosFacade().getUserAtual());
                     this.model.getServicosFacade().adicionaServicoProgramado(newID, newPlano, "programado");
+                    String eqID = this.model.getOrcamentosFacade().getOrcamentos().get(idOrc).getIdEquip();
+                    int nifCliente = this.model.getClientesFacade().getClienteEQ(eqID);
+                    this.model.getEquipamentosFacade().atualizaEstado(nifCliente, "em espera");
                     System.out.println("ID do serviço criado: " + newID + ".\n");
                 } else System.out.print("\u001B[31mID de serviço inválido.\n\n\u001b[0m");
             } catch (NumberFormatException e){ System.out.println("\u001B[31mERROR: ID tem de ser um inteiro!\n\n\u001b[0m"); }
         });
         menu.setHandlers(2,()->{
-            // MUDAR APENAS PARA  VER O ESTADO ATUAL DO PROCESSO
             System.out.print("ID do Serviço a alterar: ");
             try {
                 int id = Integer.parseInt(scan.nextLine());

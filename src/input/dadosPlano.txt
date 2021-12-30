@@ -9,6 +9,4 @@
 9;9;annaphens;23.0;PT54M;testar,90.0,PT12M
 10;10;rexfeels;78.0;PT29M;n/a
 11;11;taogataquemia;14.0;PT1H23M;n/a
-12;1;ruipgcoelho;9.0;PT17M;testar,5.0,PT4M@testar,5.0,PT5M
-13;1;ruipgcoelho;0.0;PT0S;n/a
-14;1;ruipgcoelho;0.0;PT0S;n/a
+
