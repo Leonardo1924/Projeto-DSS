@@ -47,9 +47,9 @@ public class Estatisticas {
             Duration meanDuracao = Duration.ofSeconds(mean);
 
             String res = "\033[1;36m*** ID Técnico: \033[0m"+idF+
-                    " \033[1;36m***\n-- Serviço Expresso --\nTotal: \033[0m"+nrServicosExpresso +
-                    "\033[1;36m\n--Serviço Programado--\nTotal: \033[0m"+nrServicosProgramados +
-                    "\033[1;36m\nTempo total: \033[0m"+somatorioDuracao+"\033[1;36m\nTempo médio: \033[0m"+meanDuracao;
+                    "\033[0m\n\033[1;33m-- Serviço Expresso --\033[0m\n\033[1;35mTotal: \033[0m"+nrServicosExpresso +
+                    "\033[1;33m\n--Serviço Programado--\033[0m\n\033[1;35mTotal: \033[0m"+nrServicosProgramados +
+                    "\n\033[1;35mTempo total: \033[0m"+somatorioDuracao+"\033[1;36m\n\033[1;35mTempo médio: \033[0m"+meanDuracao;
             sb.append(res).append("\n\n");
         }
         return sb.toString();
