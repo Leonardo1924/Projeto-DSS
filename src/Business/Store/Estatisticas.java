@@ -15,16 +15,16 @@ public class Estatisticas {
     }
 
     public String reportTecnico(){
-        Set<String> idsRececionistas = new TreeSet<>();
+        Set<String> idsTecnicos = new TreeSet<>();
         for(Funcionario f : this.model.getFuncionariosFacade().getFuncionarios().values()){
             String idF = f.getTipo();
             if(idF.equals("Tecnico"))
-                idsRececionistas.add(f.getUsername());
+                idsTecnicos.add(f.getUsername());
         }
 
         StringBuilder sb = new StringBuilder();
 
-        for(String idF : idsRececionistas){
+        for(String idF : idsTecnicos){
             int nrServicosProgramados = 0;
             int nrServicosExpresso = 0;
             long tempoSEC = 0;
