@@ -7,13 +7,13 @@ public class Passo {
     private String descricao;
     private float custoPasso;
     private Duration tempoPasso;
-
+/*
     public Passo() {
         this.descricao = null;
         this.custoPasso = -1;
         this.tempoPasso = Duration.ZERO;
     }
-    
+   */
     public Passo(String desc, float custoPasso, Duration tempoPasso){
         this.descricao = desc;
         this.custoPasso = custoPasso;

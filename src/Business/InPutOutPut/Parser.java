@@ -110,14 +110,15 @@ public class Parser {
             tokens = l.split(";", 6);
             List<String> list = new ArrayList<String>(Arrays.asList(tokens[5].split("@")));
             List<Passo> passos = new ArrayList<>();
-            for(String p : list) {
-                List<String> stringPasso = new ArrayList<String>(Arrays.asList(tokens[5].split(",")));
-                System.out.println((Duration.parse(stringPasso.get(2))).toString());
-                Passo passo = new Passo(stringPasso.get(0),Float.parseFloat(stringPasso.get(1)),Duration.parse(stringPasso.get(2)));
-                passos.add(passo.clone());
+            if(list.size() != 1 || (list.size() == 1 && !list.get(0).equals("n/a"))) {
+                for(String p : list) {
+                    List<String> stringPasso = new ArrayList<String>(Arrays.asList(p.split(",")));
+                    Passo passo = new Passo(stringPasso.get(0),Float.parseFloat(stringPasso.get(1)),Duration.parse(stringPasso.get(2)));
+                    passos.add(passo.clone());
+                }
             }
-            PlanoTrabalho pt = new PlanoTrabalho(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),tokens[2],Float.parseFloat(tokens[3]), Duration.parse(tokens[4]),passos);
-            System.out.println("plano: " + pt.getPrazo());
+            PlanoTrabalho pt = new PlanoTrabalho(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),tokens[2],Float.parseFloat(tokens[3]),Duration.parse(tokens[4]),passos);
+            //System.out.println(passos);
             planos.put(Integer.parseInt(tokens[0]),pt.clone());
         }
         PlanoFacade dataPt = new PlanoFacade(planos);
