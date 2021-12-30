@@ -1,5 +1,7 @@
 package Business.Store.Funcionario;
 
+import Business.Store.PlanoTrabalho.Passo;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +51,9 @@ public class Funcionario{
     }
 
     public void gravar(PrintWriter print){
-        print.println(this.username + ";" + this.password + ";" + this.tipo);
+        String recebidos = String.join(",",this.equipamentosRecebidos);
+        String devolvidos = String.join(",",this.equipamentosDevolvidos);
+        print.println(this.username + ";" + this.password + ";" + this.tipo + ";" + recebidos + ";" + devolvidos);
     }
 
     public Funcionario clone(){
