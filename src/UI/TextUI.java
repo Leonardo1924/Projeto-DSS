@@ -466,7 +466,7 @@ public class TextUI {
         //Registar os handlers
         menu.setHandlers(1,()->{
             Estatisticas e = new Estatisticas(this.model);
-            // ADICIONAR METODO QUANDO ESTIVER PRONTO
+            System.out.println(e.reportTecnico());
         });
         menu.setHandlers(2,()->{
             Estatisticas e = new Estatisticas(this.model);
