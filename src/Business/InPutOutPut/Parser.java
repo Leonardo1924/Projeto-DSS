@@ -17,6 +17,7 @@ import Business.Store.Funcionario.FuncionariosFacade;
 import Business.Store.Equipamento.Equipamento;
 import Business.Store.Orcamento.Orcamento;
 import Business.Store.Orcamento.OrcamentosFacade;
+import Business.Store.PlanoTrabalho.Passo;
 import Business.Store.PlanoTrabalho.PlanoFacade;
 import Business.Store.PlanoTrabalho.PlanoTrabalho;
 import Business.Store.Servico.Servico;
@@ -106,8 +107,17 @@ public class Parser {
         String[] tokens;
 
         for (String l : lines) {
-            tokens = l.split(";", 5);
-            PlanoTrabalho pt = new PlanoTrabalho(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),tokens[2],Float.parseFloat(tokens[3]), Duration.parse(tokens[4]));
+            tokens = l.split(";", 6);
+            List<String> list = new ArrayList<String>(Arrays.asList(tokens[5].split("@")));
+            List<Passo> passos = new ArrayList<>();
+            for(String p : list) {
+                List<String> stringPasso = new ArrayList<String>(Arrays.asList(tokens[5].split(",")));
+                System.out.println((Duration.parse(stringPasso.get(2))).toString());
+                Passo passo = new Passo(stringPasso.get(0),Float.parseFloat(stringPasso.get(1)),Duration.parse(stringPasso.get(2)));
+                passos.add(passo.clone());
+            }
+            PlanoTrabalho pt = new PlanoTrabalho(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),tokens[2],Float.parseFloat(tokens[3]), Duration.parse(tokens[4]),passos);
+            System.out.println("plano: " + pt.getPrazo());
             planos.put(Integer.parseInt(tokens[0]),pt.clone());
         }
         PlanoFacade dataPt = new PlanoFacade(planos);

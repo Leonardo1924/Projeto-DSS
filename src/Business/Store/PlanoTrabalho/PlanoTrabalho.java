@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.time.Duration;
+import java.util.stream.Collectors;
 
 public class PlanoTrabalho {
     private int idPlano;
@@ -27,16 +28,16 @@ public class PlanoTrabalho {
         this.idPlano = pt.getIdPlano();
         this.idOrcamento = pt.getIdOrcamento();
         this.idTecnico = pt.getIdTecnico();
-        this.passos = new ArrayList<>(pt.getPassos());
+        this.passos = pt.getPassos();
         this.custo = pt.getCusto();
         this.prazo = pt.getPrazo();
     }
 
-    public PlanoTrabalho(int idPlano, int idOrcamento, String idTecnico, float custo, Duration prazo){
+    public PlanoTrabalho(int idPlano, int idOrcamento, String idTecnico, float custo, Duration prazo, List<Passo> passos){
         this.idPlano = idPlano;
         this.idOrcamento = idOrcamento;
         this.idTecnico = idTecnico;
-        this.passos = new ArrayList<>();
+        this.passos = new ArrayList<>(passos);
         this.custo = custo;
         this.prazo = prazo;
     }
