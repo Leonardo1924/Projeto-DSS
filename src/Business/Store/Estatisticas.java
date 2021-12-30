@@ -81,8 +81,23 @@ public class Estatisticas {
     }
 
     public String reportDetalhado() {
-        // TO DO AINDA
-        return null;
-
+        Set<String> idsTecnicos = new TreeSet<>();
+        for(Funcionario f : this.model.getFuncionariosFacade().getFuncionarios().values()){
+            String idF = f.getTipo();
+            if(idF.equals("Tecnico"))
+                idsTecnicos.add(f.getUsername());
+        }
+        StringBuilder sb = new StringBuilder();
+        for(String idF : idsTecnicos){
+            sb.append("*** ID Técnico: ").append(idF);
+            for(Servico s : this.model.getServicosFacade().getServicos().values()){
+                PlanoTrabalho pt = this.model.getPlanosFacade().getPlanos().get(s.getIdPlano());
+                if(pt.getIdTecnico().equals(idF)) {
+                    sb.append(pt);
+                }
+            }
+            sb.append("\n\n");
+        }
+        return sb.toString();
     }
 }
