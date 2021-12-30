@@ -100,7 +100,16 @@ public class PlanoTrabalho {
     }
 
     public void gravar(PrintWriter print){
-        print.println(this.idPlano + ";" + this.idOrcamento + ";" + this.idTecnico + ";" + this.custo + ";" + this.prazo.toString() + this.passos.toString());
+        if(!this.passos.isEmpty()) {
+            List<String> list = new ArrayList<>();
+            for(Passo p : this.passos) {
+                String newS = p.getDescricao() + "," + p.getCustoPasso() + "," + p.getTempoPasso();
+                list.add(newS);
+            }
+            String result = String.join("@",list);
+            print.println(this.idPlano + ";" + this.idOrcamento + ";" + this.idTecnico + ";" + this.custo + ";" + this.prazo.toString() + ";" + result);
+        }
+        else print.println(this.idPlano + ";" + this.idOrcamento + ";" + this.idTecnico + ";" + this.custo + ";" + this.prazo.toString() + ";" + "n/a");
     }
 
     @Override

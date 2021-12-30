@@ -38,8 +38,7 @@ public class Parser {
             clientes.put(tokens[0],cliente.clone());
         }
         naoContactados = new ArrayList<>(clientes.keySet());
-        ClientesFacade dataCliente = new ClientesFacade(clientes,contactados,naoContactados);
-        return dataCliente;
+        return new ClientesFacade(clientes,contactados,naoContactados);
     }
 
     public static FuncionariosFacade parseLogin() throws IOException {
@@ -52,8 +51,7 @@ public class Parser {
             Funcionario func = new Funcionario(tokens[0],tokens[1],tokens[2]);
             loginData.put(tokens[0],func.clone());
         }
-        FuncionariosFacade dataFunc = new FuncionariosFacade(loginData);
-        return dataFunc;
+        return new FuncionariosFacade(loginData);
     }
 
     public static EquipamentosFacade parseEquip() throws IOException {
@@ -66,8 +64,7 @@ public class Parser {
             Equipamento equip = new Equipamento(tokens[1],tokens[2]);
             equipamentos.put(Integer.parseInt(tokens[0]),equip.clone());
         }
-        EquipamentosFacade dataEquip = new EquipamentosFacade(equipamentos);
-        return dataEquip;
+        return new EquipamentosFacade(equipamentos);
     }
 
     public static OrcamentosFacade parseOrcamento() throws IOException {
@@ -83,8 +80,7 @@ public class Parser {
                     Float.parseFloat(tokens[3]),Duration.parse(tokens[4]),tokens[5],tokens[6],Integer.parseInt(tokens[7]),Boolean.parseBoolean(tokens[8]));
             orcamentos.put(Integer.parseInt(tokens[0]),orc.clone());
         }
-        OrcamentosFacade dataOrc = new OrcamentosFacade(orcamentos);
-        return dataOrc;
+        return new OrcamentosFacade(orcamentos);
     }
 
     public static ServicosFacade parseServico() throws IOException {
@@ -97,8 +93,7 @@ public class Parser {
             Servico ser = new Servico(Integer.parseInt(tokens[0]),tokens[1],Integer.parseInt(tokens[2]),Float.parseFloat(tokens[3]),Duration.parse(tokens[4]));
             servicos.put(Integer.parseInt(tokens[0]),ser.clone());
         }
-        ServicosFacade dataSer = new ServicosFacade(servicos);
-        return dataSer;
+        return new ServicosFacade(servicos);
     }
 
     public static PlanoFacade parsePlano() throws IOException {
@@ -120,8 +115,7 @@ public class Parser {
             PlanoTrabalho pt = new PlanoTrabalho(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),tokens[2],Float.parseFloat(tokens[3]),Duration.parse(tokens[4]),passos);
             planos.put(Integer.parseInt(tokens[0]),pt.clone());
         }
-        PlanoFacade dataPt = new PlanoFacade(planos);
-        return dataPt;
+        return new PlanoFacade(planos);
     }
 
     public static List<String> readFile(String file) {
