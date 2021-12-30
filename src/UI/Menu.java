@@ -158,7 +158,7 @@ public class Menu {
             op = -1;
         }
         if (op < 0 || op > this.opcoes.size()) {
-            System.out.println("\u001B[31m Opção Inválida!!\u001B[0m");
+            System.out.println("\u001B[31mOpção Inválida!!\n\u001B[0m");
             op = -1;
         }
         return op;
