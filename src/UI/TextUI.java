@@ -54,7 +54,7 @@ public class TextUI {
         menu.setHandlers(2, this::gestaoDeOrcamento);
         menu.setHandlers(3, this::gestaoDeEquipamentos);
         menu.setHandlers(4, this::gestaoDeServico);
-        //menu.setHandlers(5, this::gestaoDeEstatisticas);
+        menu.setHandlers(5, this::gestaoDeEstatisticas);
         menu.setHandlers(6, () ->  {
             System.out.print("Indique o ID do plano a consultar: ");
             try {
