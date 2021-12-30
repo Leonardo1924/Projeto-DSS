@@ -66,12 +66,8 @@ public class Estatisticas {
         StringBuilder sb = new StringBuilder();
 
         for(String idF : idsRececionistas){
-            int nrRecebidos = 0;
-            int nrEntregues = 0;
-            /* não é isto, mas há-de ser algo tipo isto -- basta contar o tamanho da lista associada a uma dada chave
-            nrRecebidos = this.model.getQQcenaONDEestiverOmapRECEBIDO.get(idF).size();
-            nrEntregue = this.model.getQQcenaONDEestiverOmapENTREGUE.get(idF).size();
-             */
+            int nrRecebidos = this.model.getFuncionariosFacade().getRececao().get(idF).size();;
+            int nrEntregues = this.model.getFuncionariosFacade().getDevolucao().get(idF).size();;
             String res = "*** ID Recicionista: "+idF+
                     "\nEquipamentos recebidos: "+nrRecebidos +
                     "\nEquipamentos entregues: "+nrEntregues;
@@ -89,7 +85,7 @@ public class Estatisticas {
         }
         StringBuilder sb = new StringBuilder();
         for(String idF : idsTecnicos){
-            sb.append("*** ID Técnico: ").append(idF);
+            sb.append("*** ID Técnico: ").append(idF).append("\n");
             for(Servico s : this.model.getServicosFacade().getServicos().values()){
                 PlanoTrabalho pt = this.model.getPlanosFacade().getPlanos().get(s.getIdPlano());
                 if(pt.getIdTecnico().equals(idF)) {
