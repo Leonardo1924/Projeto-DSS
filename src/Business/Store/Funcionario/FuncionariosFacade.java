@@ -17,12 +17,6 @@ public class FuncionariosFacade implements IGestFuncionarios {
         this.userAtual = "";
     }
 
-    /*
-     * Método que contacta um cliente via email ou via telefone.
-     * Devolve a data e hora do contacto. Se for o output for null, então o cliente não foi contactado.
-     *    notContacted - lista de clientes que ainda não foram contactados
-     *    contacted - lista de clientes que já foram contactados
-     */
     public Map<String,Funcionario> getFuncionarios(){
         return this.credentials.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
     }
