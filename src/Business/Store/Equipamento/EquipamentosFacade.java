@@ -45,4 +45,9 @@ public class EquipamentosFacade implements IGestEquipamentos {
         }
         return false;
     }
+
+    @Override
+    public void atualizaEstado(int eqID, String estado) {
+        this.equipamentos.get(eqID).setEstado(estado);
+    }
 }

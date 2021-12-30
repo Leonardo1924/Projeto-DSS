@@ -37,8 +37,8 @@ public class PlanoTrabalho {
         this.idOrcamento = idOrcamento;
         this.idTecnico = idTecnico;
         this.passos = new ArrayList<>();
-        this.custo = this.custoTotal();
-        this.prazo = this.prazoTotal();
+        this.custo = custo;
+        this.prazo = prazo;
     }
 
     public PlanoTrabalho(int idPlano, int idOrc, String idTecnico) {
@@ -120,7 +120,7 @@ public class PlanoTrabalho {
                 " \033[1;35mTecnico: \033[0m" + idTecnico +
                 " \033[1;35mCusto: \033[0m" + custo +
                 " \033[1;35mPrazo: \033[0m" + prazo +
-                " \033[1;35mPassos: \033[0m" + passos;
+                " \033[1;35mPassos: \033[0m" + passos + "\n\n";
     }
 
     float custoTotal(){

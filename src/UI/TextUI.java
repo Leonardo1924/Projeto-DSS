@@ -1,7 +1,9 @@
 package UI;
 
 import Business.InPutOutPut.Saver;
+import Business.Store.Equipamento.Equipamento;
 import Business.Store.IStoreLN;
+import Business.Store.Servico.Servico;
 import Business.Store.StoreLNFacade;
 
 import java.io.IOException;
@@ -41,17 +43,25 @@ public class TextUI {
                 "Equipamento",
                 "Serviço",
                 "Relatório de estatísticas",
+                "Consultar plano de trabalho",
                 "Alterar utilizador"});
 
         menu.setPreCondition(5,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Gestor"));
-
+        menu.setPreCondition(6,()->!this.model.getPlanosFacade().getPlanos().isEmpty());
         //Registar os handlers
         menu.setHandlers(1, this::gestaoDeClientes);
         menu.setHandlers(2, this::gestaoDeOrcamento);
         menu.setHandlers(3, this::gestaoDeEquipamentos);
         menu.setHandlers(4, this::gestaoDeServico);
         menu.setHandlers(5, this::gestaoDeEstatisticas);
-        menu.setHandlers(6, () -> {
+        menu.setHandlers(6, () ->  {
+            System.out.print("Indique o ID do plano a consultar: ");
+            int id = Integer.parseInt(scan.nextLine());
+            if(id <= this.model.getPlanosFacade().getPlanos().size() && this.model.getPlanosFacade().existePlano(id))
+                System.out.print(this.model.getPlanosFacade().getPlanos().get(id));
+            else System.out.print("ID de plano inválido!\n\n");
+        });
+        menu.setHandlers(7, () -> {
             System.out.print("Inserir username: ");
             String id = scan.nextLine();
             System.out.print("Inserir password: ");
@@ -67,13 +77,14 @@ public class TextUI {
                 "Registar novo cliente",
                 "Remover um cliente",
                 "Notificar o cliente",
-                "Consultar a lista de clientes"
+                "Consultar a lista de clientes",
         });
 
         //Registar pré-condições das transições
         menu.setPreCondition(2, () -> !this.model.getClientesFacade().getClientes().isEmpty());
         menu.setPreCondition(3, () -> !this.model.getClientesFacade().getClientes().isEmpty());
         menu.setPreCondition(4, () -> !this.model.getClientesFacade().getClientes().isEmpty());
+
 
         //Registar os handlers
         menu.setHandlers(1, () -> {
@@ -132,15 +143,14 @@ public class TextUI {
                 "Pedido de Orçamento",
                 "Editar Orçamento",
                 "Consultar Lista de Orçamentos",
-                "Apagar Orçamento",
-                "Consultar plano"});
+                "Apagar Orçamento"
+        });
 
         //Registar pré-condições das transições
         menu.setPreCondition(1,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Rececionista"));
         menu.setPreCondition(2,()->!this.model.getOrcamentosFacade().getOrcamentos().isEmpty());
         menu.setPreCondition(3,()->!this.model.getOrcamentosFacade().getOrcamentos().isEmpty());
         menu.setPreCondition(4,()->!this.model.getOrcamentosFacade().getOrcamentos().isEmpty());
-        menu.setPreCondition(5,()->!this.model.getPlanosFacade().getPlanos().isEmpty());
 
         //Registar os handlers
         menu.setHandlers(1, () -> {
@@ -197,13 +207,6 @@ public class TextUI {
                 System.out.print("O orçamento foi removido com sucesso!\n\n");
             else System.out.print("Este orçamento não existe no sistema!\n\n");
         });
-        menu.setHandlers(5, () ->  {
-            System.out.print("Indique o ID do plano a consultar: ");
-            int id = Integer.parseInt(scan.nextLine());
-            if(id <= this.model.getPlanosFacade().getPlanos().size() && this.model.getPlanosFacade().existePlano(id))
-                System.out.print(this.model.getPlanosFacade().getPlanos().get(id));
-            else System.out.print("ID de plano inválido!\n\n");
-        });
 
         menu.run();
     }
@@ -234,7 +237,7 @@ public class TextUI {
                 this.model.getEquipamentosFacade().registaEquip(nif, equip, "no armazem");
                 System.out.print("O equipamento foi registado com sucesso!\n\n");
             }
-            else System.out.print("Este ID de equipamento não se encontra disponivel!\n\n");
+            else System.out.print("Este ID de equipamento não se encontra disponível!\n\n");
         });
         menu.setHandlers(2, () -> {
             System.out.print("Indique o NIF do cliente: ");
@@ -287,11 +290,25 @@ public class TextUI {
             System.out.print("Indique o ID do serviço a consultar: ");
             int id = Integer.parseInt(scan.nextLine());
             if(this.model.getServicosFacade().existeServico(id)) {
-                this.model.getServicosFacade().consultaServico(id);
+                int idPl = this.model.getServicosFacade().getServicos().get(id).getIdPlano();
+                int idOrc = this.model.getPlanosFacade().getPlanos().get(idPl).getIdOrcamento();
+                String equipamento = this.model.getOrcamentosFacade().getOrcamentos().get(idOrc).getIdEquip();
+                String estado = null;
+                for(Equipamento e : this.model.getEquipamentosFacade().getEquipamentos().values()){
+                    if (e.getId().equals(equipamento)){
+                        estado = e.getEstado();
+                        break;
+                    }
+                }
+                System.out.println(this.model.getServicosFacade().consultaServico(id) +" | " + estado);
             }
             else System.out.print("Este serviço não existe no sistema!\n\n");
         });
-        menu.setHandlers(4, () -> System.out.print(this.model.getServicosFacade().getServicos()));
+        menu.setHandlers(4, () -> {
+            for(Servico se : this.model.getServicosFacade().getServicos().values())
+                System.out.println(se.toString());
+            System.out.println();
+        });
         menu.setHandlers(5, () ->  {
             System.out.print("Indique o ID do serviço a remover: ");
             int id = Integer.parseInt(scan.nextLine());
@@ -348,23 +365,70 @@ public class TextUI {
 
         //Registar os handlers
         menu.setHandlers(1,()-> {
-            System.out.print("Introduza o ID do Serviço: ");
+            System.out.print("ID do plano de trabalho correspondente: ");
             int id = Integer.parseInt(scan.nextLine());
-            if(!this.model.getServicosFacade().existeServico(id)){
-                // .....................
+            if(this.model.getPlanosFacade().existePlano(id)){
+                int newID = this.model.getServicosFacade().getServicos().size()+1;
+                int idOrc = this.model.getPlanosFacade().getPlanos().get(id).getIdOrcamento();
+                int newPlano = this.model.getPlanosFacade().getPlanos().size()+1;
+                this.model.getPlanosFacade().adicionaPlano(newPlano, idOrc, this.model.getFuncionariosFacade().getUserAtual());
+                this.model.getServicosFacade().adicionaServicoProgramado(newID, newPlano, "programado");
+                System.out.println("ID do serviço criado: "+newID+".\n");
             }
-            else System.out.print("Este ID de Serviço não se encontra disponível!\n\n");
+            else System.out.print("ID de serviço inválido.\n\n");
         });
         menu.setHandlers(2,()->{
-            System.out.print("Introduza o ID do Serviço a editar:");
+            // A VERIFICAÇÃO DO CUSTO MÁXIMO NÃO ESTÁ A SER FEITA
+            System.out.print("ID do Serviço a alterar: ");
             int id = Integer.parseInt(scan.nextLine());
             if(this.model.getServicosFacade().existeServico(id)){
-                // .....................
+                int idPlano = this.model.getServicosFacade().getServicos().get(id).getIdPlano();
+                int idOrc = this.model.getPlanosFacade().getPlanos().get(idPlano).getIdOrcamento();
+                float custoMax = this.model.getOrcamentosFacade().getOrcamentos().get(idOrc).getCusto();
+                String eqID = this.model.getOrcamentosFacade().getOrcamentos().get(idOrc).getIdEquip();
+                int nifCliente = this.model.getClientesFacade().getClienteEQ(eqID);
+                this.model.getEquipamentosFacade().atualizaEstado(nifCliente,"em processo");
+                boolean regista = true;
+                boolean concluido = false;
+                while (regista && !concluido) {
+                    System.out.print("Passo a executar: ");
+                    String desc = scan.nextLine();
+                    System.out.print("Custo: ");
+                    float custo = scan.nextFloat();
+                    System.out.print("Duração: ");
+                    int val = scan.nextInt();
+                    Duration prazo = Duration.parse("PT" + val + "M");
+                    float custoAtual = this.model.getPlanosFacade().getPlanos().get(idPlano).getCusto();
+                    this.model.getPlanosFacade().atualizaPlano(idPlano, desc, custo, prazo);
+                    if (custoAtual <= (1.2f * custoMax)){
+                        System.out.print("Continuar? sim / não ");
+                        scan.nextLine();
+                        String opt = scan.nextLine();
+                        if(!(regista = opt.equals("sim"))){
+                            System.out.print("Reparação terminada? sim / não ");
+                            String end = scan.nextLine();
+                            if(!(concluido = end.equals("sim"))){
+                                this.model.getEquipamentosFacade().atualizaEstado(nifCliente,"em espera");
+                                break;
+                            }
+                            else{
+                                this.model.getEquipamentosFacade().atualizaEstado(nifCliente,"reparado");
+                            }
+                        }
+                    }
+                    else{
+                        System.out.println("Valor de reparação é superior a 120% do valor orçamentado. Contactar cliente.\n");
+                        this.model.getEquipamentosFacade().atualizaEstado(nifCliente,"em espera");
+                        break;
+                    }
+                }
+                float custoAtualizado = this.model.getPlanosFacade().getPlanos().get(idPlano).getCusto();
+                Duration d = this.model.getPlanosFacade().getPlanos().get(idPlano).getPrazo();
+                this.model.getServicosFacade().atualizaValores(id, custoAtualizado,d);
             }
-            else System.out.print("Este serviço não existe no sistema!\n\n");
+            else System.out.print("ID de serviço inválido.\n\n");
         });
-        //menu.setHandlers(3,()-> System.out.print(this.model.getServicosFacade().getServicos()));
-        //menu.setHandlers(4,()->);
+
         menu.run();
     }
 

@@ -16,4 +16,6 @@ public interface IGestEquipamentos {
     boolean existeEquipamentoNIF(int nif);
 
     boolean existeEquipamentoID(String id);
+
+    void atualizaEstado(int eqID, String estado);
 }

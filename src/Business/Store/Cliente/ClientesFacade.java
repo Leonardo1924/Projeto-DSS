@@ -52,4 +52,11 @@ public class ClientesFacade implements IGestClientes{
     public boolean existeCliente(String id){
         return this.clientes.containsKey(id);
     }
+
+    @Override
+    public int getClienteEQ(String eqID) {
+        for(Cliente cl : this.clientes.values())
+            if (cl.getEquipamento().equals(eqID)) return cl.getNif();
+        return 0;
+    }
 }

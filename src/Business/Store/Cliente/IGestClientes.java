@@ -18,4 +18,6 @@ public interface IGestClientes {
     void consultaClientes();
 
     boolean existeCliente(String id);
+
+    int getClienteEQ(String eqID);
 }

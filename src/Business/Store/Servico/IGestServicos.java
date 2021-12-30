@@ -9,9 +9,13 @@ public interface IGestServicos {
 
     void adicionaServicoExpresso(float custo, Duration tempo);
 
-    void consultaServico(Integer id);
+    String consultaServico(Integer id);
 
     void removeServico(Integer id);
 
     boolean existeServico(int id);
+
+    void adicionaServicoProgramado(int newID, int newPlano, String tipo);
+
+    void atualizaValores(int id, float custoAtualizado, Duration d);
 }

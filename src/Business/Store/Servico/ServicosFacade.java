@@ -1,7 +1,5 @@
 package Business.Store.Servico;
 
-import Business.Store.Cliente.Cliente;
-
 import java.time.Duration;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,8 +24,8 @@ public class ServicosFacade implements IGestServicos {
     }
 
     @Override
-    public void consultaServico(Integer id) {
-            System.out.println(this.servicos.get(id).toString());
+    public String consultaServico(Integer id) {
+            return this.servicos.get(id).toString();
     }
 
     @Override
@@ -37,5 +35,16 @@ public class ServicosFacade implements IGestServicos {
 
     public boolean existeServico(int id){
         return this.servicos.containsKey(id);
+    }
+
+    public void adicionaServicoProgramado(int newID, int newPlano, String tipo) {
+        Servico se = new Servico(newID,newPlano, tipo);
+        this.servicos.put(newID,se);
+    }
+
+    @Override
+    public void atualizaValores(int id, float custoAtualizado, Duration d) {
+        this.servicos.get(id).setCustoTotal(custoAtualizado);
+        this.servicos.get(id).setTempoTotal(d);
     }
 }
