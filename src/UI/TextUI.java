@@ -241,8 +241,9 @@ public class TextUI {
             if(lengNif.length() == 9){ nif = Integer.parseInt(lengNif);}
             else{ nif = verificarNif(); }
             if(!this.model.getEquipamentosFacade().existeEquipamentoNIF(nif)) {
-                Equipamento equip = this.model.getEquipamentosFacade().getEquipamentos().get(nif);
-                this.model.getEquipamentosFacade().registaEquip(nif, equip.getId(), "no armazem");
+                System.out.print("Indique o ID do equipamento: ");
+                String equip = scan.nextLine();
+                this.model.getEquipamentosFacade().registaEquip(nif, equip, "no armazem");
                 this.model.getFuncionariosFacade().equipRecebidos(equip);
                 System.out.print("O equipamento foi registado com sucesso!\n\n");
             }
