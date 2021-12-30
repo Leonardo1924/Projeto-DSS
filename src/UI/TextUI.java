@@ -151,9 +151,9 @@ public class TextUI {
 
         //Registar pré-condições das transições
         menu.setPreCondition(1,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Rececionista"));
-        menu.setPreCondition(2,()->!this.model.getOrcamentosFacade().getOrcamentos().isEmpty());
+        menu.setPreCondition(2,()->!this.model.getOrcamentosFacade().getOrcamentos().isEmpty() && this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Tecnico"));
         menu.setPreCondition(3,()->!this.model.getOrcamentosFacade().getOrcamentos().isEmpty());
-        menu.setPreCondition(4,()->!this.model.getOrcamentosFacade().getOrcamentos().isEmpty());
+        menu.setPreCondition(4,()->!this.model.getOrcamentosFacade().getOrcamentos().isEmpty() && this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Tecnico"));
 
         //Registar os handlers
         menu.setHandlers(1, () -> {
