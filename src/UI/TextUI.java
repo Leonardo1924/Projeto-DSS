@@ -166,8 +166,8 @@ public class TextUI {
                 System.out.print("Descrição do problema: ");
                 String notas = scan.nextLine();
                 int idOrc = this.model.getOrcamentosFacade().getOrcamentos().get(this.model.getOrcamentosFacade().getOrcamentos().size()).getIdOrcamento() + 1;
-                this.model.getOrcamentosFacade().registaOrcamento(idOrc, idEq, LocalDateTime.now(), notas);
-                this.model.getEquipamentosFacade().getEquipamentos().get(Integer.parseInt(idEq)).setEstado("no armazem");
+                this.model.getOrcamentosFacade().registaOrcamento(idOrc,idEq,LocalDateTime.now(),notas);
+                this.model.getEquipamentosFacade().equipEstado(idEq, "no armazem");
                 System.out.println("\n\n");
             }
             else System.out.print("\u001B[31mEste equipamento não existe no sistema!\n\n\u001b[0m");

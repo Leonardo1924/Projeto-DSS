@@ -26,7 +26,7 @@ public class OrcamentosFacade implements IGestOrcamentos {
     }
 
 
-    public void registaOrcamento(int idOrc, String idEq, LocalDateTime now, String notas){
+    public void registaOrcamento(int idOrc,String idEq,LocalDateTime now,String notas){
         Orcamento orc = new Orcamento(idOrc,idEq,now,notas);
         this.orcamentos.put(idOrc,orc);
     }
