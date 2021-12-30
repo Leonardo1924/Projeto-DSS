@@ -100,7 +100,7 @@ public class PlanoTrabalho {
     }
 
     public void gravar(PrintWriter print){
-        print.println(this.idPlano + ";" + this.idOrcamento + ";" + this.idTecnico + ";" + this.custo + ";" + this.prazo.toString());
+        print.println(this.idPlano + ";" + this.idOrcamento + ";" + this.idTecnico + ";" + this.custo + ";" + this.prazo.toString() + this.passos.toString());
     }
 
     @Override

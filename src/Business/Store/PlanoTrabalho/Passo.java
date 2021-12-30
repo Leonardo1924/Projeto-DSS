@@ -7,21 +7,15 @@ public class Passo {
     private String descricao;
     private float custoPasso;
     private Duration tempoPasso;
-/*
-    public Passo() {
-        this.descricao = null;
-        this.custoPasso = -1;
-        this.tempoPasso = Duration.ZERO;
-    }
-   */
-    public Passo(String desc, float custoPasso, Duration tempoPasso){
-        this.descricao = desc;
+
+    public Passo(String descricao, float custoPasso, Duration tempoPasso){
+        this.descricao = descricao;
         this.custoPasso = custoPasso;
         this.tempoPasso = tempoPasso;
     }
 
     public Passo(Passo passo){
-        this.descricao = getDescricao();
+        this.descricao = passo.getDescricao();
         this.custoPasso = passo.getCustoPasso();
         this.tempoPasso = passo.getTempoPasso();
     }
@@ -32,14 +26,6 @@ public class Passo {
 
     public float getCustoPasso(){
         return this.custoPasso;
-    }
-
-    public void setTempoPasso(Duration tempoPasso){
-        this.tempoPasso = this.tempoPasso;
-    }
-
-    public void setCustoPasso(Float custoPasso){
-        this.custoPasso = custoPasso;
     }
 
     public String getDescricao() {
@@ -59,9 +45,8 @@ public class Passo {
     }
 
     public String toString(){
-        return "\033[1;35mPasso: \033[0m" + descricao +
-                " \033[1;35mCusto: \033[0m" + custoPasso +
-                " \033[1;35mTempo: \033[0m" + tempoPasso;
+        return "\033[1;35mDescriçao: \033[0m" + this.descricao +
+                " \033[1;35mCusto: \033[0m" + this.custoPasso +
+                " \033[1;35mTempo: \033[0m" + this.tempoPasso;
     }
-
 }
