@@ -54,4 +54,12 @@ public class Estatisticas {
         }
         return sb.toString();
     }
+
+    public String reportRececionista() {
+        return null;
+    }
+
+    public String reportDetalhado() {
+        return null;
+    }
 }

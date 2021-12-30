@@ -470,11 +470,11 @@ public class TextUI {
         });
         menu.setHandlers(2,()->{
             Estatisticas e = new Estatisticas(this.model);
-            // ADICIONAR METODO QUANDO ESTIVER PRONTO
+            System.out.println(e.reportDetalhado());
         });
         menu.setHandlers(3,()->{
             Estatisticas e = new Estatisticas(this.model);
-            // ADICIONAR METODO QUANDO ESTIVER PRONTO
+            System.out.println(e.reportRececionista());
         });
         menu.run();
     }
