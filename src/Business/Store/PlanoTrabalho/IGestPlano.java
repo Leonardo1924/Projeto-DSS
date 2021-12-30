@@ -11,5 +11,7 @@ public interface IGestPlano {
 
     void adicionaPlano(int idPlano, int idOrc, String idTecnico);
 
+    int adicionaPlano(int idOrc, String idTecnico);
+
     boolean existePlano(int id);
 }

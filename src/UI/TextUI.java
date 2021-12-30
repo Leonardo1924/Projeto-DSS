@@ -396,17 +396,18 @@ public class TextUI {
             } catch (NumberFormatException e){ System.out.println("\u001B[31mERROR: ID tem de ser um inteiro!\n\n\u001b[0m"); }
         });
         menu.setHandlers(2,()->{
-            // A VERIFICAÇÃO DO CUSTO MÁXIMO NÃO ESTÁ A SER FEITA
+            // MUDAR APENAS PARA  VER O ESTADO ATUAL DO PROCESSO
             System.out.print("ID do Serviço a alterar: ");
             try {
                 int id = Integer.parseInt(scan.nextLine());
                 if (this.model.getServicosFacade().existeServico(id)) {
                     int idPlano = this.model.getServicosFacade().getServicos().get(id).getIdPlano();
                     int idOrc = this.model.getPlanosFacade().getPlanos().get(idPlano).getIdOrcamento();
-                    float custoMax = this.model.getOrcamentosFacade().getOrcamentos().get(idOrc).getCusto();
+                    float custoMax = 1.2f * this.model.getOrcamentosFacade().getOrcamentos().get(idOrc).getCusto();
                     String eqID = this.model.getOrcamentosFacade().getOrcamentos().get(idOrc).getIdEquip();
                     int nifCliente = this.model.getClientesFacade().getClienteEQ(eqID);
                     this.model.getEquipamentosFacade().atualizaEstado(nifCliente, "em processo");
+                    int newPlanoID = this.model.getPlanosFacade().adicionaPlano(idOrc,this.model.getFuncionariosFacade().getUserAtual());
                     boolean regista = true;
                     boolean concluido = false;
                     while (regista && !concluido) {
@@ -417,9 +418,9 @@ public class TextUI {
                         System.out.print("Duração: ");
                         int val = scan.nextInt();
                         Duration prazo = Duration.parse("PT" + val + "M");
-                        float custoAtual = this.model.getPlanosFacade().getPlanos().get(idPlano).getCusto();
-                        this.model.getPlanosFacade().atualizaPlano(idPlano, desc, custo, prazo);
-                        if (custoAtual <= (1.2f * custoMax)) {
+                        float custoAtual = this.model.getPlanosFacade().getPlanos().get(newPlanoID).getCusto()+custo;
+                        if (custoAtual <= custoMax) {
+                            this.model.getPlanosFacade().atualizaPlano(newPlanoID, desc, custo, prazo);
                             System.out.print("Continuar? sim / não ");
                             scan.nextLine();
                             String opt = scan.nextLine();
@@ -439,8 +440,8 @@ public class TextUI {
                             break;
                         }
                     }
-                    float custoAtualizado = this.model.getPlanosFacade().getPlanos().get(idPlano).getCusto();
-                    Duration d = this.model.getPlanosFacade().getPlanos().get(idPlano).getPrazo();
+                    float custoAtualizado = this.model.getPlanosFacade().getPlanos().get(newPlanoID).getCusto();
+                    Duration d = this.model.getPlanosFacade().getPlanos().get(newPlanoID).getPrazo();
                     this.model.getServicosFacade().atualizaValores(id, custoAtualizado, d);
                 } else System.out.print("\u001B[31mID de serviço inválido.\n\n\u001b[0m");
             } catch (NumberFormatException e){ System.out.println("\u001B[31mERROR: ID tem de ser um inteiro!\n\n\u001b[0m"); }

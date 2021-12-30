@@ -28,6 +28,13 @@ public class PlanoFacade implements IGestPlano {
         this.planos.put(idPlano,pt);
     }
 
+    public int adicionaPlano(int idOrc, String idTecnico){
+        int newID = this.getPlanos().size() +1;
+        PlanoTrabalho pt = new PlanoTrabalho(newID,idOrc, idTecnico);
+        this.planos.put(newID,pt);
+        return newID;
+    }
+
     public boolean existePlano(int id){
         return this.planos.containsKey(id);
     }
