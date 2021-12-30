@@ -46,10 +46,10 @@ public class Estatisticas {
             Duration somatorioDuracao = Duration.ofSeconds(tempoSEC);
             Duration meanDuracao = Duration.ofSeconds(mean);
 
-            String res = "*** ID Técnico: "+idF+
-                    " ***\n-- Serviço Expresso --\nTotal: "+nrServicosExpresso +
-                    "\n--Serviço Programado--\nTotal: "+nrServicosProgramados +
-                    "\nTempo total: "+somatorioDuracao+"\nTempo médio: "+meanDuracao;
+            String res = "\033[1;36m*** ID Técnico: \033[0m"+idF+
+                    " \033[1;36m***\n-- Serviço Expresso --\nTotal: \033[0m"+nrServicosExpresso +
+                    "\033[1;36m\n--Serviço Programado--\nTotal: \033[0m"+nrServicosProgramados +
+                    "\033[1;36m\nTempo total: \033[0m"+somatorioDuracao+"\033[1;36m\nTempo médio: \033[0m"+meanDuracao;
             sb.append(res).append("\n\n");
         }
         return sb.toString();
@@ -68,9 +68,9 @@ public class Estatisticas {
         for(String idF : idsRececionistas){
             int nrRecebidos = this.model.getFuncionariosFacade().getRececao().get(idF).size();;
             int nrEntregues = this.model.getFuncionariosFacade().getDevolucao().get(idF).size();;
-            String res = "*** ID Recicionista: "+idF+
-                    "\nEquipamentos recebidos: "+nrRecebidos +
-                    "\nEquipamentos entregues: "+nrEntregues;
+            String res = "\033[1;36m*** ID Recicionista: \033[0m"+idF+
+                    "\033[1;35m\nEquipamentos recebidos: \033[0m"+nrRecebidos +
+                    "\033[1;35m\nEquipamentos entregues: \033[0m"+nrEntregues;
             sb.append(res).append("\n\n");
         }
         return sb.toString();
@@ -85,10 +85,14 @@ public class Estatisticas {
         }
         StringBuilder sb = new StringBuilder();
         for(String idF : idsTecnicos){
-            sb.append("*** ID Técnico: ").append(idF).append("\n");
+            sb.append("\033[1;36m*** ID Técnico: \033[0m").append(idF).append("\n");
             for(Servico s : this.model.getServicosFacade().getServicos().values()){
                 PlanoTrabalho pt = this.model.getPlanosFacade().getPlanos().get(s.getIdPlano());
                 if(pt.getIdTecnico().equals(idF)) {
+                    sb.append("\033[1;33mServiço:\n\033[0m");
+                    sb.append(s);
+                    sb.append("\n");
+                    sb.append("\033[1;33mPlano de Trabalho:\n\033[0m");
                     sb.append(pt);
                 }
             }

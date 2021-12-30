@@ -143,7 +143,7 @@ public class Menu {
                 System.out.print("\033[1;33m" + " - " + "\033[0m");
                 System.out.println(this.disponivel.get(i).validate() ? this.opcoes.get(i) : "\u001B[31mIndisponivel || Sem credenciais de acesso\u001b[0m");
             }
-            System.out.print("\033[1;36m" + "**********************************************" + "\033[0m");
+            System.out.print("\033[1;36m" + "******************************************" + "\033[0m");
         }
 
     private int readOption() throws IOException {

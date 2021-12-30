@@ -71,7 +71,7 @@ public class TextUI {
             System.out.print("Inserir password: ");
             String pass = scan.nextLine();
             if (this.model.login(id,pass)) {
-                System.out.print("\nUtilizador alterado.\n");
+                System.out.print("\nUtilizador alterado.\n\n");
             }
             else System.out.print("\u001B[31m\nDados fornecidos incorretos\n\u001b[0m");
         });
