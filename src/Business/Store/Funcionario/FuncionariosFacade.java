@@ -1,8 +1,11 @@
 package Business.Store.Funcionario;
 
+import Business.Store.Equipamento.Equipamento;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -11,6 +14,8 @@ public class FuncionariosFacade implements IGestFuncionarios {
 
     Map<String,Funcionario> credentials;
     private String userAtual;
+    private Map<String, List<String>> rececao; // username do rececionista, id do equipamento
+    private Map<String, List<String>>  entrega;
 
     public FuncionariosFacade(Map<String,Funcionario> credentials) {
         this.credentials = credentials.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
@@ -56,5 +61,29 @@ public class FuncionariosFacade implements IGestFuncionarios {
 
     public boolean validateFuncionario(String idTecnico){
         return this.credentials.containsKey(idTecnico);
+    }
+
+    public void equipRecebidos(Equipamento equip){
+        List<String> list = new ArrayList<String>();
+        if(this.rececao.containsKey(this.userAtual)){
+            list = this.rececao.get(this.userAtual);
+            list.add(equip.getId());
+            this.rececao.put(this.userAtual,list);
+        }else {
+            list.add(equip.getId());
+            this.rececao.put(this.userAtual,list);
+        }
+    }
+
+    public void equipDevolvidos(Equipamento equip){
+        List<String> list = new ArrayList<String>();
+        if(this.entrega.containsKey(this.userAtual)){
+            list = this.entrega.get(this.userAtual);
+            list.add(equip.getId());
+            this.entrega.put(this.userAtual,list);
+        }else {
+            list.add(equip.getId());
+            this.entrega.put(this.userAtual,list);
+        }
     }
 }

@@ -2,6 +2,7 @@ package UI;
 
 import Business.InPutOutPut.Saver;
 import Business.Store.Equipamento.Equipamento;
+import Business.Store.Estatisticas;
 import Business.Store.IStoreLN;
 import Business.Store.Servico.Servico;
 import Business.Store.StoreLNFacade;
@@ -53,7 +54,7 @@ public class TextUI {
         menu.setHandlers(2, this::gestaoDeOrcamento);
         menu.setHandlers(3, this::gestaoDeEquipamentos);
         menu.setHandlers(4, this::gestaoDeServico);
-        menu.setHandlers(5, this::gestaoDeEstatisticas);
+        //menu.setHandlers(5, this::gestaoDeEstatisticas);
         menu.setHandlers(6, () ->  {
             System.out.print("Indique o ID do plano a consultar: ");
             try {
@@ -69,7 +70,9 @@ public class TextUI {
             String id = scan.nextLine();
             System.out.print("Inserir password: ");
             String pass = scan.nextLine();
-            if (this.model.login(id,pass)) System.out.print("\nUtilizador alterado.\n");
+            if (this.model.login(id,pass)) {
+                System.out.print("\nUtilizador alterado.\n");
+            }
             else System.out.print("\u001B[31m\nDados fornecidos incorretos\n\u001b[0m");
         });
         menu.run();
@@ -221,7 +224,7 @@ public class TextUI {
         Menu menu = new Menu(new String[]{
                 "Registar Equipamento",
                 "Consultar Estado",
-                "Levantar Equipamento",
+                "Entregar Equipamento",
                 "Apagar Equipamento"});
 
         //Registar pré-condições das transições
@@ -238,9 +241,9 @@ public class TextUI {
             if(lengNif.length() == 9){ nif = Integer.parseInt(lengNif);}
             else{ nif = verificarNif(); }
             if(!this.model.getEquipamentosFacade().existeEquipamentoNIF(nif)) {
-                System.out.print("Indique o ID do equipamento: ");
-                String equip = scan.nextLine();
-                this.model.getEquipamentosFacade().registaEquip(nif, equip, "no armazem");
+                Equipamento equip = this.model.getEquipamentosFacade().getEquipamentos().get(nif);
+                this.model.getEquipamentosFacade().registaEquip(nif, equip.getId(), "no armazem");
+                this.model.getFuncionariosFacade().equipRecebidos(equip);
                 System.out.print("O equipamento foi registado com sucesso!\n\n");
             }
             else System.out.print("\u001B[31mEste ID de equipamento não se encontra disponível!\n\n\u001b[0m");
@@ -264,7 +267,9 @@ public class TextUI {
             if(lengNif.length() == 9){ nif = Integer.parseInt(lengNif);}
             else{ nif = verificarNif(); }
             if(this.model.getEquipamentosFacade().existeEquipamentoNIF(nif)) {
+                Equipamento equip = this.model.getEquipamentosFacade().getEquipamentos().get(nif);
                 this.model.getEquipamentosFacade().levantaEquipamento(nif);
+                this.model.getFuncionariosFacade().equipDevolvidos(equip);
                 System.out.print("O equipamento foi levantado com sucesso!\n\n");
             }
             else System.out.print("\u001B[31mEste equipamento não existe no sistema!\n\n\u001b[0m");
@@ -451,27 +456,28 @@ public class TextUI {
 
         menu.run();
     }
-
+/*
     private void gestaoDeEstatisticas() throws IOException {
         Menu menu = new Menu(new String[]{
-                "Novo Relatório",
-                "Ler Relatório",
-                "Editar Relatório",
-                "Apagar Relatório"});
-
-        //Registar pré-condições das transições
-        menu.setPreCondition(1,()->this.model.getFuncionariosFacade().getTipoFuncionario(this.model.getFuncionariosFacade().getUserAtual()).equals("Gestor"));
-        //menu.setPreCondition(2,()->têm que existir um Relatorio para editar);
-        //menu.setPreCondition(3,()->têm que existir um Relatorio para consultar);
-        //menu.setPreCondition(4,()->têm que existir um Relatorio para apagar);
+                "Relatório de serviços dos Técnicos",
+                "Relatório detalhado dos Técnicos",
+                "Relatório de Rececionistas"});
 
         //Registar os handlers
-        //menu.setHandlers(1,()->);
-        //menu.setHandlers(2,()->);
-        //menu.setHandlers(3,()->);
-        //menu.setHandlers(4,()->);
+        menu.setHandlers(1,()->{
+            Estatisticas e = new Estatisticas(this.model);
+            // ADICIONAR METODO QUANDO ESTIVER PRONTO
+        });
+        menu.setHandlers(2,()->{
+            Estatisticas e = new Estatisticas(this.model);
+            // ADICIONAR METODO QUANDO ESTIVER PRONTO
+        });
+        menu.setHandlers(3,()->{
+            Estatisticas e = new Estatisticas(this.model);
+            // ADICIONAR METODO QUANDO ESTIVER PRONTO
+        });
         menu.run();
-    }
+    }*/
 
     public boolean verificaLogin() throws IOException {
         String user = null;
