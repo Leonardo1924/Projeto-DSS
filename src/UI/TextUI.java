@@ -151,6 +151,7 @@ public class TextUI {
                 String notas = scan.nextLine();
                 int idOrc = this.model.getOrcamentosFacade().getOrcamentos().get(this.model.getOrcamentosFacade().getOrcamentos().size()).getIdOrcamento() + 1;
                 this.model.getOrcamentosFacade().registaOrcamento(idOrc, idEq, LocalDateTime.now(), notas);
+                this.model.getEquipamentosFacade().getEquipamentos().get(Integer.parseInt(idEq)).setEstado("no armazem");
                 System.out.println("\n\n");
             }
             else System.out.print("Este equipamento não existe no sistema!\n\n");
@@ -347,15 +348,15 @@ public class TextUI {
 
         //Registar os handlers
         menu.setHandlers(1,()-> {
-            System.out.print("Introduza o Id do Serviço:");
+            System.out.print("Introduza o ID do Serviço: ");
             int id = Integer.parseInt(scan.nextLine());
             if(!this.model.getServicosFacade().existeServico(id)){
                 // .....................
             }
-            else System.out.print("Este ID de Serviço não se encontra disponivel!\n\n");
+            else System.out.print("Este ID de Serviço não se encontra disponível!\n\n");
         });
         menu.setHandlers(2,()->{
-            System.out.print("Introduza o Id do Serviço a editar:");
+            System.out.print("Introduza o ID do Serviço a editar:");
             int id = Integer.parseInt(scan.nextLine());
             if(this.model.getServicosFacade().existeServico(id)){
                 // .....................
@@ -420,7 +421,7 @@ public class TextUI {
         String telemovel = null;
             while(!sucesso){
                 try{
-                    System.out.print("Número de telemovel tem 9 dígitos! Tente Novamente \n");
+                    System.out.print("Número de telemóvel tem 9 dígitos! Tente Novamente \n");
                     System.out.print("Indique o telemóvel do cliente: ");
                     telemovel = scan.nextLine();
                 } catch (InputMismatchException e) {
@@ -438,8 +439,8 @@ public class TextUI {
         String nif = null;
         while(!sucesso){
             try{
-                System.out.print("Nif tem 9 dígitos! Tente Novamente \n");
-                System.out.print("Indique o nif do cliente: ");
+                System.out.print("NIF tem 9 dígitos! Tente Novamente. \n");
+                System.out.print("Indique o NIF do cliente: ");
                 nif = scan.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println(e);

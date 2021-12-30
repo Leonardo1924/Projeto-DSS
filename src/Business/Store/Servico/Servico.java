@@ -9,19 +9,19 @@ import java.util.Objects;
 public class Servico {
     private String id;
     private String tipo;       // expresso ; normal
-    private String idPlano;
+    private int idPlano;
     private float custoTotal;
     private Duration tempoTotal;
 
     public Servico() {
         this.id = "";
         this.tipo = "";
-        this.idPlano = "";
+        this.idPlano = 0;
         this.custoTotal = -1;
         this.tempoTotal = Duration.ZERO;
     }
 
-    public Servico(String id, String tipo, String idPlano, float custoTotal, Duration tempoTotal) {
+    public Servico(String id, String tipo, int idPlano, float custoTotal, Duration tempoTotal) {
         this.id = id;
         this.tipo = tipo;
         this.idPlano = idPlano;
@@ -40,7 +40,7 @@ public class Servico {
     public Servico(int id, float custo, Duration tempo, String expresso) {
         this.id = String.valueOf(id);
         this.tipo = expresso;
-        this.idPlano = "0";
+        this.idPlano = 0;
         this.custoTotal = custo;
         this.tempoTotal = tempo;
     }
@@ -53,7 +53,7 @@ public class Servico {
         return this.tipo;
     }
 
-    public String getIdPlano() {
+    public int getIdPlano() {
         return this.idPlano;
     }
 
@@ -70,10 +70,11 @@ public class Servico {
     }
 
     public String toString(){
-        if (this.idPlano.equals("0")) this.idPlano = "n/a";
+        String idP = "n/a";
+        if (this.idPlano != 0) idP = String.valueOf(this.idPlano);
         return "\033[1;35mId: \033[0m" + this.id +
                 " \033[1;35mTipo: \033[0m" + this.tipo +
-                " \033[1;35mId Plano: \033[0m" + this.idPlano +
+                " \033[1;35mId Plano: \033[0m" + idP +
                 " \033[1;35mCusto Total: \033[0m" + this.custoTotal +
                 " \033[1;35mTempo Total: \033[0m" + this.tempoTotal;
     }
@@ -82,12 +83,13 @@ public class Servico {
         print.println(this.id + ";" + this.tipo + ";" + this.idPlano + ";" + this.custoTotal + ";" + this.tempoTotal);
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Servico servico = (Servico) o;
-        return Float.compare(servico.custoTotal, custoTotal) == 0 && Objects.equals(id, servico.id) && Objects.equals(tipo, servico.tipo) && Objects.equals(idPlano, servico.idPlano) && Objects.equals(tempoTotal, servico.tempoTotal);
+        return idPlano == servico.idPlano && Float.compare(servico.custoTotal, custoTotal) == 0 && Objects.equals(id, servico.id) && Objects.equals(tipo, servico.tipo) && Objects.equals(tempoTotal, servico.tempoTotal);
     }
 
 }
