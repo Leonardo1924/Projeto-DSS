@@ -56,10 +56,33 @@ public class Estatisticas {
     }
 
     public String reportRececionista() {
-        return null;
+        Set<String> idsRececionistas = new TreeSet<>();
+        for(Funcionario f : this.model.getFuncionariosFacade().getFuncionarios().values()){
+            String idF = f.getTipo();
+            if(idF.equals("Rececionista"))
+                idsRececionistas.add(f.getUsername());
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        for(String idF : idsRececionistas){
+            int nrRecebidos = 0;
+            int nrEntregues = 0;
+            /* não é isto, mas há-de ser algo tipo isto -- basta contar o tamanho da lista associada a uma dada chave
+            nrRecebidos = this.model.getQQcenaONDEestiverOmapRECEBIDO.get(idF).size();
+            nrEntregue = this.model.getQQcenaONDEestiverOmapENTREGUE.get(idF).size();
+             */
+            String res = "*** ID Recicionista: "+idF+
+                    "\nEquipamentos recebidos: "+nrRecebidos +
+                    "\nEquipamentos entregues: "+nrEntregues;
+            sb.append(res).append("\n\n");
+        }
+        return sb.toString();
     }
 
     public String reportDetalhado() {
+        // TO DO AINDA
         return null;
+
     }
 }
