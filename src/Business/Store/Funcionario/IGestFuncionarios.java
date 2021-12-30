@@ -20,7 +20,15 @@ public interface IGestFuncionarios {
 
     boolean validateFuncionario(String idTecnico);
 
-    void equipRecebidos(Equipamento equip);
+    void equipRecebidos(String equip);
 
     void equipDevolvidos(Equipamento equip);
+
+    Map<String,List<String>> getRececao();
+
+    Map<String,List<String>> getDevolucao();
+
+    Map<String,List<String>> constroiDevolucao(Map<String,Funcionario> credentials);
+
+    Map<String,List<String>> constroiRececao(Map<String,Funcionario> credentials);
 }

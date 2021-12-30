@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,6 +21,8 @@ public class FuncionariosFacade implements IGestFuncionarios {
     public FuncionariosFacade(Map<String,Funcionario> credentials) {
         this.credentials = credentials.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue().clone()));
         this.userAtual = "";
+        this.rececao = this.constroiRececao(credentials);
+        this.entrega = this.constroiDevolucao(credentials);
     }
 
     public Map<String,Funcionario> getFuncionarios(){
@@ -30,8 +33,16 @@ public class FuncionariosFacade implements IGestFuncionarios {
         return this.userAtual;
     }
 
+    public Map<String,List<String>> getRececao(){
+        return this.rececao.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue()));
+    }
+
+    public Map<String,List<String>> getDevolucao(){
+        return this.entrega.entrySet().stream().collect(Collectors.toMap(e->e.getKey(), e-> e.getValue()));
+    }
+
     public boolean login(String username,String password) throws IOException {
-        Boolean res = false;
+        boolean res = false;
         if (this.credentials.containsKey(username)) {
             this.userAtual = username;
             Funcionario func = this.credentials.get(username);
@@ -63,14 +74,14 @@ public class FuncionariosFacade implements IGestFuncionarios {
         return this.credentials.containsKey(idTecnico);
     }
 
-    public void equipRecebidos(Equipamento equip){
+    public void equipRecebidos(String id){
         List<String> list = new ArrayList<String>();
         if(this.rececao.containsKey(this.userAtual)){
             list = this.rececao.get(this.userAtual);
-            list.add(equip.getId());
+            list.add(id);
             this.rececao.put(this.userAtual,list);
         }else {
-            list.add(equip.getId());
+            list.add(id);
             this.rececao.put(this.userAtual,list);
         }
     }
@@ -85,5 +96,21 @@ public class FuncionariosFacade implements IGestFuncionarios {
             list.add(equip.getId());
             this.entrega.put(this.userAtual,list);
         }
+    }
+
+    public Map<String,List<String>> constroiRececao(Map<String,Funcionario> credentials){
+        Map<String,List<String>> recebidos = new HashMap<>();
+        for(Map.Entry<String,Funcionario> e : credentials.entrySet()){
+            recebidos.put(e.getKey(),e.getValue().getEquipamentosRecebidos());
+        }
+        return recebidos;
+    }
+
+    public Map<String,List<String>> constroiDevolucao(Map<String,Funcionario> credentials){
+        Map<String,List<String>> devolvidos = new HashMap<>();
+        for(Map.Entry<String,Funcionario> e : credentials.entrySet()){
+            devolvidos.put(e.getKey(),e.getValue().getEquipamentosDevolvidos());
+        }
+        return devolvidos;
     }
 }

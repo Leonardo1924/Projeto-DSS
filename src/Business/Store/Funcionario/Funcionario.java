@@ -1,34 +1,31 @@
 package Business.Store.Funcionario;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Funcionario{
 
     private String username;
     private String password;
     private String tipo;
+    private List<String> equipamentosRecebidos;
+    private List<String> equipamentosDevolvidos;
 
-    public Funcionario(){
-        this.username = "";
-        this.password = "";
-        this.tipo = "";
-    }
-
-    public Funcionario(String username, String password, String tipo){
+    public Funcionario(String username, String password, String tipo, List<String> equipamentosRecebidos, List<String> equipamentosDevolvidos){
         this.username = username;
         this.password = password;
         this.tipo = tipo;
-    }
-
-    public Funcionario(String username, String password) {
-        this.username = username;
-        this.password = password;
+        this.equipamentosRecebidos = new ArrayList<>(equipamentosRecebidos);
+        this.equipamentosDevolvidos = new ArrayList<>(equipamentosDevolvidos);
     }
 
     public Funcionario(Funcionario umFunc){
         this.username = umFunc.getUsername();
         this.password = umFunc.getPassword();
         this.tipo = umFunc.getTipo();
+        this.equipamentosRecebidos = umFunc.getEquipamentosRecebidos();
+        this.equipamentosDevolvidos = umFunc.getEquipamentosDevolvidos();
     }
 
     public String getUsername(){
@@ -41,6 +38,14 @@ public class Funcionario{
 
     public String getTipo(){
         return this.tipo;
+    }
+
+    public List<String> getEquipamentosRecebidos(){
+        return new ArrayList<>(this.equipamentosRecebidos);
+    }
+
+    public List<String> getEquipamentosDevolvidos(){
+        return new ArrayList<>(this.equipamentosDevolvidos);
     }
 
     public void gravar(PrintWriter print){

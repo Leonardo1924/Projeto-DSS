@@ -47,9 +47,25 @@ public class Parser {
         String[] tokens;
 
         for (String l : lines) {
-            tokens = l.split(";", 3);
-            Funcionario func = new Funcionario(tokens[0],tokens[1],tokens[2]);
-            loginData.put(tokens[0],func.clone());
+            tokens = l.split(";", 5);
+            List<String> listRecebidos = new ArrayList<>(Arrays.asList(tokens[3].split(",")));
+            List<String> listDevolvidos = new ArrayList<>(Arrays.asList(tokens[4].split(",")));
+            if(listRecebidos.size() != 1 || !listRecebidos.get(0).equals("n/a")) {
+                if (listDevolvidos.size() != 1 || !listDevolvidos.get(0).equals("n/a")) {
+                    Funcionario func = new Funcionario(tokens[0], tokens[1], tokens[2], listRecebidos, listDevolvidos);
+                    loginData.put(tokens[0], func.clone());
+                } else {
+                    listDevolvidos = new ArrayList<>();
+                    Funcionario func = new Funcionario(tokens[0], tokens[1], tokens[2], listRecebidos, listDevolvidos);
+                    loginData.put(tokens[0], func.clone());
+                }
+            }
+            else{
+                listRecebidos = new ArrayList<>();
+                listDevolvidos = new ArrayList<>();
+                Funcionario func = new Funcionario(tokens[0], tokens[1], tokens[2], listRecebidos, listDevolvidos);
+                loginData.put(tokens[0], func.clone());
+            }
         }
         return new FuncionariosFacade(loginData);
     }
