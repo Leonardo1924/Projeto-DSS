@@ -3,8 +3,8 @@ teste;teste;Rececionista
 filipamurta_10;xxxHappierThanEverxxx;Rececionista
 rexfeels;10xx9203TA;Tecnico
 taogataquemia;chandler@ainsley;Tecnico
-punkseyyy;heyITSMEMario;Rececionista
 ruipgcoelho;rui;Tecnico
+punkseyyy;heyITSMEMario;Rececionista
 withcindy;HOMEtownCHAchaCHA;Gestor
 annaphens;DayDreaming12;Tecnico
 angelsqmus;throneOFpages;Rececionista
@@ -13,3 +13,4 @@ jack_in_the_books;b+dg+als12;Rececionista
 aesthtized;plshOneyimgAming;Rececionista
 Leonardo1924;google_was_my_idea;Tecnico
 TiagoAndreLecaCarneiro;Talk@Lover;Gestor
+gestor;gestor;Gestor

@@ -456,7 +456,7 @@ public class TextUI {
 
         menu.run();
     }
-/*
+
     private void gestaoDeEstatisticas() throws IOException {
         Menu menu = new Menu(new String[]{
                 "Relatório de serviços dos Técnicos",
@@ -477,7 +477,7 @@ public class TextUI {
             // ADICIONAR METODO QUANDO ESTIVER PRONTO
         });
         menu.run();
-    }*/
+    }
 
     public boolean verificaLogin() throws IOException {
         String user = null;
