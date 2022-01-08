@@ -5,3 +5,5 @@ sendo que apenas a última implicou a implemtação do código. Esta metodologia
 uma solução, sendo esta modificada sempre que necessário. Isto tem uma vantagem enorme, visto que se se implementasse código sem
 nenhuma análise prévia e caso este fosse complexo, se fossem encontradas incoerências, corrigi-las seria extremamente trabalhoso. Assim,
 apenas implementamos uma solução sólida que temos a certeza que satisfaz os requisitos. 
+
+Nota Final Do Projeto: 15
