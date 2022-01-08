@@ -1,0 +1,11 @@
+1;CXX1299WQ;10-06-2021 09:30:46;75.0;PT26M;annaphens;Reparado com sucesso;1;true
+2;LI0283EEE;25-02-2021 11:43:06;142.2;PT45M;parkercvist;Falta peça para continuar;2;true
+3;XPPO10281;15-05-2021 16:00:12;51.9;PT40M;ruipgcoelho;Reparado com sucesso;3;true
+4;XJKR01922;01-11-2021 10:45:06;120.0;PT10M;parkercvist;Problema com peça;4;true
+5;WAPjde231;12-08-2021 11:26:54;13.5;PT2M;zvksboba;Reparado com sucesso;5;true
+6;392UUU212;08-12-2021 13:00:01;95.0;PT10M;rexfeels;Falta de tempo;6;true
+7;KIN121989;11-03-2021 14:50:16;39.0;PT31M;ruipgcoelho;Falta peça;7;true
+8;HSE219jdE;29-10-2021 12:13:46;72.0;PT46M;Leonardo1924;Colocado em espera por falta de peça;8;true
+9;EDA29BBB1;05-01-2021 09:21:15;87.0;PT10M;annaphens; Necessario mais tempo para a reparação;9;true
+10;QKLW2eBN3;17-04-2021 11:37:28;69.99;PT28M;rexfeels;Reparado com sucesso;10;true
+11;POLJs2391;26-06-2021 18:02:56;51.0;PT20M;taogataquemia;Colocado em espera por falta de tempo;11;true

@@ -1,0 +1,11 @@
+1;expresso;1;10.0;PT10M
+2;programado;2;50.0;PT50M
+3;programado;3;150.0;PT30M
+4;expresso;4;20.0;PT20M
+5;expresso;5;30.0;PT30M
+6;programado;6;80.0;PT5M
+7;programado;7;100.0;PT45M
+8;programado;8;120.0;PT2H1M
+9;expresso;9;150.0;PT30M
+10;programado;1;2.0;PT23M
+11;programado;10;5.0;PT0M
